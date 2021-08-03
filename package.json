@@ -1,0 +1,33 @@
+{
+  "name": "meet-up",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "seed": "node seeds/index.js",
+    "test": "npm run jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brandonnorsworthy/meet-up.git"
+  },
+  "author": "Brandon Norsworthy, David Gauthier, Glen Hood, Cas Vives-petralia, Jonathan Foster",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/brandonnorsworthy/meet-up/issues"
+  },
+  "homepage": "https://github.com/brandonnorsworthy/meet-up#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "connect-session-sequelize": "^7.1.1",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.3.2",
+    "express-session": "^1.17.2",
+    "handlebars": "^4.7.7",
+    "jest": "^27.0.6",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.6.5"
+  }
+}
