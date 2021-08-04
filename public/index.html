@@ -7,7 +7,9 @@
     <!-- google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400&display=swap" rel="stylesheet">
+    <!-- google font icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!-- created files/css -->
@@ -26,8 +28,8 @@
             </div>
         </div>
     </header>
-    <main>
-        <div class="card">
+    <main class="container">
+        <div class="card row">
             <div id="sort">
                 <div id="justify-left">
                     <p>Sort by</p>
@@ -41,14 +43,32 @@
             </div>
         </div>
         <div class="card row">
-            <div class="col-2">
+            <div class="flex-column col-2" style="background-color: green;">
                 <!-- pfp -->
+                <img class="col-9" src="./assets/fake-pfp/fakeperson1.png" alt="" style="width:148px;border-radius: 50%;">
+                <p class="col-3" style="width: 100%;background-color: red;">Gerfulty</p>
             </div>
-            <div class="col-8">
+            <div class="col-8" style="background-color:aqua">
+                <h1 class="row">Event title would go in this line right here brief desc</h1>
+                <p class="row">
+                    <span class="material-icons">schedule</span> 12:45PM on Tomorrow
+                </p>
+                <p class="row">
+                    <span class="material-icons">location_on</span> Schlitterbahn Waterpark New Braunfels
+                </p>
+                <p class="row">
+                    <span class="material-icons">3p</span> 42 Responses
+                </p>
                 <!-- main contnet -->
             </div>
-            <div class="col-2">
+            <div class="col-2" style="background-color: purple; color:white">
                 <!-- right side stuff -->
+                <p class="row">
+                    151<span class="material-icons">north</span>
+                </p>
+                <p class="row">August, 12, 2021</p>
+                <p class="row">(edited)</p>
+
             </div>
             <!-- test card -->
         </div>
