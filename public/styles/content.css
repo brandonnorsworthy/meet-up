@@ -1,5 +1,10 @@
 :root {
-    --pallette-purple: #9407F2;
+    --background-color: #DAE0E6;
+    --main-color: #9407F2;
+    --confirm-color: #F673E3;
+    --text-shade: #757575;
+    --text-dark: #424242;
+    --button-hover-on-white: #E1E1E1;
 }
 
 * {
@@ -7,7 +12,7 @@
 }
 
 body {
-    background-color: #DAE0E6;
+    background-color: var(--background-color);
 }
 
 main {
@@ -38,7 +43,7 @@ main {
 
 .card #sort {
     font-size: 24px;
-    color: #757575;
+    color: var(--text-shade);
     display: flex;
 }
 
@@ -56,7 +61,7 @@ main {
 
 #sort button {
     border: none;
-    color: #757575;
+    color: var(--text-shade);
     background-color: none;
     border-radius: 10px;
     padding: 18px;
@@ -64,17 +69,17 @@ main {
 }
 
 #sort button:hover {
-    background-color: #E1E1E1;
+    background-color: var(--button-hover-on-white);
 }
 
 #active {
     color: #ffffff!important;
-    background-color: var(--pallette-purple)!important;
+    background-color: var(--main-color)!important;
 }
 
 #active:hover {
     color: #ffffff!important;
-    background-color: var(--pallette-purple)!important;
+    background-color: var(--main-color)!important;
 }
 
 #justify-left {
@@ -87,30 +92,71 @@ main {
     justify-content: flex-end;
 }
 
-/* upvote button area */
+/*! all google font icons are unselectable */
+.unselectable {
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+}
 
+/*! upvote button area */
 .upvote {
     text-align: center;
-    padding-top: 12px;
-    padding: 8px;
+    margin-top: 4px;
+    padding: 4px;
     border-radius: 50%;
-    border: 2px solid #ffffff;
+    border: 2px solid var(--text-dark);
 }
 
 /* if the upvote has been previously clicked */
 .upvote:hover {
-    cursor: pointer;
-    color: #424242;;
-    border: 2px solid #424242;
+    color:var(--confirm-color);
+    background-color: #FFFFFF;
+    border: 2px solid var(--confirm-color);
 }
 
+.upvote-activated:hover,
 .upvote-activated {
     color:#FFFFFF;
-    background-color: #F673E3;
+    background-color: var(--confirm-color);
+    border: 2px solid var(--confirm-color);
 }
 
-.upvote-activated:hover {
-    color:#F673E3;
-    background-color: #FFFFFF;
-    border: 2px solid #F673E3;
+/*! thread card formatting */
+.thread {
+    flex-direction: row;
+    color: var(--text-dark);
+    padding: 15px;
 }
+
+.thread:hover {
+    cursor: pointer;
+}
+
+/* pfp on thread */
+.thread img {
+    width: 148px;
+    border-radius: 50%;
+}
+
+/* purple nameplate under pfp first column */
+.thread > div:first-child > div {
+    width: 100%;
+    text-align: center;
+    font-size: 24px;
+    color: var(--main-color);
+    margin-top: 20px;
+}
+
+/*? middle column */
+.thread > div:nth-child(2) {
+    padding-left: 30px;
+}
+
+.thread > div:nth-child(2) > * {
+    display: flex;
+    height: 25%;
+}
+
