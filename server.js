@@ -39,23 +39,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
 
-app.get('/home', function (req, res) {
-	Post.findAll({}).then(function (data, err) {
-		console.log('err and data', err, data);
-		res.render('homepage', {
-			posts: data
-		})
-	})
-})
-
-app.get('/about', function (req, res) {
-	res.render('painting')
-})
-
-app.get('/api/posts', function (req, res) {
-	console.log('POST MODEL', Post)
-})
-
 sequelize.sync({
 	force: false
 }).then(() => {
