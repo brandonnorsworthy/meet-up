@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
     <!-- google font icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- bootstrap -->
@@ -42,32 +43,39 @@
                 </div>
             </div>
         </div>
-        <div class="card row">
-            <div class="flex-column col-2" style="background-color: green;">
+        <div class="card row" style="flex-direction: row; padding: 15px">
+            <div class="flex-column col-2">
                 <!-- pfp -->
                 <img class="col-9" src="./assets/fake-pfp/fakeperson1.png" alt="" style="width:148px;border-radius: 50%;">
-                <p class="col-3" style="width: 100%;background-color: red;">Gerfulty</p>
+                <div class="col-3" style="width: 100%; text-align: center; font-size: 24px; color: #6401F9; margin-top: 20px;">Gerfulty</div>
             </div>
-            <div class="col-8" style="background-color:aqua">
-                <h1 class="row">Event title would go in this line right here brief desc</h1>
-                <p class="row">
-                    <span class="material-icons">schedule</span> 12:45PM on Tomorrow
-                </p>
-                <p class="row">
-                    <span class="material-icons">location_on</span> Schlitterbahn Waterpark New Braunfels
-                </p>
-                <p class="row">
-                    <span class="material-icons">3p</span> 42 Responses
-                </p>
+            <div class="col-8" style="padding-left: 30px;">
                 <!-- main contnet -->
+                <h1 class="row" style="display: flex; height: 25%; font-weight: 700; font-size: 26px;">
+                    Event title would go in this line right here
+                </h1>
+                <div class="row" style="display: flex; height: 25%; font-size: 24px;">
+                    <span class="col-1 material-icons">schedule</span>
+                    <p class="col-11">12:45PM on Tomorrow</p>
+                </div>
+                <div class="row" style="display: flex; height: 25%; font-size: 24px;">
+                    <span class="col-1 material-icons">location_on</span>
+                    <p class="col-11">Schlitterbahn Waterpark New Braunfels</p>
+                </div>
+                <div class="row" style="display: flex; height: 25%; font-size: 24px;">
+                    <span class="col-1 material-icons">3p</span>
+                    <p class="col-11">42 Responses</p>
+                </div>
             </div>
-            <div class="col-2" style="background-color: purple; color:white">
+            <div class="col-2">
                 <!-- right side stuff -->
-                <p class="row">
-                    151<span class="material-icons">north</span>
-                </p>
-                <p class="row">August, 12, 2021</p>
-                <p class="row">(edited)</p>
+                <div class="row justify-content-end" style="margin-bottom: 8px; font-size: 26px; height: 25%;">
+                    <p class="col-6">151</p>
+                    <span class="col-6 material-icons">north</span>
+                </div>
+                <p class="row justify-content-end" style="margin-bottom: 0; font-size: 24px; height: 25%;">August, 12, 2021</p>
+                <p class="row justify-content-end" style="margin-bottom: 0; font-size: 24px; height: 25%;">(edited)</p>
+                <p class="row justify-content-end" style="margin-bottom: 0; font-size: 24px; height: 25%;"></p>
 
             </div>
             <!-- test card -->
