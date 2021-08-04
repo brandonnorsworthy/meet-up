@@ -21,12 +21,22 @@ main {
     width: 55vw;
     border-radius: 1;
     margin-top: 45px;
-    padding: 0px 35px 0px 35px
+    /* padding: 0px 35px 0px 35px */
 }
 
 .card #sort {
     font-size: 24px;
     color: #757575;
+    display: flex;
+}
+
+.card #sort > * {
+    display: flex;
+    direction: column;
+}
+
+.card #sort > * > * {
+    align-items: center;
 }
 
 #sort button {
@@ -47,13 +57,13 @@ main {
 }
 
 #justify-left {
-    width: 46.9%;
+    width: 50%;
     justify-content: start;
-    background-color: blue;
+    /* background-color: blue; */
 }
 
 #justify-right {
-    width: 46.9%;
-    justify-content: end;
-    background-color: green;
+    width: 50%;
+    justify-content: flex-end;
+    /* background-color: green; */
 }
