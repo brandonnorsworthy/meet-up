@@ -19,7 +19,7 @@ main {
 
 .card {
     width: 55vw;
-    border-radius: 1;
+    border-radius: 10px;
     margin-top: 45px;
     /* padding: 0px 35px 0px 35px */
 }
@@ -30,40 +30,47 @@ main {
     display: flex;
 }
 
-.card #sort > * {
+#sort > * {
     display: flex;
-    direction: column;
+    padding: 5px 35px 5px 35px;
 }
 
-.card #sort > * > * {
+#sort > * > * {
+    /* background-color: red; */
+    display: flex;
     align-items: center;
+    margin-bottom: 0px;
 }
 
 #sort button {
     border: none;
     color: #757575;
     background-color: none;
-    border-radius: 10;
+    border-radius: 10px;
+    padding: 18px;
+    margin: 0px 2px 0px 2px;
 }
 
 #sort button:hover {
     background-color: #E1E1E1;
 }
 
-#sort button:active {
-    font-weight: bold;
-    color: #ffffff;
-    background-color: var(--pallette-purple);
+#active {
+    color: #ffffff!important;
+    background-color: var(--pallette-purple)!important;
+}
+
+#active:hover {
+    color: #ffffff!important;
+    background-color: var(--pallette-purple)!important;
 }
 
 #justify-left {
     width: 50%;
     justify-content: start;
-    /* background-color: blue; */
 }
 
 #justify-right {
     width: 50%;
     justify-content: flex-end;
-    /* background-color: green; */
 }
