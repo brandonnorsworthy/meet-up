@@ -28,6 +28,14 @@ main {
     width: 37.5vw
 }
 
+#signup-card {
+    margin-top: 5vh;
+}
+
+#login-card {
+    margin-top: 17vh;
+}
+
 .card #sort {
     font-size: 24px;
     color: #757575;

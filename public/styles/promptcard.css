@@ -77,8 +77,13 @@ main {
     border: 0px;
     border-radius: 10px;
     font-weight: 700;
+    font-size: 20px;
     color: #ffffff;
     padding: 15px 45px 15px 45px;
     width: auto;
     background-color: var(--pallette-pink);
+}
+
+.user-prompt span {
+    font-size: 64px;
 }
