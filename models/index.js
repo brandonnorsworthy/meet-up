@@ -4,10 +4,12 @@ const Responses = require('./Responses');
 
 Users.hasMany(Posts, {
   foreignKey: 'user_id',
+  onDelete: 'CASCADE',
 });
   
 Users.hasMany(Responses, {
   foreignKey: 'user_id',
+  onDelete: 'CASCADE',
 });
   
 Posts.belongsTo(Users, {
