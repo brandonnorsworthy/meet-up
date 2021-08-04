@@ -23,6 +23,62 @@ main {
     flex-direction: column;
 }
 
+/*! navbar */
+.nav {
+    width: 100vw;
+    height: 5vh;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+}
+
+.nav-img {
+    width: 20vw;
+    height: 100%;
+    padding-left: 2vw;
+}
+
+.nav-img img {
+    width: 80px;
+}
+
+.nav-search {
+    width: 60vw;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.nav-search input {
+    width: 35vw;
+    height: 60%;
+    padding: 5px 0px 0px 35px;
+    border: 0px;
+    border-radius: 10px;
+    color: #959595;
+    background-color: #E1E1E1;
+}
+
+.nav-search input:focus {
+    border-color: var(--main-color);
+}
+
+.nav-buttons {
+    width: 20vw;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.nav-buttons a {
+    color: var(--main-color);
+    margin-right: 35px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+/*! formatting of base cards */
 .card {
     width: 60vw;
     border-radius: 10px;
@@ -30,6 +86,7 @@ main {
     background-color: var(--card-background-color);
 }
 
+/* used for signup and login just a bit smaller in width */
 .small {
     width: 37.5vw
 }
@@ -40,6 +97,17 @@ main {
 
 #login-card {
     margin-top: 17vh;
+}
+
+/*! first card on main page has special formatting also formats the sort buttons */
+.justify-left {
+    width: 50%;
+    justify-content: start;
+}
+
+.justify-right {
+    width: 50%;
+    justify-content: flex-end;
 }
 
 .card #sort {
@@ -81,16 +149,6 @@ main {
 #active:hover {
     color: var(--card-background-color)!important;
     background-color: var(--main-color)!important;
-}
-
-.justify-left {
-    width: 50%;
-    justify-content: start;
-}
-
-.justify-right {
-    width: 50%;
-    justify-content: flex-end;
 }
 
 /*! all google font icons are unselectable */
