@@ -24,6 +24,10 @@ main {
     /* padding: 0px 35px 0px 35px */
 }
 
+.small {
+    width: 37.5vw
+}
+
 .card #sort {
     font-size: 24px;
     color: #757575;
