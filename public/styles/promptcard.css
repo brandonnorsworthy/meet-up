@@ -1,0 +1,85 @@
+:root {
+    --pallette-purple: #9407F2;
+    --pallette-pink: #F673E3;
+}
+
+main {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+/* login signup area */
+.jc-c {
+    display: flex;
+    justify-content: center;
+}
+
+.txt-a-c {
+    text-align: center;
+}
+
+.txt-a-l {
+    text-align: left;
+}
+
+.row {
+    margin: 0px;
+}
+
+.user-prompt {
+    margin-top: 17vh;
+    color: #424242;
+}
+
+.user-prompt > div {
+    margin: 0px;
+    width: 100%;
+    padding: 25px;
+}
+
+.user-prompt > div > div {
+    width: 100%;
+    display: flex;
+}
+
+.user-prompt > div > div > img {
+    height: 113px;
+    width: 170px;
+}
+
+.user-prompt h1 {
+    font-size: 24px;
+}
+
+.user-prompt p {
+    font-size: 20px;
+    padding: 0px;
+    margin-bottom: 10px;
+}
+
+.user-prompt input {
+    padding: 7px 0px 7px 15px;
+    background-color: #E1E1E1;
+    border-radius: 10px;
+    border: 0px;
+    color: #424242;
+    font-size: 20px;
+    margin-bottom: 25px;
+}
+
+.user-prompt a {
+    text-decoration: none;
+    font-weight: 700;
+    color: var(--pallette-purple);
+}
+
+.user-prompt button {
+    border: 0px;
+    border-radius: 10px;
+    font-weight: 700;
+    color: #ffffff;
+    padding: 15px 45px 15px 45px;
+    width: auto;
+    background-color: var(--pallette-pink);
+}
