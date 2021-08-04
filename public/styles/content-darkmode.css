@@ -1,11 +1,11 @@
 :root {
-    --background-color: #DAE0E6;
-    --card-background-color: #FFFFFF;
-    --main-color: #9407F2;
-    --confirm-color: #F673E3;
-    --text-shade: #757575;
-    --text-dark: #424242;
-    --button-hover-on-white: #E1E1E1;
+    --background-color: #313131;
+    --card-background-color: #525252;
+    --main-color: #53008a;
+    --confirm-color: #c200a1;
+    --text-shade: #bbbbbb;
+    --text-dark: #e2e2e2;
+    --button-hover-on-white: #7c7c7c;
 }
 
 * {
