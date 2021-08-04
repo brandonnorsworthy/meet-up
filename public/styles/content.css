@@ -1,3 +1,59 @@
+:root {
+    --pallette-purple: #9407F2;
+}
+
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
 body {
     background-color: #DAE0E6;
+}
+
+main {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    flex-direction: column;
+}
+
+.card {
+    width: 55vw;
+    border-radius: 1;
+    margin-top: 45px;
+    padding: 0px 35px 0px 35px
+}
+
+.card #sort {
+    font-size: 24px;
+    color: #757575;
+}
+
+#sort button {
+    border: none;
+    color: #757575;
+    background-color: none;
+    border-radius: 10;
+}
+
+#sort button:hover {
+    background-color: #E1E1E1;
+}
+
+#sort button:active {
+    font-weight: bold;
+    color: #ffffff;
+    background-color: var(--pallette-purple);
+}
+
+#justify-left {
+    width: 46.9%;
+    justify-content: start;
+    background-color: blue;
+}
+
+#justify-right {
+    width: 46.9%;
+    justify-content: end;
+    background-color: green;
 }

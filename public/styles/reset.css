@@ -31,3 +31,7 @@ pre, code {
 ol, ul {
   list-style: none;
 }
+
+button {
+  border-radius: 0px;
+}
