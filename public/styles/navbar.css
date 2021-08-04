@@ -1,5 +1,5 @@
 :root {
-    --test: #ffffff;
+    --pallette-purple: #9407F2;
 }
 
 .nav {
@@ -7,21 +7,51 @@
     height: 5vh;
     background-color: #ffffff;
     display: flex;
-    justify-content: center;
     align-items: center;
-    padding: 0px 2vw 0px 2vw;
 }
 
-.nav .red {
-    /* background-color: red; */
-    width: 100%;
+.nav-img {
+    width: 20vw;
     height: 100%;
+    padding-left: 2vw;
 }
 
-.nav img {
-    padding: 3px;
-    width: 90px;
+.nav-img img {
+    width: 80px;
 }
 
-.nav input {
+.nav-search {
+    width: 60vw;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.nav-search input {
+    width: 35vw;
+    height: 60%;
+    padding: 5px 0px 0px 35px;
+    border: 0px;
+    border-radius: 10px;
+    color: #959595;
+    background-color: #E1E1E1;
+}
+
+.nav-search input:focus {
+    border-color: var(--pallette-purple);
+}
+
+.nav-buttons {
+    width: 20vw;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.nav-buttons a {
+    color: var(--pallette-purple);
+    margin-right: 35px;
+    font-weight: 700;
+    text-decoration: none;
 }
