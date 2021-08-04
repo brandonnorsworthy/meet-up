@@ -1,182 +1,69 @@
-			const router = require('express').Router();
-			const {
-				Posts,
-				Users,
-				Responses,
-			} = require('../../models');
-			
-			router.post('/',function(req, res){
+const router = require('express').Router();
+// const { response } = require('express');
+const { Posts } = require('../../models');
 
+router.post('/',function(req, res){
+	try {
+		const postRoutes = Posts.getcreate({
+			...req.body,
+			post_id: req.session.post_id,
+		});
+
+		res.status(200).json(postRoutes);
+	} catch (err) {
+		res.status(400).json(err);
+	}
+})
+
+//TODO possibly reverse this so its more formatted to match like website.com/posts/:id/upvote
+router.put('/upvote/:id',function(req, res){
+	try {
+		const userUpvote = Posts.getcreate({
+			...req.body,
+			post_upvotes: req.session.post_upvotes,
+		});
+
+		res.status(200).json(userUpvote);
+	} catch (err) {
+		res.status(400).json(err);
+	}
+
+})
+
+//TODO possibly reverse this so its more formatted to match like website.com/posts/:id/upvote
+router.put('/edited/:id',function(req, res){
+	try {
+		const userEdited = Posts.getcreate({
+			...req.body,
+			edited_post: req.session.edited_post,
+		});
+
+		res.status(200).json(userEdited);
+	} catch (err) {
+		res.status(400).json(err);
+	}
 	
-			})
+})
 
-			router.post('/response/:id',function(req, res){
-			
-				
-			})
-			
-			router.put('/upvote/:id',function(req, res){
-			
-				
-			})
+router.delete('/:id',function(req,res){
+	//TODO make sure the person that is deleting it in the session matches the author of the response trying to be deleted
+	try {
+		const userPost = await Posts.destroy({
+			where: {
+				id: req.params.id,
+				post_id: req.session.post_id,
+			},
+		});
 
-			router.put('/editpost/:id',function(req, res){
-			
-				
-			})
+		if (!userPost) {
+			res.status(404).json({ message: 'No Posts to delete here!' });
+			return;
+		}
 
-			router.put('/editresponse/:id',function(req, res){
-			
-				
-			})
+		res.status(200).json(userPost);
+	} catch (err) {
+		res.status(500).json(err);
+	}
+})
 
-
-			router.delete('/:id',function(req,res){
-      // cascade on delete.
-
-			})
-
-			router.delete('/deleterespones/:id',function(req,res){
-				// cascade on delete.
-	
-				})
-
-
-
-
-
-
-
-
-
-				
-			// const sequelize = require('../../config/connection');
-			// const withAuth = require('../../utils/auth');
-
-			// router.get('/', (req, res) => {
-				
-			// 	console.log('======================');
-			// 	Post.findAll({
-			// 			attributes: ['id',
-			// 				'title',
-			// 				'content',
-			// 				'created_at'
-			// 			],
-			// 			order: [
-			// 				['created_at', 'DESC']
-			// 			],
-			// 			include: [{
-			// 					model: User,
-			// 					attributes: ['username']
-			// 				},
-			// 				{
-			// 					model: Comment,
-			// 					attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
-			// 					include: {
-			// 						model: User,
-			// 						attributes: ['username']
-			// 					}
-			// 				}
-			// 			]
-			// 		})
-			// 		.then(dbPostData => res.json(dbPostData.reverse()))
-			// 		.catch(err => {
-			// 			console.log(err);
-			// 			res.status(500).json(err);
-			// 		});
-
-			// });
-			// router.get('/:id', (req, res) => {
-			// 	Post.findOne({
-			// 			where: {
-			// 				id: req.params.id
-			// 			},
-			// 			attributes: ['id',
-			// 				'content',
-			// 				'title',
-			// 				'created_at'
-			// 			],
-			// 			include: [{
-			// 					model: User,
-			// 					attributes: ['username']
-			// 				},
-			// 				{
-			// 					model: Comment,
-			// 					attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
-			// 					include: {
-			// 						model: User,
-			// 						attributes: ['username']
-			// 					}
-			// 				}
-			// 			]
-			// 		})
-			// 		.then(dbPostData => {
-			// 			if (!dbPostData) {
-			// 				res.status(404).json({
-			// 					message: 'No post found with this id'
-			// 				});
-			// 				return;
-			// 			}
-			// 			res.json(dbPostData);
-			// 		})
-			// 		.catch(err => {
-			// 			console.log(err);
-			// 			res.status(500).json(err);
-			// 		});
-			// });
-
-			// router.post('/', withAuth, (req, res) => {
-			// 	Post.create({
-			// 			title: req.body.title,
-			// 			content: req.body.content,
-			// 			user_id: req.session.user_id
-			// 		})
-			// 		.then(dbPostData => res.json(dbPostData))
-			// 		.catch(err => {
-			// 			console.log(err);
-			// 			res.status(500).json(err);
-			// 		});
-			// });
-
-			// router.put('/:id', withAuth, (req, res) => {
-			// 	Post.update({
-			// 			title: req.body.title,
-			// 			content: req.body.content
-			// 		}, {
-			// 			where: {
-			// 				id: req.params.id
-			// 			}
-			// 		}).then(dbPostData => {
-			// 			if (!dbPostData) {
-			// 				res.status(404).json({
-			// 					message: 'No post found with this id'
-			// 				});
-			// 				return;
-			// 			}
-			// 			res.json(dbPostData);
-			// 		})
-			// 		.catch(err => {
-			// 			console.log(err);
-			// 			res.status(500).json(err);
-			// 		});
-			// });
-			// router.delete('/:id', withAuth, (req, res) => {
-			// 	Post.destroy({
-			// 		where: {
-			// 			id: req.params.id
-			// 		}
-			// 	}).then(dbPostData => {
-			// 		if (!dbPostData) {
-			// 			res.status(404).json({
-			// 				message: 'No post found with this id'
-			// 			});
-			// 			return;
-			// 		}
-			// 		res.json(dbPostData);
-			// 	}).catch(err => {
-			// 		console.log(err);
-			// 		res.status(500).json(err);
-			// 	});
-			// });
-
-			module.exports = router;
+module.exports = router;
