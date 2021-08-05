@@ -1,4 +1,12 @@
 function init() {
+    //TODO remove this later it defaults to darkmode should default to lightmode
+    document.documentElement.style.setProperty('--background-color', '#000000')
+    document.documentElement.style.setProperty('--card-background-color', '#1A1A1B')
+    document.documentElement.style.setProperty('--main-color', '#9407F2')
+    document.documentElement.style.setProperty('--confirm-color', '#ec28cf')
+    document.documentElement.style.setProperty('--text-shade', '#BFBFBF')
+    document.documentElement.style.setProperty('--text-dark', '#D7DADC')
+    document.documentElement.style.setProperty('--button-hover-on-white', '#272727')
     $('.darkModeToggle').click(darkModeButtonClicked)
     $('.sortBtn').click(sortButtonClicked);
     $('.upvote').click(upvoteButtonClicked);

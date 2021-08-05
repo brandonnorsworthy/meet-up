@@ -227,13 +227,20 @@ main {
     padding-right: 0px;
 }
 
+/* !KEEP ABOVE THE RIGHT COLUMN AND UPVOTE SO IT DOESNT OVERWRITE */
+.post * {
+    margin: 0px;
+    padding: 0px;
+}
+
 /*? right column */
+.post > div:first-child > div:last-child,
 .thread > div:last-child > div {
     margin-bottom: 8px;
     font-size: 26px;
-    height: 25%; /* first of 4 rows */
 }
 
+.post > div:first-child > div:last-child p,
 .thread > div:last-child > div p {
     text-align:right;
     padding-top: 8px;
@@ -273,5 +280,85 @@ main {
 .post { /* TODO refactor */
     flex-direction: row;
     color: var(--text-dark);
-    padding: 15px;
+    padding: 20px;
+}
+
+.post > div {
+    padding-bottom: 20px;
+}
+
+/* ? header of post and upvote */
+.post > div:first-child > div:first-child {
+    display: flex;
+    align-items: center;
+}
+
+.post > div:first-child > div:first-child h1 {
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.post > div:first-child > div:last-child p {
+    padding-right: 12px;
+}
+
+/* ? location tag and time tag */
+.post > div:nth-child(2) > div {
+    display: flex;
+    font-size: 24px;
+}
+
+/* last child of any because later on it the location tag will be converted into a clickable link for google maps instead of a p tag */
+.post > div:nth-child(2) > div *:last-child {
+    padding-left: 20px;
+}
+
+.post > div:nth-child(2) > div:first-child  span {
+    padding-left: 0px;
+}
+
+.post > div:nth-child(2) > div span {
+    padding-left: 20px;
+}
+
+.post > div:nth-child(2) > div p {
+    color: var(--main-color);
+}
+
+/*? description area */
+.post > div:nth-child(3) > p {
+    font-size: 20px;
+    line-height: 1.3;
+}
+
+/* ? date buttons and author */
+.post > div:nth-child(5) {
+    border-bottom: 1px solid var(--text-dark);
+}
+
+/* first half justified left */
+
+.post > div:nth-child(5) > div:first-child p {
+    font-size: 20px;
+    margin: 10px 30px 10px 0px;
+    align-self: center;
+}
+
+.post > div:nth-child(5) > div:first-child button {
+    font-size: 20px;
+    border: none;
+    color: var(--main-color);
+    background-color: var(--card-background-color);
+    margin: 10px 30px 10px 0px;
+    align-self: center;
+}
+
+/* second half justfied right */
+.post > div:nth-child(5) > div:last-child {
+    background-color: red;
+}
+
+.post > div:nth-child(5) img {
+    width: 60px;
+    border-radius: 50%;
 }

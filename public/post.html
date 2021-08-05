@@ -31,6 +31,10 @@
                 <input type="text" minlength="4" maxlength="60" placeholder="search">
             </div>
             <div class="nav-buttons">
+                <span>DARK MODE</span>
+                <button class="darkModeToggle" id="off">
+                    <span class="material-icons">toggle_off</span> <!-- toggle_on -->
+                </button>
                 <a href="./login.html">LOGIN</a>
                 <a href="./signup.html">SIGN UP</a>
             </div>
@@ -56,13 +60,13 @@
             </div>
             <!-- location and time -->
             <div class="row">
-                <div class="row">
-                    <span class="col-1 unselectable material-icons">schedule</span>
-                    <p class="col-11">12:45PM on Tomorrow</p>
+                <div class="col-auto">
+                    <span class="unselectable material-icons">location_on</span>
+                    <p>Schlitterbahn Waterpark New Braunfels</p>
                 </div>
-                <div class="row">
-                    <span class="col-1 unselectable material-icons">location_on</span>
-                    <p class="col-11">Schlitterbahn Waterpark New Braunfels</p>
+                <div class="col-auto">
+                    <span class="unselectable material-icons">schedule</span>
+                    <p>12:45PM on Tomorrow</p>
                 </div>
             </div>
             <!-- description -->
@@ -75,19 +79,15 @@
             <!-- date, edit, delete, author -->
             <div class="row">
                 <!-- date, edit, delete -->
-                <div class="col-6 justify-content-start">
-                    <p class="row justify-content-end">September, 12, 2021</p>
+                <div class="col-6 d-flex justify-content-start align-content-center">
+                    <p>September, 12, 2021</p>
                     <button name="edit">edit</button>
                     <button name="delete">delete</button>
                 </div>
                 <!-- author and pfp -->
-                <div class="col-6 justify-content-end">
-                    <div class="row">
-                        <div class="col-3">
-                            <p>Gerfulty</p>
-                        </div>
-                        <img class="col-9" src="./assets/fake-pfp/fakeperson1.png" alt="">
-                    </div>
+                <div class="col-6 d-flex justify-content-end align-content-center">
+                    <p>Gerfulty</p>
+                    <img src="./assets/fake-pfp/fakeperson1.png" alt="">
                 </div>
             </div>
             <!-- !border bottom -->
