@@ -42,7 +42,7 @@ Posts.init(
 	user_id: {
 	  type: DataTypes.INTEGER,
 	  references: {
-	    model: 'user',
+	    model: 'Users',
 		key: 'id',
 	},
   },
@@ -51,7 +51,7 @@ Posts.init(
     sequelize,
     underscored: true,
     freezeTableName: true,
-    modelName: 'post',
+    modelName: 'Posts',
   }
 );
 

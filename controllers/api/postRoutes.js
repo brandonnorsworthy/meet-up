@@ -15,7 +15,7 @@ router.post('/',function(req, res){
 	}
 })
 
-//TODO possibly reverse this so its more formatted to match like website.com/posts/:id/upvote
+//TODO possibly reverse this so its more formatted to match like website.com/posts/:id/upvote***
 router.put('/upvote/:id',function(req, res){
 	try {
 		const userUpvote = Posts.getcreate({
@@ -30,12 +30,12 @@ router.put('/upvote/:id',function(req, res){
 
 })
 
-//TODO possibly reverse this so its more formatted to match like website.com/posts/:id/upvote
+//TODO possibly reverse this so its more formatted to match like website.com/posts/:id/upvote***
 router.put('/edited/:id',function(req, res){
 	try {
 		const userEdited = Posts.getcreate({
 			...req.body,
-			edited_post: req.session.edited_post,
+			post_edited: req.session.post_edited,
 		});
 
 		res.status(200).json(userEdited);
@@ -45,7 +45,7 @@ router.put('/edited/:id',function(req, res){
 	
 })
 
-router.delete('/:id',function(req,res){
+router.delete('/:id',async function(req,res){
 	//TODO make sure the person that is deleting it in the session matches the author of the response trying to be deleted
 	try {
 		const userPost = await Posts.destroy({

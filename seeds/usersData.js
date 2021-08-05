@@ -17,13 +17,13 @@ const userData = [
     username: 'Kristin Withers',
     email: 'kwithers@gmail.com',
     password: 'dnckjndlnnx',
-    filename: 'image3.jpeg',
+    image_url: 'image3.jpeg',
   },
   {
     username: 'Brian Wilson',
     email: 'bwill@gmail.com',
     password: 'ncjksdcnsk',
-    filename: 'image4.jpeg',
+    image_url: 'image4.jpeg',
   },
 ];
 

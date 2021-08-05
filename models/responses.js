@@ -19,17 +19,17 @@ Responses.init(
       type: DataTypes.TEXT,
       allowNull: false,
     },
-	user_id: {
+	  user_id: {
 	  type: DataTypes.INTEGER,
 	  references: {
-	  model: 'users',
+	  model: 'Users',
 	  key: 'id',
-	},
-},
+      },
+    },
     posts_id: {
 	  type: DataTypes.INTEGER,
 	  references: {
-	  model: 'posts',
+	  model: 'Posts',
 	  key: 'id',
 			},
 		},
