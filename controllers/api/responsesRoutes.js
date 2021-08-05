@@ -17,7 +17,7 @@ router.post('/',function(req, res){
     
 })
 
-router.delete('/:id',function(req,res){
+router.delete('/:id',async function(req,res){
     // cascade on delete.
     //TODO make sure the person that is deleting it in the session matches the author of the response trying to be deleted
     try {

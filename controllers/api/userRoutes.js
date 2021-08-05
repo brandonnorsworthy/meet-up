@@ -2,7 +2,7 @@ const router = require('express').Router();
 
 const { Users } = require('../../models');
 
-router.post('/login',function(req, res){
+router.post('/login',async function(req, res){
 	//TODO attach the user id to the session so we can look at who is logged in at anytime
 	try {
     const dbUserData = await Users.findOne({
@@ -40,7 +40,7 @@ router.post('/login',function(req, res){
   }
 });
 
-router.post('/register',function(req, res){
+router.post('/register',async function(req, res){
 	try {
     const dbUserData = await Users.create({
       username: req.body.username,
