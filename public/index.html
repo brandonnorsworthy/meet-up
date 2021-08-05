@@ -15,21 +15,26 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!-- created files/css -->
     <link rel="stylesheet" href="./styles/reset.css">
-    <link rel="stylesheet" href="./styles/navbar.css">
     <link rel="stylesheet" href="./styles/content.css">
-    <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="./assets/logos/favicon.ico" type="image/x-icon">
     <title>Meet Up</title>
 </head>
 <body>
     <header>
         <div class="nav">
             <div class="nav-img">
-                <img src="./assets/logos/logo-purple-clipped.png" alt="meet up logo with arrow colored purple">
+                <a href="./index.html">
+                    <img src="./assets/logos/logo-purple-clipped.png" alt="meet up logo with arrow colored purple">
+                </a>
             </div>
             <div class="nav-search">
                 <input type="text" minlength="4" maxlength="60" placeholder="search">
             </div>
             <div class="nav-buttons">
+                <span>DARK MODE</span>
+                <button class="darkModeToggle" id="off">
+                    <span class="material-icons">toggle_off</span> <!-- toggle_on -->
+                </button>
                 <a href="./login.html">LOGIN</a>
                 <a href="./signup.html">SIGN UP</a>
             </div>
@@ -38,10 +43,10 @@
     <main class="container">
         <div class="card row">
             <div id="sort">
-                <div id="justify-left">
+                <div class="justify-left">
                     <p>Sort by</p>
                 </div>
-                <div id="justify-right">
+                <div class="justify-right">
                     <button class="sortBtn" id="active">Top</button>
                     <button class="sortBtn">New</button>
                     <button class="sortBtn">Upcoming</button>
@@ -49,42 +54,125 @@
                 </div>
             </div>
         </div>
-        <div class="card row" style="flex-direction: row; padding: 15px">
+        <!-- thread 1 -->
+        <div class="card row thread">
             <div class="flex-column col-2">
                 <!-- pfp -->
-                <img class="col-9" src="./assets/fake-pfp/fakeperson1.png" alt="" style="width:148px;border-radius: 50%;">
-                <div class="col-3" style="width: 100%; text-align: center; font-size: 24px; color: #6401F9; margin-top: 20px;">Gerfulty</div>
-            </div>
-            <div class="col-8" style="padding-left: 30px;">
-                <!-- main contnet -->
-                <h1 class="row" style="display: flex; height: 25%; font-weight: 700; font-size: 26px;">
-                    Event title would go in this line right here
-                </h1>
-                <div class="row" style="display: flex; height: 25%; font-size: 24px;">
-                    <span class="col-1 material-icons" style="text-align: right; padding-right: 0px;">schedule</span>
-                    <p class="col-11">12:45PM on Tomorrow</p>
+                <img class="col-9" src="./assets/fake-pfp/fakeperson6.png" alt="">
+                <div class="col-3">
+                    <p>actuallyangela</p>
                 </div>
-                <div class="row" style="display: flex; height: 25%; font-size: 24px;">
-                    <span class="col-1 material-icons" style="text-align: right; padding-right: 0px;">location_on</span>
+            </div>
+            <div class="col-7">
+                <!-- main contnet -->
+                <h1 class="row">
+                    Angela Kinsley look alike meet up BYOD 🥂
+                </h1>
+                <div class="row">
+                    <span class="col-1 unselectable material-icons">schedule</span>
+                    <p class="col-11">12:45PM on Wednesday</p>
+                </div>
+                <div class="row">
+                    <span class="col-1 unselectable material-icons">location_on</span>
                     <p class="col-11">Schlitterbahn Waterpark New Braunfels</p>
                 </div>
-                <div class="row" style="display: flex; height: 25%; font-size: 24px;">
-                    <span class="col-1 material-icons" style="text-align: right; padding-right: 0px;">3p</span>
+                <div class="row">
+                    <span class="col-1 unselectable material-icons">3p</span>
                     <p class="col-11">42 Responses</p>
                 </div>
             </div>
-            <div class="col-2">
+            <div class="col-3">
                 <!-- right side stuff -->
-                <div class="row justify-content-end" style="margin-bottom: 8px; font-size: 26px; height: 25%;">
-                    <p class="col-9" style="text-align:right; padding-top: 8px; padding-right: 0px;">151</p>
-                    <span class="col-3 material-icons md-48" style="text-align: center; padding-top: 12px; padding: 8px; color:#FFFFFF; background-color: #F673E3; border-radius: 50%;">north</span>
+                <div class="row justify-content-end">
+                    <p class="col-10">151</p>
+                    <div class="col-2">
+                        <span class="content unselectable material-icons md-48 upvote">north</span>
+                    </div>
                 </div>
-                <p class="row justify-content-end" style="margin-bottom: 0; font-size: 24px; height: 25%;">August, 12, 2021</p>
-                <p class="row justify-content-end" style="margin-bottom: 0; font-size: 24px; height: 25%;">(edited)</p>
-                <p class="row justify-content-end" style="margin-bottom: 0; font-size: 24px; height: 25%;"></p>
-
+                <p class="row justify-content-end">August, 11, 2021</p>
+                <p class="row justify-content-end">(edited)</p>
+                <p class="row justify-content-end"></p>
             </div>
-            <!-- test card -->
+        </div>
+        <!-- thread 2 -->
+        <div class="card row thread">
+            <div class="flex-column col-2">
+                <!-- pfp -->
+                <img class="col-9" src="./assets/fake-pfp/fakeperson4.png" alt="">
+                <div class="col-3">
+                    <p>24hrchillbeats</p>
+                </div>
+            </div>
+            <div class="col-7">
+                <!-- main contnet -->
+                <h1 class="row">
+                    My first DJ gig looking come check it out
+                </h1>
+                <div class="row">
+                    <span class="col-1 unselectable material-icons">schedule</span>
+                    <p class="col-11">9:30PM</p>
+                </div>
+                <div class="row">
+                    <span class="col-1 unselectable material-icons">location_on</span>
+                    <p class="col-11">Jimmy Jams Bar</p>
+                </div>
+                <div class="row">
+                    <span class="col-1 unselectable material-icons">3p</span>
+                    <p class="col-11">8 Responses</p>
+                </div>
+            </div>
+            <div class="col-3">
+                <!-- right side stuff -->
+                <div class="row justify-content-end">
+                    <p class="col-10">7</p>
+                    <div class="col-2">
+                        <span class="content unselectable material-icons md-48 upvote">north</span>
+                    </div>
+                </div>
+                <p class="row justify-content-end">August, 13, 2021</p>
+                <p class="row justify-content-end"></p>
+                <p class="row justify-content-end"></p>
+            </div>
+        </div>
+        <!-- thread 3 -->
+        <div class="card row thread">
+            <div class="flex-column col-2">
+                <!-- pfp -->
+                <img class="col-9" src="./assets/fake-pfp/realperson1.png" alt="">
+                <div class="col-3">
+                    <p>bnorsworthy</p>
+                </div>
+            </div>
+            <div class="col-7">
+                <!-- main contnet -->
+                <h1 class="row">
+                    Brandons Epic Minecraft 24th Birthday Bash
+                </h1>
+                <div class="row">
+                    <span class="col-1 unselectable material-icons">schedule</span>
+                    <p class="col-11">4:30PM</p>
+                </div>
+                <div class="row">
+                    <span class="col-1 unselectable material-icons">location_on</span>
+                    <p class="col-11">My Parents House</p>
+                </div>
+                <div class="row">
+                    <span class="col-1 unselectable material-icons">3p</span>
+                    <p class="col-11">8 Responses</p>
+                </div>
+            </div>
+            <div class="col-3">
+                <!-- right side stuff -->
+                <div class="row justify-content-end">
+                    <p class="col-10">2</p>
+                    <div class="col-2">
+                        <span class="content unselectable material-icons md-48 upvote">north</span>
+                    </div>
+                </div>
+                <p class="row justify-content-end">February, 26, 2022</p>
+                <p class="row justify-content-end"></p>
+                <p class="row justify-content-end"></p>
+            </div>
         </div>
     </main>
     <!-- jquery -->
