@@ -24,13 +24,16 @@ router.get('/', function (req, res){
 	res.render('homepage');
 })
 
-router.get('/post/:id', function (req, res){
-	Posts.findAll({})
-		.then(postsData => res.json(postsData))
-		.catch(err => {
-			console.log(err);
-			res.status(500).json(err);
-		})
+router.get('/post/:id', async function (req, res){
+	const singlePost = await Posts.findAll({
+		where: {
+			id: req.params.id
+		}
+	})
+	
+console.log('Single POST!!!', singlePost);
+
+res.render('postDetail',{post: singlePost[0]});
 	//TODO render the post filled with content of that specific id
 	//? will have to do a query and merge posts table with responses
 	//? will have to merge posts and a user (the user that owns the post)
