@@ -9,6 +9,7 @@ const postsData = [
     upvotes: 0,
     location: "2113 Main St. Austin, TX.",
     time_occuring: "13:00:00",
+    date_occuring: "August 04, 2021",
     user_id: 1,
     edited: false
   },
@@ -20,6 +21,7 @@ const postsData = [
     upvotes: 0,
     location: "700 Duvall St. Austin, TX.",
     time_occuring: "16:00:00",
+    date_occuring: "August 05, 2021",
     user_id: 2,
     edited: false
   },
@@ -31,6 +33,7 @@ const postsData = [
     upvotes: 0,
     location: "2336 Douglas St. Austin, TX.",
     time_occuring: "12:00:00",
+    date_occuring: "August 06, 2021",
     user_id: 3,
     edited: false
   },
@@ -42,6 +45,7 @@ const postsData = [
     upvotes: 0,
     location: "420 Green St. Austin, TX.",
     time_occuring: "13:00:00",
+    date_occuring: "August 07, 2021",
     user_id: 3,
     edited: false
   },

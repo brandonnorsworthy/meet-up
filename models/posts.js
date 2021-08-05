@@ -35,17 +35,21 @@ Posts.init(
         type: DataTypes.TIME,
         allowNull: false,
     },
+    date_occuring: {
+        type: DataTypes.DATE,
+        allowNull: false,
+     },
     edited: {
         type: DataTypes.BOOLEAN,
         defaultValue: false
     },
-	user_id: {
+	  user_id: {
 	  type: DataTypes.INTEGER,
 	  references: {
 	    model: 'Users',
 		key: 'id',
 	},
-  },
+},
 },
   {
     sequelize,
