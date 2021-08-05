@@ -1,8 +1,11 @@
 function init() {
-    // if (window.localStorage.getItem("darkmode") == "true") {
-    //     $('.darkModeToggle')[0].id = 'on'
-    //     $('.darkModeToggle')[0].children[0].textContent = 'toggle_on'
-    darkModeHandler();
+    if($('.darkModeToggle').length != 0) { //check if page has a darkmode slider
+        if (window.localStorage.getItem("darkmode") == "true") { //if darkmode is set to true in storage flip switch to on
+            $('.darkModeToggle')[0].id = 'on'
+            $('.darkModeToggle')[0].children[0].textContent = 'toggle_on'
+            darkModeHandler(); //load darkmode settings if its enabled
+        }
+    }
     $('.darkModeToggle').click(darkModeButtonClicked);
     $('.sortBtn').click(sortButtonClicked);
     $('.upvote').click(upvoteButtonClicked);
