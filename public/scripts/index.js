@@ -1,13 +1,10 @@
 function init() {
-    //TODO remove this later it defaults to darkmode should default to lightmode
-    document.documentElement.style.setProperty('--background-color', '#000000')
-    document.documentElement.style.setProperty('--card-background-color', '#1A1A1B')
-    document.documentElement.style.setProperty('--main-color', '#9407F2')
-    document.documentElement.style.setProperty('--confirm-color', '#ec28cf')
-    document.documentElement.style.setProperty('--text-shade', '#BFBFBF')
-    document.documentElement.style.setProperty('--text-dark', '#D7DADC')
-    document.documentElement.style.setProperty('--button-hover-on-white', '#272727')
-    $('.darkModeToggle').click(darkModeButtonClicked)
+    if (window.localStorage.getItem("darkmode") == "true") {
+        $('.darkModeToggle')[0].id = 'on'
+        $('.darkModeToggle')[0].children[0].textContent = 'toggle_on'
+        darkModeHandler();
+    }
+    $('.darkModeToggle').click(darkModeButtonClicked);
     $('.sortBtn').click(sortButtonClicked);
     $('.upvote').click(upvoteButtonClicked);
     $('.thread').click(threadCardClicked);
@@ -16,27 +13,16 @@ function init() {
 function darkModeButtonClicked(event) {
     if ($(this).attr('id') === 'off'){
         //if off turn on
-        $(this).attr('id', 'on')
-        $(this).children().text('toggle_on')
-        document.documentElement.style.setProperty('--background-color', '#000000')
-        document.documentElement.style.setProperty('--card-background-color', '#1A1A1B')
-        document.documentElement.style.setProperty('--main-color', '#9407F2')
-        document.documentElement.style.setProperty('--confirm-color', '#ec28cf')
-        document.documentElement.style.setProperty('--text-shade', '#BFBFBF')
-        document.documentElement.style.setProperty('--text-dark', '#D7DADC')
-        document.documentElement.style.setProperty('--button-hover-on-white', '#272727')
+        $(this).attr('id', 'on');
+        $(this).children().text('toggle_on');
+        window.localStorage.setItem("darkmode", "true");
     } else {
         //if on turn off
-        $(this).attr('id', 'off')
-        $(this).children().text('toggle_off')
-        document.documentElement.style.setProperty('--background-color', '#DAE0E6')
-        document.documentElement.style.setProperty('--card-background-color', '#FFFFFF')
-        document.documentElement.style.setProperty('--main-color', '#9407F2')
-        document.documentElement.style.setProperty('--confirm-color', '#F673E3')
-        document.documentElement.style.setProperty('--text-shade', '#757575')
-        document.documentElement.style.setProperty('--text-dark', '#424242')
-        document.documentElement.style.setProperty('--button-hover-on-white', '#E1E1E1')
+        $(this).attr('id', 'off');
+        $(this).children().text('toggle_off');
+        window.localStorage.setItem("darkmode", "false");
     }
+    darkModeHandler();
 }
 
 function sortButtonClicked(event) {
@@ -65,8 +51,30 @@ function upvoteButtonClicked(event) {
 
 function threadCardClicked(event) {
     //TODO redirect user to thread page on click using the id attatched to the card /post/:id
-    console.log('redirecting')
+    console.log('redirecting');
     location.href = 'post.html';
+}
+
+function darkModeHandler() {
+    if (window.localStorage.getItem("darkmode") == "true") {
+        //if true then make darkmode
+        document.documentElement.style.setProperty('--background-color', '#000000');
+        document.documentElement.style.setProperty('--card-background-color', '#1A1A1B');
+        document.documentElement.style.setProperty('--main-color', '#9407F2');
+        document.documentElement.style.setProperty('--confirm-color', '#ec28cf');
+        document.documentElement.style.setProperty('--text-shade', '#BFBFBF');
+        document.documentElement.style.setProperty('--text-dark', '#D7DADC');
+        document.documentElement.style.setProperty('--button-hover-on-white', '#272727');
+    } else {
+        //else make bright
+        document.documentElement.style.setProperty('--background-color', '#DAE0E6');
+        document.documentElement.style.setProperty('--card-background-color', '#FFFFFF');
+        document.documentElement.style.setProperty('--main-color', '#9407F2');
+        document.documentElement.style.setProperty('--confirm-color', '#F673E3');
+        document.documentElement.style.setProperty('--text-shade', '#757575');
+        document.documentElement.style.setProperty('--text-dark', '#424242');
+        document.documentElement.style.setProperty('--button-hover-on-white', '#E1E1E1');
+    }
 }
 
 init()

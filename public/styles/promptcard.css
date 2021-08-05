@@ -1,6 +1,11 @@
 :root {
-    --pallette-purple: #9407F2;
-    --pallette-pink: #F673E3;
+    --background-color: #DAE0E6;
+    --card-background-color: #FFFFFF;
+    --main-color: #9407F2;
+    --confirm-color: #F673E3;
+    --text-shade: #757575;
+    --text-dark: #424242;
+    --button-hover-on-white: #E1E1E1;
 }
 
 main {
@@ -29,7 +34,7 @@ main {
 
 .user-prompt {
     margin-top: 17vh;
-    color: #424242;
+    color: var(--text-shade);
 }
 
 .user-prompt > div {
@@ -60,10 +65,10 @@ main {
 
 .user-prompt input {
     padding: 7px 0px 7px 15px;
-    background-color: #E1E1E1;
+    background-color: var(--button-hover-on-white);
     border-radius: 10px;
     border: 0px;
-    color: #424242;
+    color: var(--text-shade);
     font-size: 20px;
     margin-bottom: 25px;
 }
@@ -71,18 +76,18 @@ main {
 .user-prompt a {
     text-decoration: none;
     font-weight: 700;
-    color: var(--pallette-purple);
+    color: var(--main-color);
 }
 
 .user-prompt button {
+    color: var(--card-background-color);
+    background-color: var(--confirm-color);
     border: 0px;
     border-radius: 10px;
     font-weight: 700;
     font-size: 20px;
-    color: #ffffff;
     padding: 15px 45px 15px 45px;
     width: auto;
-    background-color: var(--pallette-pink);
 }
 
 .user-prompt span {

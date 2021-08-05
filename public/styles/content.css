@@ -333,6 +333,7 @@ main {
 
 /* ? date buttons and author */
 .post > div:nth-child(5) {
+    padding-bottom: 0px;
     border-bottom: 1px solid var(--text-dark);
 }
 
@@ -354,11 +355,16 @@ main {
 }
 
 /* second half justfied right */
-.post > div:nth-child(5) > div:last-child {
-    background-color: red;
+.post > div:nth-child(5) > div:last-child p {
+    font-size: 20px;
+    /* color: var(--main-color); */
+    font-weight: 600;
+    margin: 10px 0px 10px 30px;
+    align-self: center;
 }
 
 .post > div:nth-child(5) img {
     width: 60px;
+    margin: 10px 15px 10px 15px;
     border-radius: 50%;
 }
