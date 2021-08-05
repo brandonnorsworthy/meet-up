@@ -12,8 +12,17 @@ router.get('/login', function (req, res){
 		res.direct('/');
 		return;
 	}
-
-	res.render('login');
+	// let posts = [
+	// 	{
+	// 		title:"test",
+	// 		description: "oijethreoijh",
+	// 	},
+	// 	{
+	// 		title:"test",
+	// 		description: "oijethreoijh",
+	// 	}
+	// ]
+	res.render('homepage');
 });
 // will get data
 
