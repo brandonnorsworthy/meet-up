@@ -22,7 +22,7 @@ router.get('/login', function (req, res){
 	// 		description: "oijethreoijh",
 	// 	}
 	// ]
-	res.render('login');
+	res.render('homepage');
 });
 // will get data
 
