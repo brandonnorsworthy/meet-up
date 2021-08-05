@@ -8,7 +8,7 @@ const postsData = [
     description: 'Hey gang! Im having a BBQ at my house! I hope all can attend!!',
     upvotes: 0,
     location: "2113 Main St. Austin, TX.",
-    time_occuring: "August 11, 2021 13:00:00",
+    time_occuring: "13:00:00",
     user_id: 1,
     edited: false
   },
@@ -19,7 +19,7 @@ const postsData = [
     description: 'Hey guys! Lets meet up at the brewery!!',
     upvotes: 0,
     location: "700 Duvall St. Austin, TX.",
-    time_occuring: "August 12, 2021 16:00:00",
+    time_occuring: "16:00:00",
     user_id: 2,
     edited: false
   },
@@ -30,7 +30,7 @@ const postsData = [
     description: 'Lets toss around the frisbee!!',
     upvotes: 0,
     location: "2336 Douglas St. Austin, TX.",
-    time_occuring: "August 13, 2021 12:00:00",
+    time_occuring: "12:00:00",
     user_id: 3,
     edited: false
   },
@@ -41,11 +41,11 @@ const postsData = [
     description: 'Hey gang! Lets meet up at the ballpark for a softball game!!',
     upvotes: 0,
     location: "420 Green St. Austin, TX.",
-    time_occuring: "August 14, 2021 13:00:00",
+    time_occuring: "13:00:00",
     user_id: 3,
     edited: false
   },
-],
+]
 
 const seedposts = () => Posts.bulkCreate(postsData);
 
