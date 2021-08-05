@@ -1,9 +1,8 @@
 function init() {
-    if (window.localStorage.getItem("darkmode") == "true") {
-        $('.darkModeToggle')[0].id = 'on'
-        $('.darkModeToggle')[0].children[0].textContent = 'toggle_on'
-        darkModeHandler();
-    }
+    // if (window.localStorage.getItem("darkmode") == "true") {
+    //     $('.darkModeToggle')[0].id = 'on'
+    //     $('.darkModeToggle')[0].children[0].textContent = 'toggle_on'
+    darkModeHandler();
     $('.darkModeToggle').click(darkModeButtonClicked);
     $('.sortBtn').click(sortButtonClicked);
     $('.upvote').click(upvoteButtonClicked);
@@ -58,6 +57,7 @@ function threadCardClicked(event) {
 function darkModeHandler() {
     if (window.localStorage.getItem("darkmode") == "true") {
         //if true then make darkmode
+        console.log("dark")
         document.documentElement.style.setProperty('--background-color', '#000000');
         document.documentElement.style.setProperty('--card-background-color', '#1A1A1B');
         document.documentElement.style.setProperty('--main-color', '#9407F2');
@@ -67,6 +67,7 @@ function darkModeHandler() {
         document.documentElement.style.setProperty('--button-hover-on-white', '#272727');
     } else {
         //else make bright
+        console.log("bright")
         document.documentElement.style.setProperty('--background-color', '#DAE0E6');
         document.documentElement.style.setProperty('--card-background-color', '#FFFFFF');
         document.documentElement.style.setProperty('--main-color', '#9407F2');

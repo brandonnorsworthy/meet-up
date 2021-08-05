@@ -23,9 +23,13 @@ main {
     flex-direction: column;
 }
 
+header {
+    width: 100%;
+}
+
 /*! navbar */
 .nav {
-    width: 100vw;
+    width: 100%;
     height: 5vh;
     background-color: var(--card-background-color);
     display: flex;
@@ -52,7 +56,7 @@ main {
 .nav-search input {
     width: 35vw;
     height: 60%;
-    padding: 5px 0px 0px 42px;
+    padding: 7px 0px 7px 42px;
     border: 0px;
     border-radius: 10px;
     color: var(--text-dark);
@@ -65,7 +69,7 @@ main {
 
 .nav-buttons {
     background-color: var(--card-background-color)!important;
-    width: 20vw;
+    width: fit-content;
     height: 100%;
     display: flex;
     align-items: center;
@@ -198,7 +202,7 @@ main {
 .thread > div:first-child > div {
     width: 100%;
     text-align: center;
-    font-size: 24px;
+    font-size: 20px;
     color: var(--main-color);
     margin-top: 20px;
 }
@@ -284,7 +288,7 @@ main {
 }
 
 .post > div {
-    padding-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 /* ? header of post and upvote */
@@ -310,15 +314,15 @@ main {
 
 /* last child of any because later on it the location tag will be converted into a clickable link for google maps instead of a p tag */
 .post > div:nth-child(2) > div *:last-child {
-    padding-left: 20px;
+    margin-left: 20px;
 }
 
 .post > div:nth-child(2) > div:first-child  span {
-    padding-left: 0px;
+    margin-left: 0px;
 }
 
 .post > div:nth-child(2) > div span {
-    padding-left: 20px;
+    margin-left: 20px;
 }
 
 .post > div:nth-child(2) > div p {
@@ -327,13 +331,12 @@ main {
 
 /*? description area */
 .post > div:nth-child(3) > p {
-    font-size: 20px;
+    font-size: 22px;
     line-height: 1.3;
 }
 
 /* ? date buttons and author */
 .post > div:nth-child(5) {
-    padding-bottom: 0px;
     border-bottom: 1px solid var(--text-dark);
 }
 
@@ -367,4 +370,81 @@ main {
     width: 60px;
     margin: 10px 15px 10px 15px;
     border-radius: 50%;
+}
+
+/* ?response numbers and sort by */
+.post >div:nth-child(6) > div p {
+    font-size: 20px;
+}
+
+.post > div:nth-child(6) > div:first-child  span {
+    padding-left: 0px;
+}
+
+.post > div:nth-child(6) > div:first-child p {
+    margin-left: 20px;
+}
+
+.post > div:nth-child(6) > div button {
+    border: none;
+    font-size: 20px;
+    margin-left: 10px;
+    color: var(--main-color);
+    background-color: var(--card-background-color);
+}
+
+/* ?respond box area */
+.post > div:nth-child(7) {
+    padding-bottom: 30px;
+}
+
+.post > div:nth-child(7) > input {
+    border: none;
+    background-color: var(--button-hover-on-white);
+    border-radius: 10px;
+    padding: 7px 0px 7px 15px;
+}
+
+.post > div:nth-child(7) > input:hover {
+    cursor: pointer;
+}
+
+/* image 65 margin 25 */
+/* !responses */
+.response {
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--text-shade);
+}
+
+.response:last-of-type {
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    border-bottom: none;
+}
+
+.response div:first-child {
+    margin-bottom: 5px;
+}
+
+.response div:first-child div:last-child p {
+    color: var(--text-shade);
+}
+
+.response img {
+    border-radius: 50%;
+    width: 60px;
+}
+
+.response h2 {
+    color: var(--main-color);
+    font-size: 22px;
+    margin-left: 25px;
+}
+
+.response p {
+    font-size: 20px;
+}
+
+.response div:last-child p {
+    padding-left: 85px;
 }
