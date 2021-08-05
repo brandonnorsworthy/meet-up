@@ -15,7 +15,9 @@ router.post('/',function(req, res){
 })
 
 //TODO possibly reverse this so its more formatted to match like website.com/posts/:id/upvote***
+// /api/posts/upvote/1
 router.put('/upvote/:id',function(req, res){
+	console.log('WE HI THTE upvote route!!')
 	try {
 		const userUpvote = Posts.getcreate({
 			...req.body,
@@ -43,6 +45,7 @@ router.put('/edited/:id',function(req, res){
 	}
 	
 })
+
 
 router.delete('/:id',async function(req,res){
 	//TODO make sure the person that is deleting it in the session matches the author of the response trying to be deleted

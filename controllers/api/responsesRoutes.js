@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { Responses } = require('../../models');
 // const withAuth = require('../../utils/auth');
 
+// /api/responses/  POST guy
 router.post('/',function(req, res){
     //TODO take in message, you will record the date, message, and link to a user_id that created it
     try {
