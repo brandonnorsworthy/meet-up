@@ -1,0 +1,14 @@
+router.use('/', homeRoutes);(localhost :3001/)...homepage
+
+
+router.use('/post/:id', postRoutes);
+router.use('/user/:id', userRoutes);
+router.use('/api/', apiRoutes);
+router.use('/user/', homeRoutes);
+
+router.use('/login/', homeRoutes);
+router.use('/user/:id', homeRoutes);
+
+
+
+
