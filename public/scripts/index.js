@@ -1,10 +1,25 @@
+// html elements
+// TODO upvote button event click
+// TODO login button (ROUTE) event click
+    // TODO login button (SUBMIT/ON LOGIN PAGE) event click
+    //? function should have email and password from user input
+// TODO signup button event click
+    // TODO signup button (SUBMIT/ON signup PAGE) event click
+    //? function should have profile picture, email, username and password from user input
+// TODO clicking a form button event click
+// TODO clicking to enter a response button event click
+// TODO sort button event click
+// TODO home button event click
+
+
 function init() {
-    if($('.darkModeToggle').length != 0) { //check if page has a darkmode slider
-        if (window.localStorage.getItem("darkmode") == "true") { //if darkmode is set to true in storage flip switch to on
+    if (window.localStorage.getItem("darkmode") == "true") { //if darkmode is set to true in storage flip switch to on
+        if($('.darkModeToggle').length != 0) { //check if page has a darkmode slider
             $('.darkModeToggle')[0].id = 'on'
             $('.darkModeToggle')[0].children[0].textContent = 'toggle_on'
-            darkModeHandler(); //load darkmode settings if its enabled
         }
+        console.log("trying to darkmoden stuff")
+        darkModeHandler(); //load darkmode settings if its enabled
     }
     $('.darkModeToggle').click(darkModeButtonClicked);
     $('.sortBtn').click(sortButtonClicked);
