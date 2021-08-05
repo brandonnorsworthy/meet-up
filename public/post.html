@@ -38,18 +38,24 @@
     </header>
     <main>
         <div class="card row post">
-            <div class="flex-column col-0">
-                <!-- pfp -->
-                <img class="col-9" src="./assets/fake-pfp/fakeperson1.png" alt="">
-                <div class="col-3">
-                    <p>Gerfulty</p>
+            <!-- title and upvotes -->
+            <div class="row">
+                <div class="col-10">
+                    <h1 class="row">
+                        Event title would go in this line right here on this
+                    </h1>
+                </div>
+                <div class="col-2">
+                    <div class="row justify-content-end">
+                        <p class="col-10">151</p>
+                        <div class="col-2">
+                            <span class="content unselectable material-icons md-48 upvote">north</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-7">
-                <!-- main contnet -->
-                <h1 class="row">
-                    Event title would go in this line right here on this
-                </h1>
+            <!-- location and time -->
+            <div class="row">
                 <div class="row">
                     <span class="col-1 unselectable material-icons">schedule</span>
                     <p class="col-11">12:45PM on Tomorrow</p>
@@ -58,25 +64,50 @@
                     <span class="col-1 unselectable material-icons">location_on</span>
                     <p class="col-11">Schlitterbahn Waterpark New Braunfels</p>
                 </div>
-                <div class="row">
-                    <span class="col-1 unselectable material-icons">3p</span>
-                    <p class="col-11">42 Responses</p>
-                </div>
             </div>
-            <div class="col-3">
-                <!-- right side stuff -->
-                <div class="row justify-content-end">
-                    <p class="col-10">151</p>
-                    <div class="col-2">
-                        <span class="content unselectable material-icons md-48 upvote">north</span>
+            <!-- description -->
+            <div class="row">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus, perspiciatis corrupti voluptatum in, facilis porro minima est consequatur quasi esse modi et reprehenderit inventore animi commodi asperiores quos, accusamus ratione eveniet rem. Repellat, iusto eligendi fugiat, sit ab, nam tempora aliquid tempore voluptate perferendis eius nisi. Cum tempore ex eaque minima sint aliquam. Ratione ipsam architecto officiis rem earum quaerat quam eius velit id, cumque fuga saepe, delectus illum libero veritatis expedita quis accusamus quae!</p>
+            </div>
+            <div class="row">
+                <p class="row justify-content-end">(edited)</p>
+            </div>
+            <!-- date, edit, delete, author -->
+            <div class="row">
+                <!-- date, edit, delete -->
+                <div class="col-6 justify-content-start">
+                    <p class="row justify-content-end">September, 12, 2021</p>
+                    <button name="edit">edit</button>
+                    <button name="delete">delete</button>
+                </div>
+                <!-- author and pfp -->
+                <div class="col-6 justify-content-end">
+                    <div class="row">
+                        <div class="col-3">
+                            <p>Gerfulty</p>
+                        </div>
+                        <img class="col-9" src="./assets/fake-pfp/fakeperson1.png" alt="">
                     </div>
                 </div>
-                <p class="row justify-content-end">September, 12, 2021</p>
-                <p class="row justify-content-end">(edited)</p>
-                <p class="row justify-content-end"></p>
-
             </div>
-        </div>  
+            <!-- !border bottom -->
+            <!-- responses and sort by -->
+            <div class="row">
+                <!-- responses -->
+                <div class="col-6">
+
+                </div>
+                <div class="col-6">
+                    <p>Sort:</p>
+                    <button>Newest</button>
+                </div>
+            </div>
+            <div class="row">
+                <span class="col-1 unselectable material-icons">3p</span>
+                <p class="col-11">42 Responses</p>
+            </div>
+            <div class="row response"></div>
+        </div>
     </main>
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
