@@ -19,6 +19,7 @@ router.get('/login', function (req, res){
 
 router.get('/', function (req, res){
 	//TODO render homepage
+	console.log('hit')
 })
 
 router.get('/post/:id', function (req, res){
