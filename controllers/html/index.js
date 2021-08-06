@@ -50,7 +50,7 @@ router.get('/post/:id', async function (req, res) {
 				{
 					model: Responses,
 					include: {
-						// order: '"updatedAt" DESC',
+						// order: '"date" DESC',
 						model: Users,
 					}
 				}
