@@ -68,8 +68,8 @@ function upvoteButtonClicked(event) {
 
 function threadCardClicked(event) {
     //TODO redirect user to thread page on click using the id attatched to the card /post/:id
-    console.log('redirecting');
-    location.href = 'post.html';
+    // console.log('redirecting', $(this).attr('id'));
+    location.href = `/post/${$(this).attr('id')}`;
 }
 
 function darkModeHandler() {

@@ -2,17 +2,42 @@ const { Users, Posts, Responses } = require('../../models');
 
 const router = require('express').Router();
 
-router.get('/', function (req, res){
-	//TODO render homepage
+router.get('/', async function (req, res){
+	try {
+		const dbPostsData = await Posts.findAll({
+			include: [
+			  {
+				model: Responses,
+				model: Users,
+			  },
+			],
+		  });
 
-	res.render('homepage');
+		const posts = dbPostsData.map((post) =>
+			post.get({ plain: true })
+		);
+
+		console.log("---------------------------------------------------------")
+		console.log(posts)
+
+		res.render('homepage', {
+		  loggedIn: req.session.loggedIn,
+		  posts,
+		});
+	  } catch (err) {
+		console.log(err);
+		res.status(500).json(err);
+	  }
 })
 
 //TODO write down all handlebar files as named in html routes
 router.get('/signup', function (req, res){
-	//TODO render signup.html as handlbars
+	if (req.session.loggedIn) {
+		res.direct('/');
+		return;
+	}
 
-	res.render('signup');
+	res.render('signup').status(200);
 })
 
 router.get('/login', function (req, res){
@@ -21,7 +46,7 @@ router.get('/login', function (req, res){
 		return;
 	}
 
-	res.render('login');
+	res.render('login').status(200);
 });
 // will get data
 
@@ -43,28 +68,17 @@ router.get('/post/:id', async function (req, res){
 	console.log('⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠');
 	console.log(response);
 
-	res.render('post', response);
-	//TODO render the post filled with content of that specific id
+	res.render('post', response).status(200);
 	//? will have to do a query and merge posts table with responses
 	//? will have to merge posts and a user (the user that owns the post)
 	//? will have to merge into responses the users that own each response
 });
 
-// router.get('/:id', (req, res) => {
-// 	Posts.findAll({
-// 		where: {
-// 			id: req.params.id
-// 		}
-// 	})
-// 		.then(postsData => res.json(postsData))
-// 		.catch(err => {
-// 			console.log(err);
-// 			res.status(500).json(err);
-// 		})
-// });
-
 router.get('/user/:id', function (req, res){
-	//TODO for now just redirect to homepage
+	//! for now just redirect to homepage
+	res.direct('/');
+	return;
+
 	Users.findAll({})
 		.then(usersData => res.json(usersData))
 		.catch(err => {
@@ -72,41 +86,5 @@ router.get('/user/:id', function (req, res){
 			res.status(500).json(err);
 		})
 });
-
-// router.get('/:id', (req, res) => {
-// 	Users.findAll({
-// 			where: {
-// 			id: req.params.id
-// 			}
-// 		})
-// 		.then(usersData => res.json(usersData))
-// 		.catch(err => {
-// 			console.log(err);
-// 			res.status(500).json(err);
-// 		})
-// });
-
-
-// router.get('/responses', (req, res) => {
-// 	Responses.findAll({})
-// 		.then(responsesData => res.json(responsesData))
-// 		.catch(err => {
-// 			console.log(err);
-// 			res.status(500).json(err);
-// 		})
-// });
-
-// router.get('/:id', (req, res) => {
-// 	Responses.findAll({
-// 		where: {
-// 		id: req.params.id
-// 		}
-// 	})
-// 	.then(responsesData => res.json(responsesData))
-// 	.catch(err => {
-// 		console.log(err);
-// 		res.status(500).json(err);
-// 	})
-// });
 
 module.exports = router;

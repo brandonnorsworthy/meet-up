@@ -27,14 +27,14 @@ Posts.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    time_occuring: {
-      type: DataTypes.TIME,
-      allowNull: false,
-    },
     date_occuring: {
       type: DataTypes.DATE,
       allowNull: false,
      },
+    created_at: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
     edited: {
       type: DataTypes.BOOLEAN,
       defaultValue: false

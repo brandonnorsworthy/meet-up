@@ -15,7 +15,7 @@
                 <span class="material-icons">toggle_off</span> <!-- toggle_on -->
             </button>
             <a href="/login">LOGIN</a>
-            {{#if loggedIn}} 
+            {{#if loggedIn}}
             <a>{{user.username}}</a>
             {{else}}
             <a href="/signup">SIGN UP</a>
@@ -39,12 +39,12 @@
     </div>
     <!-- thread 1 -->
     {{#each posts as |post|}}
-    <div class="card row thread">
+    <div class="card row thread" id="{{post.id}}">
         <div class="flex-column col-2">
             <!-- pfp -->
-            <img class="col-9" src="/assets/fake-pfp/fakeperson6.png" alt="">
+            <img class="col-9" src="{{post.User.image_url}}" alt="">
             <div class="col-3">
-                <p>{{post.author}}</p>
+                <p>{{post.User.username}}</p>
             </div>
         </div>
         <div class="col-7">
@@ -54,7 +54,7 @@
             </h1>
             <div class="row">
                 <span class="col-1 unselectable material-icons">schedule</span>
-                <p class="col-11">{{post.date_occuring}} @ {{post.time_occuring}}</p>
+                <p class="col-11">{{post.date_occuring}}</p>
             </div>
             <div class="row">
                 <span class="col-1 unselectable material-icons">location_on</span>
@@ -73,7 +73,7 @@
                     <span class="content unselectable material-icons md-48 upvote">north</span>
                 </div>
             </div>
-            <p class="row justify-content-end">{{post.date_created}}</p>
+            <p class="row justify-content-end">{{post.created_at}}</p>
             {{#if post.edited}}
             <p class="row justify-content-end">(edited)</p>
             {{else}}
