@@ -33,9 +33,18 @@ router.get('/post/:id', async function (req, res){
 		}
 	})
 
-	console.log('Single POST!!!', singlePost);
+	const user = {
+		'loggedIn': false
+	}
+	const response = {
+		user: user,
+		post: singlePost[0].dataValues
+	}
 
-	res.render('postDetail',{post: singlePost[0]});
+	console.log('⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠');
+	console.log(response);
+
+	res.render('post', response);
 	//TODO render the post filled with content of that specific id
 	//? will have to do a query and merge posts table with responses
 	//? will have to merge posts and a user (the user that owns the post)
