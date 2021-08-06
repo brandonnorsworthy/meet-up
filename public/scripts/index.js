@@ -98,9 +98,34 @@ function darkModeHandler() {
 }
 
 function loginButtonClicked() {
+    let emailValue = $('input[name="email"]').val();
+    let passwordValue = $('input[name="password"]').val();
+
+    console.log(emailValue, passwordValue)
+
+    $.post('/api/users/login',{
+        email:emailValue,
+        password:passwordValue,
+    }, function(){
+        console.log('sent')
+    })
+        .done(function() {
+            // alert("second success");
+            location.href='/'
+        })
+        .fail(function() {
+            // alert("error");
+        })
+}
+
+function signUpButtonClicked() {
     let email = $('input[name="email"]').val();
+    let username = $('input[name="username"]').val();
     let password = $('input[name="password"]').val();
-    console.log(email, password)
+    let confirm = $('input[name="confirm"]').val();
+
+
+    console.log(email, username, password, confirm)
 }
 
 init()
