@@ -4,13 +4,12 @@ const router = require('express').Router();
 
 router.get('/', function (req, res){
 	//TODO render homepage
-	console.log('hit');
 
 	res.render('homepage');
 })
 
 //TODO write down all handlebar files as named in html routes
-router.get('/register', function (req, res){
+router.get('/signup', function (req, res){
 	//TODO render signup.html as handlbars
 
 	res.render('signup');
