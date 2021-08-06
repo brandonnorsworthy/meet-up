@@ -6,6 +6,7 @@ const { Users, Posts, Responses } = require('../../models');
 router.get('/', async function (req, res) {
 	try {
 		const dbPostsData = await Posts.findAll({
+			limit: 10,
 			include: [
 				{ model: Users },
 				{ model: Responses }
@@ -42,6 +43,7 @@ router.get('/post/:id', async function (req, res) {
 				{
 					model: Responses,
 					include: {
+						// order: '"updatedAt" DESC',
 						model: Users,
 					}
 				}

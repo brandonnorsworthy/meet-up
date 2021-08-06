@@ -47,7 +47,11 @@
         <div class="col-3">
             <!-- right side stuff -->
             <div class="row justify-content-end">
+                {{#if post.upvoted}}
+                <p class="col-10 upvote-activated">{{post.upvotes}}</p>
+                {{else}}
                 <p class="col-10">{{post.upvotes}}</p>
+                {{/if}}
                 <div class="col-2">
                     <span class="content unselectable material-icons md-48 upvote">north</span>
                 </div>
