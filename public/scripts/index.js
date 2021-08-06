@@ -25,6 +25,9 @@ function init() {
     $('.upvote').click(upvoteButtonClicked);
     $('.thread').click(threadCardClicked);
     $('button[name="login"]').click(loginButtonClicked);
+    $('button[name="signup"]').click(signUpButtonClicked);
+    $('button[name="logout"]').click(logoutButtonClicked);
+    console.log('INit happenin!!!!!!!!')
 
 }
 
@@ -125,7 +128,38 @@ function signUpButtonClicked() {
     let confirm = $('input[name="confirm"]').val();
 
 
-    console.log(email, username, password, confirm)
+    console.log('SIGN UP HAPPENING!!',email, username, password, confirm);
+
+    $.post('/api/users/register',{
+        email:email,
+        password:password,
+        username:username,
+    }, function(){
+        console.log('sent')
+    })
+        .done(function() {
+            // alert("second success");
+            location.href='/'
+        })
+        .fail(function() {
+            // alert("error");
+        })
 }
 
+function logoutButtonClicked(){
+
+console.log('logout button clicked')
+
+$.post('/api/users/logout',{
+}, function(){
+    console.log('sent')
+})
+    .done(function() {
+        // alert("second success");
+        location.href='/'
+    })
+    .fail(function() {
+        // alert("error");
+    })
+}
 init()

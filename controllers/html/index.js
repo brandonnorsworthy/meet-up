@@ -71,7 +71,7 @@ router.get('/post/:id', async function (req, res) {
 
 router.get('/login', function (req, res) {
 	if (req.session.loggedIn) {
-		res.direct('/');
+		res.redirect('/');
 		return;
 	}
 
@@ -88,7 +88,7 @@ router.get('/signup', function (req, res) {
 })
 
 router.get('/user/:id', function (req, res) {
-	//! for now just redirect to homepage
+	// for now just redirect to homepage
 	res.direct('/');
 	return;
 

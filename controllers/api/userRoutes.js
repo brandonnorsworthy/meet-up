@@ -42,6 +42,17 @@ router.post('/login',async function(req, res){
   }
 });
 
+router.post('/logout', (req, res) => {
+  if (req.session.loggedIn) {
+    req.session.destroy(() => {
+      res.status(204).end();
+    });
+  } else {
+    res.status(404).end();
+  }
+});
+
+
 router.post('/register',async function(req, res){
 	try {
     const dbUserData = await Users.create({
@@ -49,6 +60,7 @@ router.post('/register',async function(req, res){
       email: req.body.email,
       password: req.body.password,
     });
+    console.log('We just signed up in the route!!!', dbUserData)
 
     req.session.save(() => {
       req.session.loggedIn = true;
