@@ -12,9 +12,13 @@ router.get('/', async function (req, res) {
 			]
 		});
 
-		const posts = dbPostsData.map((post) =>
+		let posts = dbPostsData.map((post) =>
 			post.get({ plain: true })
 		);
+
+		posts.forEach(post => {
+			post.responses_length = post.Responses.length;
+		});
 
 		console.log("---------------------------------------------------------")
 		console.log(posts)
@@ -24,7 +28,7 @@ router.get('/', async function (req, res) {
 			posts,
 		});
 	} catch (err) {
-		`console`.log(err);
+		console.log(err);
 		res.status(500).json(err);
 	}
 })

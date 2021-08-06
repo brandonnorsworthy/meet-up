@@ -1,27 +1,6 @@
 
 <header>
-    <div class="nav">
-        <div class="nav-img">
-            <a href="/">
-                <img src="/assets/logos/logo-purple-clipped.png" alt="meet up logo with arrow colored purple">
-            </a>
-        </div>
-        <div class="nav-search">
-            <input type="text" minlength="4" maxlength="60" placeholder="search">
-        </div>
-        <div class="nav-buttons">
-            <span>DARK MODE</span>
-            <button class="darkModeToggle" id="off">
-                <span class="material-icons">toggle_off</span> <!-- toggle_on -->
-            </button>
-            <a href="/login">LOGIN</a>
-            {{#if loggedIn}}
-            <a>{{user.username}}</a>
-            {{else}}
-            <a href="/signup">SIGN UP</a>
-            {{/if}}
-        </div>
-    </div>
+    {{> navbar}}
 </header>
 <main class="container">
     <div class="card row">
@@ -62,7 +41,7 @@
             </div>
             <div class="row">
                 <span class="col-1 unselectable material-icons">3p</span>
-                <p class="col-11">42 Responses</p>
+                <p class="col-11">{{post.responses_length}} Responses</p>
             </div>
         </div>
         <div class="col-3">
