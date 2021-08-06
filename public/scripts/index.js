@@ -1,6 +1,5 @@
 // html elements
 // TODO upvote button event click
-
 // TODO login button (ROUTE) event click
 // TODO login button (SUBMIT/ON LOGIN PAGE) event click
 //? function should have email and password from user input
@@ -11,7 +10,6 @@
 // TODO clicking to enter a response button event click
 // TODO sort button event click
 // TODO home button event click
-
 
 
 function init() {
