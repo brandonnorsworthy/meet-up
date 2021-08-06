@@ -5,25 +5,25 @@ const userData = [
     username: 'Jennifer Wylan',
     email: 'jwylan@gmail.com',
     password: 'ewfchijwnsj',
-    image_url: 'image1.jpeg',
+    image_url: '/assets/fake-pfp/fakeperson1.png',
   },
   {
     username: 'Beau Harding',
     email: 'bhard@gmail.com',
     password: 'exinasjxikxn',
-    image_url: 'image2.jpeg',
+    image_url: '/assets/fake-pfp/fakeperson2.png',
   },
   {
     username: 'Kristin Withers',
     email: 'kwithers@gmail.com',
     password: 'dnckjndlnnx',
-    image_url: 'image3.jpeg',
+    image_url: '/assets/fake-pfp/fakeperson3.png',
   },
   {
     username: 'Brian Wilson',
     email: 'bwill@gmail.com',
     password: 'ncjksdcnsk',
-    image_url: 'image4.jpeg',
+    image_url: '/assets/fake-pfp/fakeperson4.png',
   },
 ];
 

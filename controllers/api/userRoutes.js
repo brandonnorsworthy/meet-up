@@ -10,6 +10,8 @@ router.post('/login',async function(req, res){
         email: req.body.email,
       },
     });
+    
+    console.log('Db user we found!!!', dbUserData)
 
     if (!dbUserData) {
       res
@@ -23,7 +25,7 @@ router.post('/login',async function(req, res){
     if (!validPassword) {
       res
         .status(400)
-        .json({ message: 'Incorrect email or password. Please try again!' });
+        .json({ message: 'Incorrect email or password. Please try again! SECOND!!!' });
       return;
     }
 

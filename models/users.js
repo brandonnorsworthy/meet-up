@@ -36,8 +36,8 @@ Users.init(
       },
     },
     image_url: {
-        type: DataTypes.STRING,
-        allowNull: false,
+      type: DataTypes.STRING,
+        
     },
   },
   {
@@ -54,5 +54,17 @@ Users.init(
     modelName: 'Users',
   }
 );
+
+// Users.beforeCreate((user, options) => {
+//   console.log('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
+//   return bcrypt.hash(user.password, 10)
+//         .then(hash => {
+//           user.password = hash;
+//         })
+//         .catch(err => { 
+//             throw new Error(); 
+//         });
+// });
+
 
 module.exports = Users;

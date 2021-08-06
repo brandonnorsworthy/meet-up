@@ -15,18 +15,20 @@ router.post('/', function(req, res) {
 })
 
 //TODO possibly reverse this so its more formatted to match like website.com/posts/:id/upvote***
-router.post('/upvote/:id', function(req, res) {
-    // try {
-    // 	const userUpvote = Posts.getcreate({
-    // 		...req.body,
-    // 		post_upvotes: req.session.post_upvotes,
-    // 	});
+// /api/posts/upvote/1
+router.put('/upvote/:id', function(req, res) {
+    console.log('WE HI THTE upvote route!!')
+    try {
+        const userUpvote = Posts.getcreate({
+            ...req.body,
+            post_upvotes: req.session.post_upvotes,
+        });
 
-    // 	res.status(200).json(userUpvote);
-    // } catch (err) {
-    // 	res.status(400).json(err);
-    // }
-    console.log(req.params.id)
+        res.status(200).json(userUpvote);
+    } catch (err) {
+        res.status(400).json(err);
+    }
+
 })
 
 //TODO possibly reverse this so its more formatted to match like website.com/posts/:id/upvote***
@@ -43,6 +45,7 @@ router.put('/edited/:id', function(req, res) {
     }
 
 })
+
 
 router.delete('/:id', async function(req, res) {
     //TODO make sure the person that is deleting it in the session matches the author of the response trying to be deleted

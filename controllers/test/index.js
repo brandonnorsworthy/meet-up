@@ -1,15 +1,10 @@
 const router = require('express').Router();
 
 router.get('/', function (req, res){
-	console.log("hit main route")
+	//TODO render homepage
+	console.log('hit');
 
-	res.status(500);
+	res.render('homepage');
 })
-
-router.get('/edit/:id', function (req, res){
-	console.log(req.params.id)
-
-	res.status(200);
-});
 
 module.exports = router;
