@@ -72,8 +72,8 @@
             </div>
             <!-- author and pfp -->
             <div class="col-6 d-flex justify-content-end align-content-center">
-                <p>{{post.author}}</p>
-                <img src="/assets/fake-pfp/realperson1.png" alt="">
+                <p>{{post.User.username}}</p>
+                <img src="{{post.User.image_url}}" alt="">
             </div>
         </div>
         <!-- response numbers and sort by -->
@@ -93,33 +93,8 @@
             <input type="text" name="response" id="response" disabled placeholder="Login or Sign Up to respond">
         </div>
         <!-- single response -->
-        <div class="row response">
-            <div class="row">
-                <div class="col-6 d-flex justify-content-start align-content-center">
-                    <img src="/assets/fake-pfp/fakeperson6.png" alt="">
-                    <h2 class="align-self-center">Pluto1334</h2>
-                </div>
-                <div class="col-6 d-flex justify-content-end align-content-center">
-                    <p class="align-self-center">October 31, 2021</p>
-                </div>
-            </div>
-            <div class="row">
-                <p>Epic party def coming bringing my playstation controller so we can play super smash bros</p>
-            </div>
-        </div>
-        <div class="row response">
-            <div class="row">
-                <div class="col-6 d-flex justify-content-start align-content-center">
-                    <img src="/assets/fake-pfp/fakeperson1.png" alt="">
-                    <h2 class="align-self-center">bigsantaboi</h2>
-                </div>
-                <div class="col-6 d-flex justify-content-end align-content-center">
-                    <p class="align-self-center">December 26, 2021</p>
-                </div>
-            </div>
-            <div class="row">
-                <p>ill talk to my mom and if she says i can stay over ill come can you drop the door amount a bit tho my allowance is only $2</p>
-            </div>
-        </div>
+        {{#each post.Responses as |Response|}}
+        {{> response}}
+        {{/each}}
     </div>
 </main>
