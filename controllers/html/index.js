@@ -22,7 +22,7 @@ router.get('/login', function (req, res){
 	// 		description: "oijethreoijh",
 	// 	}
 	// ]
-	res.render('homepage');
+	res.render('login');
 });
 // will get data
 
@@ -30,7 +30,7 @@ router.get('/', function (req, res){
 	//TODO render homepage
 	console.log('hit');
 
-	res.render('homepage');
+	res.render('post');
 })
 
 router.get('/post/:id', function (req, res){
