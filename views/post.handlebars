@@ -1,0 +1,125 @@
+<header>
+    <div class="nav">
+        <div class="nav-img">
+            <a href="./index.html">
+                <img src="./assets/logos/logo-purple-clipped.png" alt="meet up logo with arrow colored purple">
+            </a>
+        </div>
+        <div class="nav-search">
+            <input type="text" minlength="4" maxlength="60" placeholder="search">
+        </div>
+        <div class="nav-buttons">
+            <span>DARK MODE</span>
+            <button class="darkModeToggle" id="off">
+                <span class="material-icons">toggle_off</span> <!-- toggle_on -->
+            </button>
+            <a href="./login.html">LOGIN</a>
+            <a href="./signup.html">SIGN UP</a>
+        </div>
+    </div>
+</header>
+<main>
+    <div class="card row post">
+        <!-- title and upvotes -->
+        <div class="row">
+            <div class="col-10">
+                <h1 class="row">
+                    {{post.title}}
+                </h1>
+            </div>
+            <div class="col-2">
+                <div class="row justify-content-end">
+                    <p class="col-10">{{post.upvotes}}</p>
+                    <div class="col-2">
+                        <span class="content unselectable material-icons md-48 upvote">north</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- location and time -->
+        <div class="row">
+            <div class="col-auto">
+                <span class="unselectable material-icons">location_on</span>
+                <p>{{post.location}}</p>
+            </div>
+            <div class="col-auto">
+                <span class="unselectable material-icons">schedule</span>
+                <p>{{post.date_occuring}} @ {{post.time_occuring}}</p>
+            </div>
+        </div>
+        <!-- description -->
+        <div class="row">
+            <p>
+                {{post.description}}
+            </p>
+        </div>
+        <!-- edited tag -->
+        <div class="row">
+            {{#if post.edited}}
+            <p class="row justify-content-end">(edited)</p>
+            {{else}}
+            <p class="row justify-content-end"></p>
+            {{/if}}
+        </div>
+        <!-- date, editbtn, deletebtn, author -->
+        <div class="row">
+            <!-- date, edit, delete -->
+            <div class="col-6 d-flex justify-content-start align-content-center">
+                <p>Posted on: {{post.date_created}}</p>
+
+                <button name="edit">edit</button>
+                <button name="delete">delete</button>
+            </div>
+            <!-- author and pfp -->
+            <div class="col-6 d-flex justify-content-end align-content-center">
+                <p>{{post.author}}</p>
+                <img src="./assets/fake-pfp/realperson1.png" alt="">
+            </div>
+        </div>
+        <!-- response numbers and sort by -->
+        <div class="row">
+            <!-- responses -->
+            <div class="col-6 d-flex justify-content-start align-content-center">
+                <span class="unselectable material-icons">3p</span>
+                <p class="align-self-center">3 Responses</p>
+            </div>
+            <div class="col-6 d-flex justify-content-end align-content-center"">
+                <p class="align-self-center">Sort:</p>
+                <button>Recent</button>
+            </div>
+        </div>
+        <!-- response textbox -->
+        <div class="row">
+            <input type="text" name="response" id="response" disabled placeholder="Login or Sign Up to respond">
+        </div>
+        <!-- single response -->
+        <div class="row response">
+            <div class="row">
+                <div class="col-6 d-flex justify-content-start align-content-center">
+                    <img src="./assets/fake-pfp/fakeperson6.png" alt="">
+                    <h2 class="align-self-center">Pluto1334</h2>
+                </div>
+                <div class="col-6 d-flex justify-content-end align-content-center">
+                    <p class="align-self-center">October 31, 2021</p>
+                </div>
+            </div>
+            <div class="row">
+                <p>Epic party def coming bringing my playstation controller so we can play super smash bros</p>
+            </div>
+        </div>
+        <div class="row response">
+            <div class="row">
+                <div class="col-6 d-flex justify-content-start align-content-center">
+                    <img src="./assets/fake-pfp/fakeperson1.png" alt="">
+                    <h2 class="align-self-center">bigsantaboi</h2>
+                </div>
+                <div class="col-6 d-flex justify-content-end align-content-center">
+                    <p class="align-self-center">December 26, 2021</p>
+                </div>
+            </div>
+            <div class="row">
+                <p>ill talk to my mom and if she says i can stay over ill come can you drop the door amount a bit tho my allowance is only $2</p>
+            </div>
+        </div>
+    </div>
+</main>

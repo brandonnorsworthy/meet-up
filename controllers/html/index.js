@@ -12,7 +12,16 @@ router.get('/login', function (req, res){
 		res.direct('/');
 		return;
 	}
-
+	// let posts = [
+	// 	{
+	// 		title:"test",
+	// 		description: "oijethreoijh",
+	// 	},
+	// 	{
+	// 		title:"test",
+	// 		description: "oijethreoijh",
+	// 	}
+	// ]
 	res.render('login');
 });
 // will get data
@@ -21,16 +30,19 @@ router.get('/', function (req, res){
 	//TODO render homepage
 	console.log('hit');
 
-	res.render('homepage');
+	res.render('post');
 })
 
-router.get('/post/:id', function (req, res){
-	Posts.findAll({})
-		.then(postsData => res.json(postsData))
-		.catch(err => {
-			console.log(err);
-			res.status(500).json(err);
-		})
+router.get('/post/:id', async function (req, res){
+	const singlePost = await Posts.findAll({
+		where: {
+			id: req.params.id
+		}
+	})
+	
+console.log('Single POST!!!', singlePost);
+
+res.render('postDetail',{post: singlePost[0]});
 	//TODO render the post filled with content of that specific id
 	//? will have to do a query and merge posts table with responses
 	//? will have to merge posts and a user (the user that owns the post)
