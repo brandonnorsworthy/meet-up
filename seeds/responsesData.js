@@ -33,7 +33,7 @@ const responsesData = [
   {
     response: 'comment going here bruhv!',
     user_id: 3,
-    post_id: 3
+    post_id: 2
   },
   {
     response: '123312312312312312!',
