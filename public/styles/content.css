@@ -282,7 +282,7 @@ header {
 }
 
 /* !post styling */
-.post { /* TODO refactor */
+.post {
     flex-direction: row;
     color: var(--text-dark);
     padding: 20px;

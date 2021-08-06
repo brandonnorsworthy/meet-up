@@ -10,7 +10,7 @@ router.post('/login',async function(req, res){
         email: req.body.email,
       },
     });
-    
+
     console.log('Db user we found!!!', dbUserData)
 
     if (!dbUserData) {
