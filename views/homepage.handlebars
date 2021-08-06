@@ -2,8 +2,8 @@
 <header>
     <div class="nav">
         <div class="nav-img">
-            <a href="./index.html">
-                <img src="./assets/logos/logo-purple-clipped.png" alt="meet up logo with arrow colored purple">
+            <a href="/">
+                <img src="/assets/logos/logo-purple-clipped.png" alt="meet up logo with arrow colored purple">
             </a>
         </div>
         <div class="nav-search">
@@ -14,11 +14,11 @@
             <button class="darkModeToggle" id="off">
                 <span class="material-icons">toggle_off</span> <!-- toggle_on -->
             </button>
-            <a href="./login.html">LOGIN</a>
+            <a href="/login">LOGIN</a>
             {{#if loggedIn}} 
             <a>{{user.username}}</a>
             {{else}}
-            <a href="./signup.html">SIGN UP</a>
+            <a href="/signup">SIGN UP</a>
             {{/if}}
         </div>
     </div>
@@ -42,7 +42,7 @@
     <div class="card row thread">
         <div class="flex-column col-2">
             <!-- pfp -->
-            <img class="col-9" src="./assets/fake-pfp/fakeperson6.png" alt="">
+            <img class="col-9" src="/assets/fake-pfp/fakeperson6.png" alt="">
             <div class="col-3">
                 <p>{{post.author}}</p>
             </div>
