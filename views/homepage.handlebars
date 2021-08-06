@@ -1,27 +1,6 @@
 
 <header>
-    <div class="nav">
-        <div class="nav-img">
-            <a href="./index.html">
-                <img src="./assets/logos/logo-purple-clipped.png" alt="meet up logo with arrow colored purple">
-            </a>
-        </div>
-        <div class="nav-search">
-            <input type="text" minlength="4" maxlength="60" placeholder="search">
-        </div>
-        <div class="nav-buttons">
-            <span>DARK MODE</span>
-            <button class="darkModeToggle" id="off">
-                <span class="material-icons">toggle_off</span> <!-- toggle_on -->
-            </button>
-            <a href="./login.html">LOGIN</a>
-            {{#if loggedIn}} 
-            <a>{{user.username}}</a>
-            {{else}}
-            <a href="./signup.html">SIGN UP</a>
-            {{/if}}
-        </div>
-    </div>
+    {{> navbar}}
 </header>
 <main class="container">
     <div class="card row">
@@ -39,12 +18,12 @@
     </div>
     <!-- thread 1 -->
     {{#each posts as |post|}}
-    <div class="card row thread">
+    <div class="card row thread" id="{{post.id}}">
         <div class="flex-column col-2">
             <!-- pfp -->
-            <img class="col-9" src="./assets/fake-pfp/fakeperson6.png" alt="">
+            <img class="col-9" src="{{post.User.image_url}}" alt="">
             <div class="col-3">
-                <p>{{post.author}}</p>
+                <p>{{post.User.username}}</p>
             </div>
         </div>
         <div class="col-7">
@@ -54,7 +33,7 @@
             </h1>
             <div class="row">
                 <span class="col-1 unselectable material-icons">schedule</span>
-                <p class="col-11">{{post.date_occuring}} @ {{post.time_occuring}}</p>
+                <p class="col-11">{{post.date_occuring}}</p>
             </div>
             <div class="row">
                 <span class="col-1 unselectable material-icons">location_on</span>
@@ -62,18 +41,22 @@
             </div>
             <div class="row">
                 <span class="col-1 unselectable material-icons">3p</span>
-                <p class="col-11">42 Responses</p>
+                <p class="col-11">{{post.responses_length}} Responses</p>
             </div>
         </div>
         <div class="col-3">
             <!-- right side stuff -->
             <div class="row justify-content-end">
+                {{#if post.upvoted}}
+                <p class="col-10 upvote-activated">{{post.upvotes}}</p>
+                {{else}}
                 <p class="col-10">{{post.upvotes}}</p>
+                {{/if}}
                 <div class="col-2">
                     <span class="content unselectable material-icons md-48 upvote">north</span>
                 </div>
             </div>
-            <p class="row justify-content-end">{{post.date_created}}</p>
+            <p class="row justify-content-end">{{post.createdAt}}</p>
             {{#if post.edited}}
             <p class="row justify-content-end">(edited)</p>
             {{else}}

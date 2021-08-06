@@ -1,69 +1,97 @@
+const moment = require('moment');
+const router = require('express').Router();
 const { Users, Posts, Responses } = require('../../models');
 
-const router = require('express').Router();
+//home route returns the homepage
+router.get('/', async function (req, res) {
+	try {
+		const dbPostsData = await Posts.findAll({
+			limit: 10,
+			include: [
+				{ model: Users },
+				{ model: Responses }
+			]
+		});
 
-//TODO write down all handlebar files as named in html routes
-router.get('/register', function (req, res){
-	//TODO render signup.html as handlbars
+		let posts = dbPostsData.map((post) =>
+			post.get({ plain: true })
+		);
+
+		posts.forEach(post => {
+			post.responses_length = post.Responses.length;
+			post.date_occuring = moment(post.date_occuring).format('h:mm a on MMMM Do, YYYY');
+			post.createdAt = moment(post.createdAt).fromNow();
+		});
+
+		res.status(200).render('homepage', {
+			loggedIn: req.session.loggedIn,
+			posts,
+		});
+	} catch (err) {
+		console.log(err);
+		res.status(500).json(err);
+	}
 })
 
-router.get('/login', function (req, res){
+//specific post route returns page to view page by id
+router.get('/post/:id', async function (req, res) {
+	try {
+		const dbPostData = await Posts.findOne({
+			where: { id: req.params.id },
+			include: [
+				{ model: Users },
+				{
+					model: Responses,
+					include: {
+						// order: '"updatedAt" DESC',
+						model: Users,
+					}
+				}
+			]
+		});
+
+		let post = dbPostData.get({ plain: true })
+		post.responses_length = post.Responses.length;
+
+		post.date_occuring = moment(post.date_occuring).format('h:mm a on MMMM Do, YYYY');
+		post.createdAt = moment(post.createdAt).fromNow();
+		post.Responses.forEach(response => {
+			response.createdAt = moment(response.createdAt).fromNow();
+		});
+
+		res.status(200).render('post', {
+			loggedIn: req.session.loggedIn,
+			post,
+		});
+	} catch (err) {
+		console.log(err);
+		res.status(500).json(err);
+	}
+});
+
+router.get('/login', function (req, res) {
 	if (req.session.loggedIn) {
 		res.direct('/');
 		return;
 	}
-	// let posts = [
-	// 	{
-	// 		title:"test",
-	// 		description: "oijethreoijh",
-	// 	},
-	// 	{
-	// 		title:"test",
-	// 		description: "oijethreoijh",
-	// 	}
-	// ]
-	res.render('login');
+
+	res.status(200).render('login');
 });
-// will get data
 
-router.get('/', function (req, res){
-	//TODO render homepage
-	console.log('hit');
+router.get('/signup', function (req, res) {
+	if (req.session.loggedIn) {
+		res.direct('/');
+		return;
+	}
 
-	res.render('post');
+	res.status(200).render('signup');
 })
 
-router.get('/post/:id', async function (req, res){
-	const singlePost = await Posts.findAll({
-		where: {
-			id: req.params.id
-		}
-	})
-	
-console.log('Single POST!!!', singlePost);
+router.get('/user/:id', function (req, res) {
+	//! for now just redirect to homepage
+	res.direct('/');
+	return;
 
-res.render('postDetail',{post: singlePost[0]});
-	//TODO render the post filled with content of that specific id
-	//? will have to do a query and merge posts table with responses
-	//? will have to merge posts and a user (the user that owns the post)
-	//? will have to merge into responses the users that own each response
-});
-
-// router.get('/:id', (req, res) => {
-// 	Posts.findAll({
-// 		where: {
-// 			id: req.params.id
-// 		}
-// 	})
-// 		.then(postsData => res.json(postsData))
-// 		.catch(err => {
-// 			console.log(err);
-// 			res.status(500).json(err);
-// 		})
-// });
-
-router.get('/user/:id', function (req, res){
-	//TODO for now just redirect to homepage
 	Users.findAll({})
 		.then(usersData => res.json(usersData))
 		.catch(err => {
@@ -71,41 +99,5 @@ router.get('/user/:id', function (req, res){
 			res.status(500).json(err);
 		})
 });
-
-// router.get('/:id', (req, res) => {
-// 	Users.findAll({
-// 			where: {
-// 			id: req.params.id
-// 			}
-// 		})
-// 		.then(usersData => res.json(usersData))
-// 		.catch(err => {
-// 			console.log(err);
-// 			res.status(500).json(err);
-// 		})
-// });
-
-
-// router.get('/responses', (req, res) => {
-// 	Responses.findAll({})
-// 		.then(responsesData => res.json(responsesData))
-// 		.catch(err => {
-// 			console.log(err);
-// 			res.status(500).json(err);
-// 		})
-// });
-
-// router.get('/:id', (req, res) => {
-// 	Responses.findAll({
-// 		where: {
-// 		id: req.params.id
-// 		}
-// 	})
-// 	.then(responsesData => res.json(responsesData))
-// 	.catch(err => {
-// 		console.log(err);
-// 		res.status(500).json(err);
-// 	})
-// });
 
 module.exports = router;

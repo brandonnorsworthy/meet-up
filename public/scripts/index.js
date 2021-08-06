@@ -18,7 +18,6 @@ function init() {
             $('.darkModeToggle')[0].id = 'on'
             $('.darkModeToggle')[0].children[0].textContent = 'toggle_on'
         }
-        console.log("trying to darkmoden stuff")
         darkModeHandler(); //load darkmode settings if its enabled
     }
     $('.darkModeToggle').click(darkModeButtonClicked);
@@ -59,23 +58,23 @@ function upvoteButtonClicked(event) {
     //? if upvote has upvote-activated class already then take it off
     if ($(this)[0].classList.contains('upvote-activated')) {
         $(this).removeClass('upvote-activated');
+        $(this).parent().parent().children().first().text(Number($(this).parent().parent().children().first().text()) - 1);
     } else {
         //? else put it on
         $(this).addClass('upvote-activated');
+        $(this).parent().parent().children().first().text(Number($(this).parent().parent().children().first().text()) + 1);
     }
-
+    // console.log($(this).parent().parent().children().first().text())
 }
 
 function threadCardClicked(event) {
     //TODO redirect user to thread page on click using the id attatched to the card /post/:id
-    console.log('redirecting');
-    location.href = 'post.html';
+    location.href = `/post/${$(this).attr('id')}`;
 }
 
 function darkModeHandler() {
     if (window.localStorage.getItem("darkmode") == "true") {
         //if true then make darkmode
-        console.log("dark")
         document.documentElement.style.setProperty('--background-color', '#000000');
         document.documentElement.style.setProperty('--card-background-color', '#1A1A1B');
         document.documentElement.style.setProperty('--main-color', '#9407F2');
@@ -85,7 +84,6 @@ function darkModeHandler() {
         document.documentElement.style.setProperty('--button-hover-on-white', '#272727');
     } else {
         //else make bright
-        console.log("bright")
         document.documentElement.style.setProperty('--background-color', '#DAE0E6');
         document.documentElement.style.setProperty('--card-background-color', '#FFFFFF');
         document.documentElement.style.setProperty('--main-color', '#9407F2');

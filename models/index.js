@@ -27,4 +27,3 @@ Responses.belongsTo(Users, {
 });
   
 module.exports = { Users, Posts, Responses };
-  

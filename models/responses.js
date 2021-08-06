@@ -11,28 +11,24 @@ Responses.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    date_created: {
-      type: DataTypes.DATE,
-      allowNull: false,
-    },
     response: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
 	  user_id: {
-	  type: DataTypes.INTEGER,
-	  references: {
-	  model: 'Users',
-	  key: 'id',
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'Users',
+        key: 'id',
       },
     },
-    posts_id: {
-	  type: DataTypes.INTEGER,
-	  references: {
-	  model: 'Posts',
-	  key: 'id',
-			},
-		},
+    post_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'Posts',
+        key: 'id',
+      },
+    },
   },
   {
     sequelize,
