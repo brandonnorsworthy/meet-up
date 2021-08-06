@@ -25,7 +25,7 @@ function init() {
     $('.upvote').click(upvoteButtonClicked);
     $('.thread').click(threadCardClicked);
     $('button[name="login"]').click(loginButtonClicked);
-
+    $('button[name="logout"]').click(logoutButtonClicked);
 }
 
 function darkModeButtonClicked(event) {
@@ -110,11 +110,22 @@ function loginButtonClicked() {
         console.log('sent')
     })
         .done(function() {
-            // alert("second success");
             location.href='/'
         })
-        .fail(function() {
-            // alert("error");
+        .fail(function(data) {
+            console.log(data.responseJSON.message)
+        })
+}
+
+function logoutButtonClicked() {
+    $.post('/api/users/logout', function(){
+        console.log('sent')
+    })
+        .done(function() {
+            location.href='/';
+        })
+        .fail(function(data) {
+            console.log(data.responseJSON.message);
         })
 }
 
