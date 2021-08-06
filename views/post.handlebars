@@ -53,10 +53,9 @@
             <!-- date, edit, delete -->
             <div class="col-6 d-flex justify-content-start align-content-center">
                 <p>Posted: {{post.createdAt}}</p>
-                {{#if loggedIn}}
+                {{#if session.loggedIn}}
                 <button name="edit">edit</button>
                 <button name="delete">delete</button>
-                {{else}}
                 {{/if}}
             </div>
             <!-- author and pfp -->
@@ -79,7 +78,7 @@
         </div>
         <!-- response textbox -->
         <div class="row">
-            {{#if loggedIn}}
+            {{#if session.loggedIn}}
             <input type="text" name="response" id="response" placeholder="Enter text to respond">
             {{else}}
             <input type="text" name="response" id="response" disabled placeholder="Login or Sign Up to respond">
