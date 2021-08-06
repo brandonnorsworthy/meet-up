@@ -28,6 +28,6 @@ const userData = [
 ];
 
 
-const seedUsers = () => Users.create(userData[1]);
+const seedUsers = () => Users.create(userData[0]);
 
 module.exports = seedUsers;

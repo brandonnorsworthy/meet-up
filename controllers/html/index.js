@@ -1,6 +1,7 @@
 const moment = require('moment');
 const router = require('express').Router();
 const { Users, Posts, Responses } = require('../../models');
+const { post } = require('../api/userRoutes');
 
 //home route returns the homepage
 router.get('/', async function (req, res) {
@@ -13,6 +14,12 @@ router.get('/', async function (req, res) {
 			]
 		});
 
+		if (req.session.loggedIn) {
+			console.log(req.session.username, "requested the homepage at", moment().format("h:mm a on MMMM Do, YYYY"))
+		} else {
+			console.log("Anonymous requested the homepage at", moment().format("h:mm a on MMMM Do, YYYY"))
+		}
+
 		let posts = dbPostsData.map((post) =>
 			post.get({ plain: true })
 		);
@@ -24,7 +31,7 @@ router.get('/', async function (req, res) {
 		});
 
 		res.status(200).render('homepage', {
-			loggedIn: req.session.loggedIn,
+			session: { loggedIn: req.session.loggedIn, username: req.session.username },
 			posts,
 		});
 	} catch (err) {
@@ -43,7 +50,7 @@ router.get('/post/:id', async function (req, res) {
 				{
 					model: Responses,
 					include: {
-						// order: '"updatedAt" DESC',
+						// order: '"date" DESC',
 						model: Users,
 					}
 				}
@@ -51,8 +58,14 @@ router.get('/post/:id', async function (req, res) {
 		});
 
 		let post = dbPostData.get({ plain: true })
-		post.responses_length = post.Responses.length;
 
+		if (req.session.loggedIn) {
+			console.log(req.session.username, "requested the post", post.title, "at", moment().format("h:mm a on MMMM Do, YYYY"))
+		} else {
+			console.log("Anonymous requested the post", post.title, "at", moment().format("h:mm a on MMMM Do, YYYY"))
+		}
+
+		post.responses_length = post.Responses.length;
 		post.date_occuring = moment(post.date_occuring).format('h:mm a on MMMM Do, YYYY');
 		post.createdAt = moment(post.createdAt).fromNow();
 		post.Responses.forEach(response => {
@@ -71,7 +84,7 @@ router.get('/post/:id', async function (req, res) {
 
 router.get('/login', function (req, res) {
 	if (req.session.loggedIn) {
-		res.direct('/');
+		res.redirect('/');
 		return;
 	}
 

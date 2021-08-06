@@ -10,13 +10,12 @@ router.post('/login',async function(req, res){
         email: req.body.email,
       },
     });
-    
-    console.log('Db user we found!!!', dbUserData)
+
+		let user = dbUserData.get({ plain: true })
 
     if (!dbUserData) {
-      res
-        .status(400)
-        .json({ message: 'Incorrect email or password. Please try again!' });
+      res.status(400)
+      .json({ message: 'Incorrect email or password. Please try again!' });
       return;
     }
 
@@ -25,16 +24,14 @@ router.post('/login',async function(req, res){
     if (!validPassword) {
       res
         .status(400)
-        .json({ message: 'Incorrect email or password. Please try again! SECOND!!!' });
+        .json({ message: 'Incorrect email or password. Please try again!' });
       return;
     }
 
     req.session.save(() => {
       req.session.loggedIn = true;
-
-      res
-        .status(200)
-        .json({ user: dbUserData, message: 'You are now logged in!' });
+      req.session.username = user.username.toUpperCase().trim();
+      res.status(200).json({ message: 'You are now logged in!' });
     });
   } catch (err) {
     console.log(err);
