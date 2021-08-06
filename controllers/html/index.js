@@ -23,7 +23,7 @@ router.get('/', async function (req, res) {
 			post.createdAt = moment(post.createdAt).fromNow();
 		});
 
-		res.render('homepage', {
+		res.status(200).render('homepage', {
 			loggedIn: req.session.loggedIn,
 			posts,
 		});
@@ -59,7 +59,7 @@ router.get('/post/:id', async function (req, res) {
 			response.createdAt = moment(response.createdAt).fromNow();
 		});
 
-		res.render('post', {
+		res.status(200).render('post', {
 			loggedIn: req.session.loggedIn,
 			post,
 		});
@@ -75,7 +75,7 @@ router.get('/login', function (req, res) {
 		return;
 	}
 
-	res.render('login').status(200);
+	res.status(200).render('login');
 });
 
 router.get('/signup', function (req, res) {
@@ -84,7 +84,7 @@ router.get('/signup', function (req, res) {
 		return;
 	}
 
-	res.render('signup').status(200);
+	res.status(200).render('signup');
 })
 
 router.get('/user/:id', function (req, res) {
