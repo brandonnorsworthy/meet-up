@@ -1,8 +1,6 @@
 // html elements
 // TODO upvote button event click
-$("#other").click(function() {
-    $("#target").click();
-});
+
 // TODO login button (ROUTE) event click
 // TODO login button (SUBMIT/ON LOGIN PAGE) event click
 //? function should have email and password from user input
@@ -13,6 +11,7 @@ $("#other").click(function() {
 // TODO clicking to enter a response button event click
 // TODO sort button event click
 // TODO home button event click
+
 
 
 function init() {
@@ -27,6 +26,8 @@ function init() {
     $('.sortBtn').click(sortButtonClicked);
     $('.upvote').click(upvoteButtonClicked);
     $('.thread').click(threadCardClicked);
+    $('button[name="login"]').click(loginButtonClicked);
+
 }
 
 function darkModeButtonClicked(event) {
@@ -55,8 +56,8 @@ function sortButtonClicked(event) {
 }
 
 function upvoteButtonClicked(event) {
-    //TODO stop propogation upwards
     event.stopPropagation();
+
     console.log(event.target)
     $.post('/api/posts/upvote/1').then(vote => console.log(vote))
         //? if upvote has upvote-activated class already then take it off
@@ -96,6 +97,12 @@ function darkModeHandler() {
         document.documentElement.style.setProperty('--text-dark', '#424242');
         document.documentElement.style.setProperty('--button-hover-on-white', '#E1E1E1');
     }
+}
+
+function loginButtonClicked() {
+    let email = $('input[name="email"]').val();
+    let password = $('input[name="password"]').val();
+    console.log(email, password)
 }
 
 init()
