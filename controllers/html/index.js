@@ -37,19 +37,20 @@ router.get('/', async function (req, res) {
 router.get('/post/:id', async function (req, res) {
 	try {
 		const dbPostData = await Posts.findOne({
-			where: {
-				id: req.params.id
-			},
+			where: { id: req.params.id },
 			include: [
 				{ model: Users },
-				{ model: Responses }
+				{
+					model: Responses,
+					include: {
+						model: Users,
+					}
+				}
 			]
 		});
 
-		const post = dbPostData.get({ plain: true })
-
-		console.log("---------------------------------------------------------")
-		console.log(post)
+		let post = dbPostData.get({ plain: true })
+		post.responses_length = post.Responses.length;
 
 		res.render('post', {
 			loggedIn: req.session.loggedIn,
