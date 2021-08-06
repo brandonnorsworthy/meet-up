@@ -2,9 +2,18 @@ const { Users, Posts, Responses } = require('../../models');
 
 const router = require('express').Router();
 
+router.get('/', function (req, res){
+	//TODO render homepage
+	console.log('hit');
+
+	res.render('homepage');
+})
+
 //TODO write down all handlebar files as named in html routes
 router.get('/register', function (req, res){
 	//TODO render signup.html as handlbars
+
+	res.render('signup');
 })
 
 router.get('/login', function (req, res){
@@ -12,26 +21,10 @@ router.get('/login', function (req, res){
 		res.direct('/');
 		return;
 	}
-	// let posts = [
-	// 	{
-	// 		title:"test",
-	// 		description: "oijethreoijh",
-	// 	},
-	// 	{
-	// 		title:"test",
-	// 		description: "oijethreoijh",
-	// 	}
-	// ]
+
 	res.render('login');
 });
 // will get data
-
-router.get('/', function (req, res){
-	//TODO render homepage
-	console.log('hit');
-
-	res.render('post');
-})
 
 router.get('/post/:id', async function (req, res){
 	const singlePost = await Posts.findAll({
@@ -39,10 +32,10 @@ router.get('/post/:id', async function (req, res){
 			id: req.params.id
 		}
 	})
-	
-console.log('Single POST!!!', singlePost);
 
-res.render('postDetail',{post: singlePost[0]});
+	console.log('Single POST!!!', singlePost);
+
+	res.render('postDetail',{post: singlePost[0]});
 	//TODO render the post filled with content of that specific id
 	//? will have to do a query and merge posts table with responses
 	//? will have to merge posts and a user (the user that owns the post)

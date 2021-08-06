@@ -11,10 +11,6 @@ Posts.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    date_created: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      },
     title: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -28,29 +24,29 @@ Posts.init(
       allowNull: true,
     },
     location: {
-        type: DataTypes.STRING,
-        allowNull: false,
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     time_occuring: {
-        type: DataTypes.TIME,
-        allowNull: false,
+      type: DataTypes.TIME,
+      allowNull: false,
     },
     date_occuring: {
-        type: DataTypes.DATE,
-        allowNull: false,
+      type: DataTypes.DATE,
+      allowNull: false,
      },
     edited: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     },
 	  user_id: {
-	  type: DataTypes.INTEGER,
-	  references: {
-	    model: 'Users',
-		key: 'id',
-	},
-},
-},
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'Users',
+        key: 'id',
+	    },
+    },
+  },
   {
     sequelize,
     underscored: true,
