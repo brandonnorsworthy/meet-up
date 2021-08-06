@@ -27,7 +27,7 @@
             </div>
             <div class="col-auto">
                 <span class="unselectable material-icons">schedule</span>
-                <p>{{post.date_occuring}} @ {{post.time_occuring}}</p>
+                <p>{{post.date_occuring}}</p>
             </div>
         </div>
         <!-- description -->
@@ -48,7 +48,7 @@
         <div class="row">
             <!-- date, edit, delete -->
             <div class="col-6 d-flex justify-content-start align-content-center">
-                <p>Posted on: {{post.date_created}}</p>
+                <p>Posted: {{post.createdAt}}</p>
 
                 <button name="edit">edit</button>
                 <button name="delete">delete</button>

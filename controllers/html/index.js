@@ -1,6 +1,6 @@
-const { Users, Posts, Responses } = require('../../models');
-
+const moment = require('moment');
 const router = require('express').Router();
+const { Users, Posts, Responses } = require('../../models');
 
 //home route returns the homepage
 router.get('/', async function (req, res) {
@@ -18,10 +18,9 @@ router.get('/', async function (req, res) {
 
 		posts.forEach(post => {
 			post.responses_length = post.Responses.length;
+			post.date_occuring = moment(post.date_occuring).format('h:mm a on MMMM Do, YYYY');
+			post.createdAt = moment(post.createdAt).fromNow();
 		});
-
-		console.log("---------------------------------------------------------")
-		console.log(posts)
 
 		res.render('homepage', {
 			loggedIn: req.session.loggedIn,
@@ -51,6 +50,12 @@ router.get('/post/:id', async function (req, res) {
 
 		let post = dbPostData.get({ plain: true })
 		post.responses_length = post.Responses.length;
+
+		post.date_occuring = moment(post.date_occuring).format('h:mm a on MMMM Do, YYYY');
+		post.createdAt = moment(post.createdAt).fromNow();
+		post.Responses.forEach(response => {
+			response.createdAt = moment(response.createdAt).fromNow();
+		});
 
 		res.render('post', {
 			loggedIn: req.session.loggedIn,
