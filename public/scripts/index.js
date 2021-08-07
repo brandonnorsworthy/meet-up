@@ -96,25 +96,8 @@ function createAccountButtonClicked() {
     }
     if (foundEmptyField) { return; } //if found any empty inputs then stop here
 
-    //! error handling for unmatching passwords
-    if (body.password !== body.confirmPassword) {
-        const passwords = {
-            passwordEl: $('p[for="password"]'),
-            passwordConfirmEl: $('p[for="confirmPassword"]')
-        }
-        const passwordsDontMatch = ' <span>Passwords do not match</span>';
-
-        for (const key in passwords) { //loop over both password and passwordConfirm
-            console.log(passwords[key])
-            //if the p tag does not have a span try to add one
-            if (passwords[key].first().children().length === 0){
-                passwords[key].html(passwords[key].text() + passwordsDontMatch)
-            } else { //if there was a span remove it then add one
-                passwords[key].first().children().first().remove()
-                passwords[key].html(passwords[key].text() + passwordsDontMatch)
-            }
-        }
-        return; //passwords did not match so we just stop here and let them fix it
+    if (promptPasswordErrors({ password: body.password, confirmPassword: body.confirmPassword })) {
+        return;
     }
 
     $.post('/api/user/register',{
@@ -142,6 +125,38 @@ function createAccountButtonClicked() {
                 console.log(data.responseJSON.message)
             }
         })
+}
+
+function promptPasswordErrors(body) {
+    const passwords = {
+        passwordEl: $('p[for="password"]'),
+        passwordConfirmEl: $('p[for="confirmPassword"]')
+    }
+    let error = false;
+    let errorCode = '';
+
+    if (body.password !== body.confirmPassword) {
+        errorCode = ' <span>Passwords do not match</span>';
+        error = true; //passwords did not match so we just stop here and let them fix it
+    }
+    if (body.password.length < 6) {
+        errorCode = ' <span>Passwords must be atleast 6 characters</span>';
+        error = true;
+    }
+    if (error) {
+
+        for (const key in passwords) { //loop over both password and passwordConfirm
+            //if the p tag does not have a span try to add one
+            if (passwords[key].first().children().length === 0){
+                passwords[key].html(passwords[key].text() + errorCode)
+            } else { //if there was a span remove it then add one
+                passwords[key].first().children().first().remove()
+                passwords[key].html(passwords[key].text() + errorCode)
+            }
+        }
+    }
+
+    return error;
 }
 
 function logoutButtonClicked() {
