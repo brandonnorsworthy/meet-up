@@ -26,6 +26,9 @@ function init() {
 
     //enter is pressed in the response input
     $('input[name="response"]').keypress(keyPressedInResponse);
+    $('button[name="response"]').click(function() {
+        location.href='/login';
+    });
 }
 
 function darkModeButtonClicked(event) {
