@@ -6,7 +6,7 @@ const responsesRoutes = require('./responsesRoutes.js');
 
 //? website.com/api/post/2/edit
 //? router.put(:id/edit)
-router.use('/users', userRoutes);
-router.use('/posts', postRoutes);
-router.use('/responses', responsesRoutes);
+router.use('/user', userRoutes);
+router.use('/post', postRoutes);
+router.use('/response', responsesRoutes);
 module.exports = router;
