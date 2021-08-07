@@ -23,13 +23,22 @@ router.post('/login', async function (req, res) {
 		}
 
 		console.log('login⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠', dbUserData.get({ plain: true }));
+		let user = dbUserData.get({ plain: true })
+
+		// req.session.save(() => {
+		// 	req.session.loggedIn = true;
+		// 	req.session.user = { user, loggedIn: true };
+		// 	res.status(200).json({ message: "logged in"});
+		// });
+
 
 		req.session.save(() => {
 			req.session.loggedIn = true;
-			req.session.user = dbUserData.get({ plain: true });
-		});
+			req.session.username = user.username.toUpperCase().trim();
+			res.status(200).json({ message: 'You are now logged in!' });
+		  });
 
-		res.status(202);
+		console.log('session: ', req.session)
 	} catch (err) {
 		console.log(err);
 		res.status(500).json(err);
@@ -69,11 +78,11 @@ router.post('/register', async function (req, res) {
 		//after users account is created automatically log them into that account
 		req.session.save(() => {
 			req.session.loggedIn = true;
-			req.session.user = dbUserData.get({ plain: true });
+			req.session.user = { username: dbUserData.get({ plain: true }).username, loggedIn: true };
 		});
 
-		//send back 201 everything went ok
-		res.status(201);
+		//send back 200 everything went ok
+		res.status(200).json({ message: "account created" });
 	} catch (err) {
 		console.log(err);
 		res.status(500).json(err);
