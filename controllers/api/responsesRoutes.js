@@ -15,7 +15,6 @@ router.post('/',function(req, res){
     } catch (err) {
         res.status(400).json(err);
     }
-    
 })
 
 router.delete('/:id',async function(req,res){
@@ -40,68 +39,5 @@ router.delete('/:id',async function(req,res){
     }
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-// router.post('/', withAuth, (req, res) => {
-// if (req.session) {
-// Responses.create({
-// comment_text: req.body.comment_text,
-// post_id: req.body.post_id,
-// user_id: req.session.user_id,
-// })
-// .then(responsesData => res.json(responsesData))
-// .catch(err => {
-// console.log(err);
-// res.status(400).json(err);
-// })
-// }
-// });
-
-// router.put('/:id', withAuth, (req, res) => {
-// Responses.update({
-// comment_text: req.body.comment_text
-// }, {
-// where: {
-// id: req.params.id
-// }
-// }).then(responsesData => {
-// if (!responsesData) {
-// res.status(404).json({ message: 'No comment found with this id' });
-// return;
-// }
-// res.json(responsesData);
-// }).catch(err => {
-// console.log(err);
-// res.status(500).json(err);
-// });
-// });
-
-// router.delete('/:id', withAuth, (req, res) => {
-// Responses.destroy({
-// where: {
-// id: req.params.id
-// }
-// }).then(responsesData => {
-// if (!responsesData) {
-// res.status(404).json({ message: 'No comment found with this id' });
-// return;
-// }
-// res.json(responsesData);
-// }).catch(err => {
-// console.log(err);
-// res.status(500).json(err);
-// });
-// });
 
 module.exports = router;

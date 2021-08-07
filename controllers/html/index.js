@@ -5,9 +5,6 @@ const { post } = require('../api/userRoutes');
 
 //home route returns the homepage
 router.get('/', async function (req, res) {
-	console.log("--------------------------------------")
-	console.log(req.session)
-
 	try {
 		const dbPostsData = await Posts.findAll({
 			limit: 10,

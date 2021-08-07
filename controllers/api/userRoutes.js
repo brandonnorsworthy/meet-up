@@ -22,15 +22,8 @@ router.post('/login', async function (req, res) {
 			return;
 		}
 
-		console.log('login⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠', dbUserData.get({ plain: true }));
+		// console.log('login⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠', dbUserData.get({ plain: true }));
 		let user = dbUserData.get({ plain: true })
-
-		// req.session.save(() => {
-		// 	req.session.loggedIn = true;
-		// 	req.session.user = { user, loggedIn: true };
-		// 	res.status(200).json({ message: "logged in"});
-		// });
-
 
 		req.session.save(() => {
 			req.session.loggedIn = true;
@@ -38,7 +31,6 @@ router.post('/login', async function (req, res) {
 			res.status(200).json({ message: 'You are now logged in!' });
 		});
 
-		console.log('session: ', req.session)
 	} catch (err) {
 		console.log(err);
 		res.status(500).json(err);
@@ -65,7 +57,6 @@ router.post('/register', async function (req, res) {
 			return;
 		}
 
-		console.log(req.body.email.toLowerCase().trim())
 		//TODO take in a url or image some how
 		//creates a new user in database that can be logged in from
 		const dbUserData = await Users.create({
@@ -74,14 +65,8 @@ router.post('/register', async function (req, res) {
 			password: req.body.password.trim(),
 		});
 
-		console.log('register⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠', dbUserData.get({ plain: true }));
+		// console.log('register⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠', dbUserData.get({ plain: true }));
 		let user = dbUserData.get({ plain: true })
-
-		//after users account is created automatically log them into that account
-		// req.session.save(() => {
-		// 	req.session.loggedIn = true;
-		// 	req.session.user = { username: dbUserData.get({ plain: true }).username, loggedIn: true };
-		// });
 
 		req.session.save(() => {
 			req.session.loggedIn = true;
@@ -89,10 +74,6 @@ router.post('/register', async function (req, res) {
 			res.status(200).json({ message: 'account created' });
 		});
 
-		console.log('session: ', req.session)
-
-		//send back 200 everything went ok
-		// res.status(200).json({ message: "account created" });
 	} catch (err) {
 		console.log(err);
 		res.status(500).json(err);
