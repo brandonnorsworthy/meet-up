@@ -186,6 +186,8 @@ function sortButtonClicked(event) {
     }
     $(this).attr('id', 'active'); //set the clicked on button with the active id for styling
 
+    console.log(`${$(this).text().toLowerCase()}`)
+
     $.post('/',{ //TODO this sends over the right thing problem on serverside
         sort: `${$(this).text().toLowerCase()}` //sends over the text from the button clicked to be sorted by
     })
