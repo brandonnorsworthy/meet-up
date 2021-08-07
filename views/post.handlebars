@@ -2,7 +2,7 @@
     {{> navbar}}
 </header>
 <main>
-    <div class="card row post">
+    <div class="card row post" id="{{post.id}}">
         <!-- title and upvotes -->
         <div class="row">
             <div class="col-10">
@@ -53,7 +53,7 @@
             <!-- date, edit, delete -->
             <div class="col-6 d-flex justify-content-start align-content-center">
                 <p>Posted: {{post.createdAt}}</p>
-                {{#if session.loggedIn}}
+                {{#if post.isOwner}}
                 <button name="edit">edit</button>
                 <button name="delete">delete</button>
                 {{/if}}
@@ -79,9 +79,9 @@
         <!-- response textbox -->
         <div class="row">
             {{#if session.loggedIn}}
-            <input type="text" name="response" id="response" placeholder="Enter text to respond">
+            <input type="text" name="response" id="response" placeholder="Enter text to respond . . .">
             {{else}}
-            <input type="text" name="response" id="response" disabled placeholder="Login or Sign Up to respond">
+            <button class="txt-a-l" type="text" name="response" id="response">Login or Sign Up to respond</button>
             {{/if}}
         </div>
         <!-- single response -->

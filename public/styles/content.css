@@ -423,6 +423,7 @@ header {
     padding-bottom: 30px;
 }
 
+#response,
 .post > div:nth-child(7) > input {
     border: none;
     color: var(--text-shade);
@@ -433,6 +434,10 @@ header {
 
 .post > div:nth-child(7) > input:hover {
     cursor: pointer;
+}
+
+#response {
+    padding: 15px 15px
 }
 
 /* image 65 margin 25 */

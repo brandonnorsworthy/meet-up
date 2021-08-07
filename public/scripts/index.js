@@ -36,6 +36,9 @@ function init() {
     $('.upvote').click(upvoteButtonClicked);
     //each thread clickable
     $('.thread').click(threadCardClicked);
+
+    //enter is pressed in the response input
+    $('input[name="response"]').keypress(keyPressedInResponse);
 }
 
 function darkModeButtonClicked(event) {
@@ -173,6 +176,25 @@ function upvoteButtonClicked(event) {
 function threadCardClicked(event) {
     //TODO redirect user to thread page on click using the id attatched to the card /post/:id
     location.href = `/post/${$(this).attr('id')}`;
+}
+
+function keyPressedInResponse(event) {
+    if (event.keyCode === 13) {
+        //TODO take in message, you will record the date, message, and link to a user_id that created it
+        $.post('/api/response/',  {
+            post_id: $('.post').attr('id'),
+            response: $('input[name="response"]').val(),
+        }, function(){
+            console.log('sent')
+        })
+            .done(function() {
+                location.href='/'
+                console.log("created")
+            })
+            .fail(function(data) {
+                console.log(data.responseJSON.message)
+            })
+    }
 }
 
 function darkModeHandler() {

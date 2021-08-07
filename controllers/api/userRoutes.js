@@ -59,11 +59,15 @@ router.post('/register', async function (req, res) {
 		}
 
 		//TODO take in a url or image some how
+		if (!req.body.image_url) {
+			req.body.image_url = '/assets/pfp/default.png' //default image to default image incase they dont send a pic
+		}
 		//creates a new user in database that can be logged in from
 		const dbUserData = await Users.create({
 			username: req.body.username.trim(),
 			email: req.body.email.toLowerCase().trim(),
 			password: req.body.password.trim(),
+			image_url: image_url
 		});
 
 		// console.log('register⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠', dbUserData.get({ plain: true }));

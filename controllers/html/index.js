@@ -43,6 +43,7 @@ router.get('/', async function (req, res) {
 //specific post route returns page to view page by id
 router.get('/post/:id', async function (req, res) {
 	try {
+		console.log('getting post for user')
 		const dbPostData = await Posts.findOne({
 			where: { id: req.params.id },
 			include: [
@@ -58,6 +59,8 @@ router.get('/post/:id', async function (req, res) {
 		});
 
 		if (!dbPostData) {
+			console.log('getting home for user')
+
 			res.status(400).redirect('/');
 			// .json({ message:"post does not exsist" });
 		}
@@ -66,19 +69,27 @@ router.get('/post/:id', async function (req, res) {
 
 		if (req.session.loggedIn) {
 			console.log(req.session.username, "requested the post", post.title, "at", moment().format("h:mm a on MMMM Do, YYYY"))
+			//if current user is the same as the author of the post then show them the author buttons edit and delete
+			if (post.user_id === req.session.user_id) {
+				post.isOwner = true;
+			}
 		} else {
 			console.log("Anonymous requested the post", post.title, "at", moment().format("h:mm a on MMMM Do, YYYY"))
 		}
+
 
 		post.responses_length = post.Responses.length;
 		post.date_occuring = moment(post.date_occuring).format('h:mm a on MMMM Do, YYYY');
 		post.createdAt = moment(post.createdAt).fromNow();
 		post.Responses.forEach(response => {
+			if (req.session.user_id === response.user_id) {
+				response.isOwner = true;
+			}
 			response.createdAt = moment(response.createdAt).fromNow();
 		});
 
 		res.status(200).render('post', {
-			loggedIn: req.session.loggedIn,
+			session: req.session,
 			post,
 		});
 	} catch (err) {

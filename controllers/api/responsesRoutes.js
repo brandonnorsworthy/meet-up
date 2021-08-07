@@ -1,17 +1,24 @@
 const router = require('express').Router();
+const moment = require('moment')
 const { Responses } = require('../../models');
 // const withAuth = require('../../utils/auth');
 
 // /api/responses/  POST guy
-router.post('/',function(req, res){
+router.post('/', async function(req, res){
     //TODO take in message, you will record the date, message, and link to a user_id that created it
     try {
-        const userResponses = Responses.getcreate({
-            ...req.body,
-            responses_id: req.session.responses_id,
+        const dbResponseData = await Responses.create({
+            post_id: req.body.post_id,
+            user_id: req.session.user_id,
+            response: req.body.response,
+            created_at: moment().format()
         });
 
-        res.status(200).json(userResponses);
+		let responses = dbResponseData.get({ plain: true })
+
+        console.log('redirecting', req.session.username)
+
+        res.status(200).redirect(`/post/1`);
     } catch (err) {
         res.status(400).json(err);
     }
