@@ -174,15 +174,18 @@ function createPostSubmit() {
     let description = $('textarea[name="post-description"]').val();
     let location = $('textarea[name="post-location"]').val();
     let date = $('input[name="post-date"]').val();
+    let time = $('input[name="post-time"]').val();
 
-    console.log(title, description, location, date)
+    console.log(title, description, location, date, time);
+
+    // return;
 
     // return;
     $.post('/api/post/create',{
         title: title,
         description: description,
         location: location,
-        date: date
+        date: `${date} ${time}`
     }, function(){
         console.log('sent')
     })

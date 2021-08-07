@@ -10,10 +10,12 @@
                 <img src="{{session.image_url}}" alt="">
             </div>
             <div class="col-11">
-                <button class="txt-a-l" data-bs-toggle="modal" data-bs-target="#createModal" style="width: 100%;">Create a event</button>
+                <button class="txt-a-l" data-bs-toggle="modal" data-bs-target="#createModal" style="width: 100%;">Create
+                    a event</button>
             </div>
         </div>
-        <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="create-post-modal-title" aria-hidden="true">
+        <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="create-post-modal-title"
+            aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered ">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -35,8 +37,16 @@
                                 <textarea class="form-control" name="post-location"></textarea>
                             </div>
                             <div class="mb-3">
-                                <label for="startdate" class="col-form-label">Date</label>
-                                <input name="post-date">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label for="startdate" class="col-form-label">Date</label>
+                                        <input type="date" name="post-date">
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="startdate" class="col-form-label">Time (12:00 AM)</label>
+                                        <input type="time" name="post-time">
+                                    </div>
+                                </div>
                             </div>
                         </form>
                     </div>

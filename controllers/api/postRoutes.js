@@ -24,7 +24,7 @@ router.post('/create', async function(req, res) {
             description: req.body.description,
             location: req.body.location,
             upvotes: 0,
-            date_occuring: date,
+            date_occuring: moment(req.body.date).format(),
             user_id: req.session.user_id,
             created_at: moment().format()
 		});
