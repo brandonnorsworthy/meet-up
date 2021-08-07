@@ -73,7 +73,7 @@ router.post('/register', async function (req, res) {
 			username: req.body.username.trim(),
 			email: req.body.email.toLowerCase().trim(),
 			password: req.body.password.trim(),
-			image_url: image_url
+			image_url: req.body.image_url
 		});
 
 		// console.log('register⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠', dbUserData.get({ plain: true }));
