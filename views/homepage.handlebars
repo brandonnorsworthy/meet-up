@@ -48,7 +48,7 @@
         </div>
     </div>
     {{/if}}
-    <!-- sort card -->
+    {{!-- sort card --}}
     <div class="card row">
         <div id="sort">
             <div class="justify-left">
@@ -57,23 +57,24 @@
             <div class="justify-right">
                 <button class="sortBtn" id="active">Top</button>
                 <button class="sortBtn">New</button>
+                {{!-- <button class="sortBtn">Soon</button> --}}
                 {{!-- <button class="sortBtn">Past</button> --}}
                 {{!-- <button class="sortBtn">Nearby</button> --}}
             </div>
         </div>
     </div>
-    <!-- thread 1 -->
+    {{!-- thread 1 --}}
     {{#each posts as |post|}}
     <div class="card row thread" id="{{post.id}}">
         <div class="flex-column col-2">
-            <!-- pfp -->
+            {{!-- pfp --}}
             <img class="col-9" src="{{post.User.image_url}}" alt="">
             <div class="col-3">
                 <p>{{post.User.username}}</p>
             </div>
         </div>
         <div class="col-7">
-            <!-- main contnet -->
+            {{!-- main contnet --}}
             <h1 class="row">
                 {{post.title}}
             </h1>
@@ -91,7 +92,7 @@
             </div>
         </div>
         <div class="col-3">
-            <!-- right side stuff -->
+            {{!-- right side stuff --}}
             <div class="row justify-content-end">
                 {{#if post.upvoted}}
                 <p class="col-10 upvote-activated">{{post.upvotes}}</p>
