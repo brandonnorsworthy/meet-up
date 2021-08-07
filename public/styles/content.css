@@ -68,7 +68,7 @@ header {
 }
 
 .nav-buttons {
-    width: 30vw;
+    width: max-content;
     height: 100%;
     display: flex;
     align-items: center;
