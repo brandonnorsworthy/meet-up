@@ -24,6 +24,7 @@ function init() {
     $('.darkModeToggle').click(darkModeButtonClicked);
     $('button[name="login"]').click(loginButtonClicked);
     $('button[name="logout"]').click(logoutButtonClicked);
+    $('button[name="create-account"]').click(createAccountButtonClicked);
 
     //create post btn 1st card
     $('#create-event-submit').click();
@@ -72,12 +73,30 @@ function loginButtonClicked() {
         })
 }
 
-function signUpButtonClicked() {
+function createAccountButtonClicked() {
     let email = $('input[name="email"]').val();
     let username = $('input[name="username"]').val();
     let password = $('input[name="password"]').val();
-    let confirm = $('input[name="confirm-password"]').val();
+    let confirmPassword = $('input[name="confirm-password"]').val();
 
+    if (password !== confirmPassword) {
+        //todo add error that passwords dont match on html
+        return;
+    }
+
+    $.post('/api/users/register',{
+        email:emailValue,
+        username:usernameValue,
+        password:passwordValue,
+    }, function(){
+        console.log('sent')
+    })
+        .done(function() {
+            location.href='/'
+        })
+        .fail(function(data) {
+            console.log(data.responseJSON.message)
+        })
     console.log(email, username, password, confirm)
 }
 
@@ -90,11 +109,12 @@ function logoutButtonClicked() {
         })
         .fail(function(data) {
             console.log(data.responseJSON.message);
+            //todo add error prompt on form in html
         })
 }
 
 function createPostSubmit() {
-
+    //todo fill out create post and do post request to server
 }
 
 function sortButtonClicked(event) {
