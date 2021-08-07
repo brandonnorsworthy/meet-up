@@ -6,6 +6,7 @@
     --text-shade: #757575;
     --text-dark: #424242;
     --button-hover-on-white: #E1E1E1;
+    --global-font-size: 18px;
 }
 
 main {
@@ -18,6 +19,11 @@ main {
 .jc-c {
     display: flex;
     justify-content: center;
+}
+
+.jc-e {
+    display: flex;
+    justify-content: end;
 }
 
 .txt-a-c {
@@ -53,12 +59,13 @@ main {
 }
 
 .user-prompt h1 {
-    font-size: 24px;
+    font-size: var(--global-font-size);
+    font-weight: 600;
     margin-bottom: 40px;
 }
 
 .user-prompt p {
-    font-size: 20px;
+    font-size: var(--global-font-size);
     padding: 0px;
     margin-bottom: 10px;
 }
@@ -69,7 +76,7 @@ main {
     border-radius: 10px;
     border: 0px;
     color: var(--text-shade);
-    font-size: 20px;
+    font-size: var(--global-font-size);
     margin-bottom: 25px;
 }
 
@@ -85,13 +92,14 @@ main {
     border: 0px;
     border-radius: 10px;
     font-weight: 700;
-    font-size: 20px;
+    font-size: var(--global-font-size);
     padding: 15px 45px 15px 45px;
     width: auto;
 }
 
 .user-prompt span {
-    font-size: 64px;
+    color: var(--main-color);
+    font-size: var(--global-font-size);
 }
 
 #avatar {

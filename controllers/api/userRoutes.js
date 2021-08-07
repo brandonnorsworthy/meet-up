@@ -45,7 +45,10 @@ router.post('/register', async function (req, res) {
 
 		//if a user with that email is found then send back that email already exsists
 		if (dbEmailData) {
-			res.status(400).json({ message: 'email exists' });
+			res.status(400).json({
+				problem: 'email',
+				message: 'Account with this email already exsists'
+			});
 			return;
 		}
 
@@ -54,7 +57,10 @@ router.post('/register', async function (req, res) {
 
 		//if that username is found in the database then return that username is taken
 		if (dbUsernameData) {
-			res.status(400).json({ message: 'username exists' });
+			res.status(400).json({
+				problem: 'username',
+				message: 'Account with this username already exsists'
+			});
 			return;
 		}
 

@@ -1,15 +1,5 @@
-// html elements
-// TODO upvote button event click
-// TODO login button (ROUTE) event click
-// TODO login button (SUBMIT/ON LOGIN PAGE) event click
-//? function should have email and password from user input
-// TODO signup button event click
-// TODO signup button (SUBMIT/ON signup PAGE) event click
-//? function should have profile picture, email, username and password from user input
-// TODO clicking a form button event click
-// TODO clicking to enter a response button event click
+// TODO upvote button event click specifically send a post
 // TODO sort button event click
-// TODO home button event click
 
 function init() {
     if (window.localStorage.getItem("darkmode") == "true") { //if darkmode is set to true in storage flip switch to on
@@ -77,23 +67,60 @@ function loginButtonClicked() {
 }
 
 function createAccountButtonClicked() {
-    let email = $('input[name="email"]').val();
-    let username = $('input[name="username"]').val();
-    let password = $('input[name="password"]').val();
-    let confirmPassword = $('input[name="confirm-password"]').val();
+    const body = {
+        email: $('input[name="email"]').val(),
+        username: $('input[name="username"]').val(),
+        password: $('input[name="password"]').val(),
+        confirmPassword: $('input[name="confirmPassword"]').val()
+    }
+    const requriedText = ' <span>This field is required</span>';
 
-    console.log(email, username, password, confirmPassword)
+    //! error handling for empty fields
+    let foundEmptyField = false;
+    for (const key in body) {
+        let pEl = $(`p[for="${key}"]`); //grabs the label above the current input
 
-    if (password !== confirmPassword) {
-        //todo add error that passwords dont match on html
-        console.log("passwords dont match")
-        return;
+        if (body[key].length === 0) { //if the input is empty inside mark that found a empty string
+            if (pEl.first().children().length === 0) { //if no span has already been added then add one
+                pEl.html(pEl.text() + requriedText)
+            } else { //if there is a span then remove it and add one back because it might say something different
+                pEl.first().children().first().remove()
+                pEl.html(pEl.text() + requriedText)
+            }
+            foundEmptyField = true;
+        } else {
+            if (pEl.first().children().length !== 0) { //if not empty but span is attached then remove it
+                pEl.first().children().first().remove()
+            }
+        }
+    }
+    if (foundEmptyField) { return; } //if found any empty inputs then stop here
+
+    //! error handling for unmatching passwords
+    if (body.password !== body.confirmPassword) {
+        const passwords = {
+            passwordEl: $('p[for="password"]'),
+            passwordConfirmEl: $('p[for="confirmPassword"]')
+        }
+        const passwordsDontMatch = ' <span>Passwords do not match</span>';
+
+        for (const key in passwords) { //loop over both password and passwordConfirm
+            console.log(passwords[key])
+            //if the p tag does not have a span try to add one
+            if (passwords[key].first().children().length === 0){
+                passwords[key].html(passwords[key].text() + passwordsDontMatch)
+            } else { //if there was a span remove it then add one
+                passwords[key].first().children().first().remove()
+                passwords[key].html(passwords[key].text() + passwordsDontMatch)
+            }
+        }
+        return; //passwords did not match so we just stop here and let them fix it
     }
 
     $.post('/api/user/register',{
-        email: email,
-        username: username,
-        password: password,
+        email: body.email,
+        username: body.username,
+        password: body.password,
     }, function(){
         console.log('sent')
     })
@@ -101,7 +128,19 @@ function createAccountButtonClicked() {
             location.href='/'
         })
         .fail(function(data) {
-            console.log(data.responseJSON.message)
+            if (data.responseJSON.problem) { //should send over a specified part it didnt like
+                const spanString = ` <span>${data.responseJSON.message}</span>`
+                let pEl = $(`p[for="${data.responseJSON.problem}"]`);
+
+                if (pEl.first().children().length === 0) { //if no span has already been added then add one
+                    pEl.html(pEl.text() + spanString)
+                } else { //if there is a span then remove it and add one back because it might say something different
+                    pEl.first().children().first().remove()
+                    pEl.html(pEl.text() + spanString)
+                }
+            } else {
+                console.log(data.responseJSON.message)
+            }
         })
 }
 
