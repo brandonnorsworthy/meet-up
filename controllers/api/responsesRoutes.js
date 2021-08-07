@@ -1,11 +1,8 @@
 const router = require('express').Router();
 const moment = require('moment')
 const { Responses } = require('../../models');
-// const withAuth = require('../../utils/auth');
 
-// /api/responses/  POST guy
 router.post('/', async function(req, res){
-    //TODO take in message, you will record the date, message, and link to a user_id that created it
     try {
         const dbResponseData = await Responses.create({
             post_id: req.body.post_id,
@@ -25,13 +22,11 @@ router.post('/', async function(req, res){
 })
 
 router.delete('/:id',async function(req,res){
-    // cascade on delete.
-    //TODO make sure the person that is deleting it in the session matches the author of the response trying to be deleted
     try {
         const responsesRoutes = await Responses.destroy({
             where: {
                 id: req.params.id,
-                responses_id: req.session.responses_id,
+                user_id: req.session.user_id,
             },
         });
 

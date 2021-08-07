@@ -15,7 +15,6 @@ router.post('/', function(req, res) {
     }
 })
 
-//TODO possibly reverse this so its more formatted to match like website.com/posts/:id/upvote***
 router.post('/create', async function(req, res) {
     try {
         let date = moment().format()
@@ -42,8 +41,6 @@ router.post('/create', async function(req, res) {
 	}
 })
 
-//TODO possibly reverse this so its more formatted to match like website.com/posts/:id/upvote***
-// /api/posts/upvote/1
 router.post('/upvote/:id', function(req, res) {
     console.log('recieved upvote')
     try {
@@ -64,7 +61,6 @@ router.post('/upvote/:id', function(req, res) {
     }
 })
 
-//TODO possibly reverse this so its more formatted to match like website.com/posts/:id/upvote***
 router.put('/edited/:id', function(req, res) {
     try {
         const userEdited = Posts.getcreate({
@@ -79,14 +75,12 @@ router.put('/edited/:id', function(req, res) {
 
 })
 
-
 router.delete('/:id', async function(req, res) {
-    //TODO make sure the person that is deleting it in the session matches the author of the response trying to be deleted
     try {
         const userPost = await Posts.destroy({
             where: {
                 id: req.params.id,
-                post_id: req.session.post_id,
+                user_id: req.session.user_id,
             },
         });
 
