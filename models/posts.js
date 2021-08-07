@@ -1,7 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Posts extends Model {}
+class Posts extends Model { }
 
 Posts.init(
   {
@@ -30,7 +30,7 @@ Posts.init(
     date_occuring: {
       type: DataTypes.DATE,
       allowNull: false,
-     },
+    },
     created_at: {
       type: DataTypes.DATE,
       allowNull: false,
@@ -44,7 +44,7 @@ Posts.init(
       references: {
         model: 'Users',
         key: 'id',
-	    },
+      },
     },
   },
   {

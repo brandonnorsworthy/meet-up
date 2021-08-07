@@ -26,8 +26,10 @@ router.post('/create', async function(req, res) {
             upvotes: 0,
             date_occuring: moment(req.body.date).format(),
             user_id: req.session.user_id,
-            created_at: moment().format()
+            created_at: moment().format(),
 		});
+
+        console.log(dbPostData)
 
 	} catch (err) {
 		console.log(err);

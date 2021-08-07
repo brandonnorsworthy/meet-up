@@ -395,12 +395,17 @@ header {
     align-self: center;
 }
 
+.response > div div img,
 .post > div:nth-child(5) img {
     width: 60px; /* width of container */
     height: 60px; /* height of container */
     object-fit: cover;
     margin: 10px 15px 10px 15px;
     border-radius: 50%;
+}
+
+.response > div div img {
+    margin: 0px;
 }
 
 /* ?response numbers and sort by */
@@ -455,6 +460,15 @@ header {
 
 .response:last-of-type {
     padding-bottom: 0px;
+    border-bottom: none;
+}
+
+.response div:first-child {
+    padding-bottom: 5px;
+}
+
+.response div:first-child div:last-child p {
+    color: var(--text-shade);
 }
 
 .response h2 {
