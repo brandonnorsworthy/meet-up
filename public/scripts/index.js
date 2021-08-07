@@ -11,21 +11,30 @@
 // TODO sort button event click
 // TODO home button event click
 
-
 function init() {
     if (window.localStorage.getItem("darkmode") == "true") { //if darkmode is set to true in storage flip switch to on
         if ($('.darkModeToggle').length != 0) { //check if page has a darkmode slider
-            $('.darkModeToggle')[0].id = 'on'
-            $('.darkModeToggle')[0].children[0].textContent = 'toggle_on'
+            $('.darkModeToggle')[0].id = 'on';
+            $('.darkModeToggle')[0].children[0].textContent = 'toggle_on';
         }
         darkModeHandler(); //load darkmode settings if its enabled
     }
+
+    //darkmode switch
     $('.darkModeToggle').click(darkModeButtonClicked);
-    $('.sortBtn').click(sortButtonClicked);
-    $('.upvote').click(upvoteButtonClicked);
-    $('.thread').click(threadCardClicked);
     $('button[name="login"]').click(loginButtonClicked);
     $('button[name="logout"]').click(logoutButtonClicked);
+
+    //create post btn 1st card
+    $('#create-event-submit').click();
+
+    //sort buttons 2nd card
+    $('.sortBtn').click(sortButtonClicked);
+
+    //upvote button on each post
+    $('.upvote').click(upvoteButtonClicked);
+    //each thread clickable
+    $('.thread').click(threadCardClicked);
 }
 
 function darkModeButtonClicked(event) {
@@ -41,6 +50,51 @@ function darkModeButtonClicked(event) {
         window.localStorage.setItem("darkmode", "false");
     }
     darkModeHandler();
+}
+
+function loginButtonClicked() {
+    let emailValue = $('input[name="email"]').val();
+    let passwordValue = $('input[name="password"]').val();
+
+    console.log(emailValue, passwordValue)
+
+    $.post('/api/users/login',{
+        email:emailValue,
+        password:passwordValue,
+    }, function(){
+        console.log('sent')
+    })
+        .done(function() {
+            location.href='/'
+        })
+        .fail(function(data) {
+            console.log(data.responseJSON.message)
+        })
+}
+
+function signUpButtonClicked() {
+    let email = $('input[name="email"]').val();
+    let username = $('input[name="username"]').val();
+    let password = $('input[name="password"]').val();
+    let confirm = $('input[name="confirm-password"]').val();
+
+    console.log(email, username, password, confirm)
+}
+
+function logoutButtonClicked() {
+    $.post('/api/users/logout', function(){
+        console.log('sent')
+    })
+        .done(function() {
+            location.href='/';
+        })
+        .fail(function(data) {
+            console.log(data.responseJSON.message);
+        })
+}
+
+function createPostSubmit() {
+
 }
 
 function sortButtonClicked(event) {
@@ -95,48 +149,6 @@ function darkModeHandler() {
         document.documentElement.style.setProperty('--text-dark', '#424242');
         document.documentElement.style.setProperty('--button-hover-on-white', '#E1E1E1');
     }
-}
-
-function loginButtonClicked() {
-    let emailValue = $('input[name="email"]').val();
-    let passwordValue = $('input[name="password"]').val();
-
-    console.log(emailValue, passwordValue)
-
-    $.post('/api/users/login',{
-        email:emailValue,
-        password:passwordValue,
-    }, function(){
-        console.log('sent')
-    })
-        .done(function() {
-            location.href='/'
-        })
-        .fail(function(data) {
-            console.log(data.responseJSON.message)
-        })
-}
-
-function logoutButtonClicked() {
-    $.post('/api/users/logout', function(){
-        console.log('sent')
-    })
-        .done(function() {
-            location.href='/';
-        })
-        .fail(function(data) {
-            console.log(data.responseJSON.message);
-        })
-}
-
-function signUpButtonClicked() {
-    let email = $('input[name="email"]').val();
-    let username = $('input[name="username"]').val();
-    let password = $('input[name="password"]').val();
-    let confirm = $('input[name="confirm"]').val();
-
-
-    console.log(email, username, password, confirm)
 }
 
 init()
