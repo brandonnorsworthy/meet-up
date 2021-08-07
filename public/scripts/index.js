@@ -60,8 +60,8 @@ function loginButtonClicked() {
     console.log(emailValue, passwordValue)
 
     $.post('/api/users/login',{
-        email:emailValue,
-        password:passwordValue,
+        email: emailValue,
+        password: passwordValue,
     }, function(){
         console.log('sent')
     })
@@ -79,15 +79,18 @@ function createAccountButtonClicked() {
     let password = $('input[name="password"]').val();
     let confirmPassword = $('input[name="confirm-password"]').val();
 
+    console.log(email, username, password, confirmPassword)
+
     if (password !== confirmPassword) {
         //todo add error that passwords dont match on html
+        console.log("passwords dont match")
         return;
     }
 
     $.post('/api/users/register',{
-        email:emailValue,
-        username:usernameValue,
-        password:passwordValue,
+        email: email,
+        username: username,
+        password: password,
     }, function(){
         console.log('sent')
     })
@@ -97,7 +100,6 @@ function createAccountButtonClicked() {
         .fail(function(data) {
             console.log(data.responseJSON.message)
         })
-    console.log(email, username, password, confirm)
 }
 
 function logoutButtonClicked() {

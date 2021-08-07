@@ -60,7 +60,10 @@ router.get('/post/:id', async function (req, res) {
 			]
 		});
 
-		if (!dbPostData) { res.status(400).json({ message:"post does not exsist" })}
+		if (!dbPostData) {
+			res.status(400).redirect('/');
+			// .json({ message:"post does not exsist" });
+		}
 
 		let post = dbPostData.get({ plain: true })
 
