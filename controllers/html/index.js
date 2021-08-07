@@ -16,6 +16,8 @@ router.get('/', async function (req, res) {
 			order: [sorting]
 		});
 
+		console.log(req.session.image_url);
+
 		if (req.session.loggedIn) {
 			console.log(req.session.username, "requested the homepage at", moment().format("h:mm a on MMMM Do, YYYY"))
 		} else {
@@ -33,7 +35,7 @@ router.get('/', async function (req, res) {
 		});
 
 		res.status(200).render('homepage', {
-			session: { loggedIn: req.session.loggedIn, username: req.session.username },
+			session: req.session,
 			posts,
 		});
 	} catch (err) {
@@ -47,6 +49,14 @@ router.post('/', async function (req, res) {
 	try {
 		console.log('post hit', req.body.sort)
 		let sorting = ['createdAt', 'DESC']
+
+		if (req.body.sort == 'new') {
+			sorting = ['createdAt', 'DESC']
+			console.log('newnewnewnewnewnewnewnewnewnew', req.body.sort)
+		} else if (req.body.sort == 'top') {
+			sorting = ['upvotes', 'ASC']
+			console.log('toptoptoptoptoptoptoptoptoptop', req.body.sort)
+		}
 
 		const dbPostsData = await Posts.findAll({
 			limit: 10,
@@ -72,6 +82,8 @@ router.post('/', async function (req, res) {
 			post.date_occuring = moment(post.date_occuring).format('h:mm a on MMMM Do, YYYY');
 			post.createdAt = moment(post.createdAt).fromNow();
 		});
+
+		console.log("about to render page")
 
 		res.status(200).render('homepage', { //todo bug related to page not re-rendering
 			session: { loggedIn: req.session.loggedIn, username: req.session.username },

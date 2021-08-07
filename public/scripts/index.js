@@ -96,25 +96,8 @@ function createAccountButtonClicked() {
     }
     if (foundEmptyField) { return; } //if found any empty inputs then stop here
 
-    //! error handling for unmatching passwords
-    if (body.password !== body.confirmPassword) {
-        const passwords = {
-            passwordEl: $('p[for="password"]'),
-            passwordConfirmEl: $('p[for="confirmPassword"]')
-        }
-        const passwordsDontMatch = ' <span>Passwords do not match</span>';
-
-        for (const key in passwords) { //loop over both password and passwordConfirm
-            console.log(passwords[key])
-            //if the p tag does not have a span try to add one
-            if (passwords[key].first().children().length === 0){
-                passwords[key].html(passwords[key].text() + passwordsDontMatch)
-            } else { //if there was a span remove it then add one
-                passwords[key].first().children().first().remove()
-                passwords[key].html(passwords[key].text() + passwordsDontMatch)
-            }
-        }
-        return; //passwords did not match so we just stop here and let them fix it
+    if (promptPasswordErrors({ password: body.password, confirmPassword: body.confirmPassword })) {
+        return;
     }
 
     $.post('/api/user/register',{
@@ -144,6 +127,38 @@ function createAccountButtonClicked() {
         })
 }
 
+function promptPasswordErrors(body) {
+    const passwords = {
+        passwordEl: $('p[for="password"]'),
+        passwordConfirmEl: $('p[for="confirmPassword"]')
+    }
+    let error = false;
+    let errorCode = '';
+
+    if (body.password !== body.confirmPassword) {
+        errorCode = ' <span>Passwords do not match</span>';
+        error = true; //passwords did not match so we just stop here and let them fix it
+    }
+    if (body.password.length < 6) {
+        errorCode = ' <span>Passwords must be atleast 6 characters</span>';
+        error = true;
+    }
+    if (error) {
+
+        for (const key in passwords) { //loop over both password and passwordConfirm
+            //if the p tag does not have a span try to add one
+            if (passwords[key].first().children().length === 0){
+                passwords[key].html(passwords[key].text() + errorCode)
+            } else { //if there was a span remove it then add one
+                passwords[key].first().children().first().remove()
+                passwords[key].html(passwords[key].text() + errorCode)
+            }
+        }
+    }
+
+    return error;
+}
+
 function logoutButtonClicked() {
     $.post('/api/user/logout')
         .done(function() {
@@ -159,15 +174,18 @@ function createPostSubmit() {
     let description = $('textarea[name="post-description"]').val();
     let location = $('textarea[name="post-location"]').val();
     let date = $('input[name="post-date"]').val();
+    let time = $('input[name="post-time"]').val();
 
-    console.log(title, description, location, date)
+    console.log(title, description, location, date, time);
+
+    // return;
 
     // return;
     $.post('/api/post/create',{
         title: title,
         description: description,
         location: location,
-        date: date
+        date: `${date} ${time}`
     }, function(){
         console.log('sent')
     })
@@ -185,6 +203,8 @@ function sortButtonClicked(event) {
         $('.sortBtn')[index].id = ''; //clear all the ids
     }
     $(this).attr('id', 'active'); //set the clicked on button with the active id for styling
+
+    console.log(`${$(this).text().toLowerCase()}`)
 
     $.post('/',{ //TODO this sends over the right thing problem on serverside
         sort: `${$(this).text().toLowerCase()}` //sends over the text from the button clicked to be sorted by
