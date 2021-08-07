@@ -6,12 +6,14 @@ const { post } = require('../api/userRoutes');
 //home route returns the homepage
 router.get('/', async function (req, res) {
 	try {
+		let sorting = ['upvotes', 'ASC']
 		const dbPostsData = await Posts.findAll({
 			limit: 10,
 			include: [
 				{ model: Users },
 				{ model: Responses }
-			]
+			],
+			order: [sorting]
 		});
 
 		if (req.session.loggedIn) {
@@ -31,6 +33,47 @@ router.get('/', async function (req, res) {
 		});
 
 		res.status(200).render('homepage', {
+			session: { loggedIn: req.session.loggedIn, username: req.session.username },
+			posts,
+		});
+	} catch (err) {
+		console.log(err);
+		res.status(500).json(err);
+	}
+})
+
+//home route returns the homepage
+router.post('/', async function (req, res) {
+	try {
+		console.log('post hit', req.body.sort)
+		let sorting = ['createdAt', 'DESC']
+
+		const dbPostsData = await Posts.findAll({
+			limit: 10,
+			include: [
+				{ model: Users },
+				{ model: Responses }
+			],
+			order: [sorting]
+		});
+
+		if (req.session.loggedIn) {
+			console.log(req.session.username, "requested the homepage at", moment().format("h:mm a on MMMM Do, YYYY"))
+		} else {
+			console.log("Anonymous requested the homepage at", moment().format("h:mm a on MMMM Do, YYYY"))
+		}
+
+		let posts = dbPostsData.map((post) =>
+			post.get({ plain: true })
+		);
+
+		posts.forEach(post => {
+			post.responses_length = post.Responses.length;
+			post.date_occuring = moment(post.date_occuring).format('h:mm a on MMMM Do, YYYY');
+			post.createdAt = moment(post.createdAt).fromNow();
+		});
+
+		res.status(200).render('homepage', { //todo bug related to page not re-rendering
 			session: { loggedIn: req.session.loggedIn, username: req.session.username },
 			posts,
 		});

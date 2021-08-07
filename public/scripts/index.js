@@ -145,20 +145,16 @@ function createAccountButtonClicked() {
 }
 
 function logoutButtonClicked() {
-    $.post('/api/user/logout', function(){
-        console.log('sent')
-    })
+    $.post('/api/user/logout')
         .done(function() {
             location.href='/';
         })
         .fail(function(data) {
             console.log(data.responseJSON.message);
-            //todo add error prompt on form in html
         })
 }
 
 function createPostSubmit() {
-    //todo fill out create post and do post request to server
     let title = $('input[name="post-title"]').val();
     let description = $('textarea[name="post-description"]').val();
     let location = $('textarea[name="post-location"]').val();
@@ -185,30 +181,46 @@ function createPostSubmit() {
 }
 
 function sortButtonClicked(event) {
-    //TODO fetch sorted homepage by user selected category
-
-    // sets active id for any clicked button and clears all other buttons of that id
-    for (let index = 0; index < $('.sortBtn').length; index++) {
-        $('.sortBtn')[index].id = '';
+    for (let index = 0; index < $('.sortBtn').length; index++) { //loop over all buttons with this class
+        $('.sortBtn')[index].id = ''; //clear all the ids
     }
-    $(this).attr('id', 'active');
+    $(this).attr('id', 'active'); //set the clicked on button with the active id for styling
+
+    $.post('/',{ //TODO this sends over the right thing problem on serverside
+        sort: `${$(this).text().toLowerCase()}` //sends over the text from the button clicked to be sorted by
+    })
+    .done(function() {
+        // location.href='/'
+        console.log("created")
+    })
+    .fail(function(data) {
+        console.log(data.responseJSON.message)
+    })
 }
 
 function upvoteButtonClicked(event) {
     event.stopPropagation();
-
-    //TODO upvote post based on id
+    let numberEl = $(this).parent().parent().children().first();
     // console.log(event.target)
     // $.post('/api/post/upvote/1').then(vote => console.log(vote))
         //? if upvote has upvote-activated class already then take it off
     if ($(this)[0].classList.contains('upvote-activated')) {
         $(this).removeClass('upvote-activated');
-        $(this).parent().parent().children().first().text(Number($(this).parent().parent().children().first().text()) - 1);
+        numberEl.text(Number($(this).parent().parent().children().first().text()) - 1);
     } else {
         //? else put it on
         $(this).addClass('upvote-activated');
-        $(this).parent().parent().children().first().text(Number($(this).parent().parent().children().first().text()) + 1);
+        numberEl.text(Number($(this).parent().parent().children().first().text()) + 1);
     }
+
+    $.post(`/api/posts/upvote/${numberEl.text()}`,)
+    .done(function(data) {
+        console.log(data)
+        console.log("created")
+    })
+    .fail(function(data) {
+        console.log(data.responseJSON.message)
+    })
     // console.log($(this).parent().parent().children().first().text())
 }
 

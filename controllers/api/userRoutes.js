@@ -29,6 +29,7 @@ router.post('/login', async function (req, res) {
 			req.session.loggedIn = true;
 			req.session.username = user.username.toUpperCase().trim();
 			req.session.user_id = user.id;
+			req.session.image_url = user.image_url;
 			res.status(200).json({ message: 'You are now logged in!' });
 		});
 
@@ -83,6 +84,7 @@ router.post('/register', async function (req, res) {
 			req.session.loggedIn = true;
 			req.session.username = user.username.toUpperCase().trim();
 			req.session.user_id = user.id;
+			req.session.image_url = user.image_url;
 			res.status(200).json({ message: 'account created' });
 		});
 

@@ -44,11 +44,18 @@ router.post('/create', async function(req, res) {
 
 //TODO possibly reverse this so its more formatted to match like website.com/posts/:id/upvote***
 // /api/posts/upvote/1
-router.put('/upvote/:id', function(req, res) {
+router.post('/upvote/:id', function(req, res) {
+    console.log('recieved upvote')
     try {
-        const userUpvote = Posts.getcreate({
-            ...req.body,
-            post_upvotes: req.session.post_upvotes,
+        const userUpvote = Posts.update({
+            post_upvotes: req.session.post_upvotes
+        },{
+            where: { id: req.params.id },
+            returning: true,
+            plain: true
+        })
+        .then(function (result) {
+            console.log(result);
         });
 
         res.status(200).json(userUpvote);
