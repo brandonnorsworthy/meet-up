@@ -13,11 +13,16 @@
             <span class="material-icons">toggle_off</span> <!-- toggle_on -->
         </button>
         <a href="https://github.com/brandonnorsworthy/meet-up" target="_blank">GITHUB</a>
-        <a href="/login">LOGIN</a>
-        {{#if loggedIn}}
-        <a>{{user.username}}</a>
+        {{#if session.loggedIn}}
+        <a>{{session.username}}</a>
         {{else}}
         <a href="/signup">SIGN UP</a>
+        {{/if}}
+
+        {{#if session.loggedIn}}
+        <button name="logout">LOGOUT</button>
+        {{else}}
+        <a href="/login">LOGIN</a>
         {{/if}}
     </div>
 </div>

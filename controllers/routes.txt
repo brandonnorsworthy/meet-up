@@ -9,18 +9,12 @@ router.use('/user/', homeRoutes);
 router.use('/login/', homeRoutes);
 router.use('/user/:id', homeRoutes);
 
-post /api/user/login 
+post /api/user/login
 post /api/user/register
-post /api/user/logout
-
+past /api/user/logout
 post /api/responses
 delete /api/responses/id
-
 post /api/posts
 put /api/posts/upvote/id
 put /api/edited/id
 delete /api/id
-
-
-
-

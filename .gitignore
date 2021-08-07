@@ -105,5 +105,3 @@ dist
 
 # People protections
 .DS_Store
-
-package-lock.json
