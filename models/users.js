@@ -37,7 +37,6 @@ Users.init(
     },
     image_url: {
       type: DataTypes.STRING,
-        
     },
   },
   {

@@ -2,8 +2,8 @@
     {{> navbar}}
 </header>
 <main>
-    <div class="card row post">
-        <!-- title and upvotes -->
+    <div class="card row post" id="{{post.id}}">
+        {{!-- title and upvotes --}}
         <div class="row">
             <div class="col-10">
                 <h1 class="row">
@@ -23,7 +23,7 @@
                 </div>
             </div>
         </div>
-        <!-- location and time -->
+        {{!-- location and time --}}
         <div class="row">
             <div class="col-auto">
                 <span class="unselectable material-icons">location_on</span>
@@ -34,13 +34,13 @@
                 <p>{{post.date_occuring}}</p>
             </div>
         </div>
-        <!-- description -->
+        {{!-- description --}}
         <div class="row">
             <p>
                 {{post.description}}
             </p>
         </div>
-        <!-- edited tag -->
+        {{!-- edited tag --}}
         <div class="row">
             {{#if post.edited}}
             <p class="row justify-content-end">(edited)</p>
@@ -48,25 +48,25 @@
             <p class="row justify-content-end"></p>
             {{/if}}
         </div>
-        <!-- date, editbtn, deletebtn, author -->
+        {{!-- date, editbtn, deletebtn, author --}}
         <div class="row">
-            <!-- date, edit, delete -->
+            {{!-- date, edit, delete --}}
             <div class="col-6 d-flex justify-content-start align-content-center">
                 <p>Posted: {{post.createdAt}}</p>
-                {{#if session.loggedIn}}
+                {{#if post.isOwner}}
                 <button name="edit">edit</button>
                 <button name="delete">delete</button>
                 {{/if}}
             </div>
-            <!-- author and pfp -->
+            {{!-- author and pfp --}}
             <div class="col-6 d-flex justify-content-end align-content-center">
                 <p>{{post.User.username}}</p>
                 <img src="{{post.User.image_url}}" alt="">
             </div>
         </div>
-        <!-- response numbers and sort by -->
+        {{!-- response numbers and sort by --}}
         <div class="row">
-            <!-- responses -->
+            {{!-- responses --}}
             <div class="col-6 d-flex justify-content-start align-content-center">
                 <span class="unselectable material-icons">3p</span>
                 <p class="align-self-center">{{post.responses_length}} Responses</p>
@@ -76,15 +76,15 @@
                 <button>Recent</button>
             </div>
         </div>
-        <!-- response textbox -->
+        {{!-- response textbox --}}
         <div class="row">
             {{#if session.loggedIn}}
-            <input type="text" name="response" id="response" placeholder="Enter text to respond">
+            <input type="text" name="response" id="response" placeholder="Enter text to respond . . .">
             {{else}}
-            <input type="text" name="response" id="response" disabled placeholder="Login or Sign Up to respond">
+            <button class="txt-a-l" type="text" name="response" id="response">Login or Sign Up to respond</button>
             {{/if}}
         </div>
-        <!-- single response -->
+        {{!-- single response --}}
         {{#each post.Responses as |Response|}}
         {{> response}}
         {{/each}}

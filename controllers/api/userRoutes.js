@@ -22,13 +22,13 @@ router.post('/login', async function (req, res) {
 			return;
 		}
 
-		// console.log('login⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠', dbUserData.get({ plain: true }));
 		let user = dbUserData.get({ plain: true })
 
 		req.session.save(() => {
 			req.session.loggedIn = true;
 			req.session.username = user.username.toUpperCase().trim();
 			req.session.user_id = user.id;
+			req.session.image_url = user.image_url;
 			res.status(200).json({ message: 'You are now logged in!' });
 		});
 
@@ -45,7 +45,10 @@ router.post('/register', async function (req, res) {
 
 		//if a user with that email is found then send back that email already exsists
 		if (dbEmailData) {
-			res.status(400).json({ message: 'email exists' });
+			res.status(400).json({
+				problem: 'email',
+				message: 'Account with this email already exsists'
+			});
 			return;
 		}
 
@@ -54,25 +57,32 @@ router.post('/register', async function (req, res) {
 
 		//if that username is found in the database then return that username is taken
 		if (dbUsernameData) {
-			res.status(400).json({ message: 'username exists' });
+			res.status(400).json({
+				problem: 'username',
+				message: 'Account with this username already exsists'
+			});
 			return;
 		}
 
 		//TODO take in a url or image some how
+		if (!req.body.image_url) {
+			req.body.image_url = '/assets/pfp/default.png' //default image to default image incase they dont send a pic
+		}
 		//creates a new user in database that can be logged in from
 		const dbUserData = await Users.create({
 			username: req.body.username.trim(),
 			email: req.body.email.toLowerCase().trim(),
 			password: req.body.password.trim(),
+			image_url: req.body.image_url
 		});
 
-		// console.log('register⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠', dbUserData.get({ plain: true }));
 		let user = dbUserData.get({ plain: true })
 
 		req.session.save(() => {
 			req.session.loggedIn = true;
 			req.session.username = user.username.toUpperCase().trim();
 			req.session.user_id = user.id;
+			req.session.image_url = user.image_url;
 			res.status(200).json({ message: 'account created' });
 		});
 
