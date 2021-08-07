@@ -1,6 +1,3 @@
-// TODO upvote button event click specifically send a post
-// TODO sort button event click
-
 function init() {
     if (window.localStorage.getItem("darkmode") == "true") { //if darkmode is set to true in storage flip switch to on
         if ($('.darkModeToggle').length != 0) { //check if page has a darkmode slider
@@ -213,7 +210,7 @@ function upvoteButtonClicked(event) {
         numberEl.text(Number($(this).parent().parent().children().first().text()) + 1);
     }
 
-    $.post(`/api/posts/upvote/${numberEl.text()}`,)
+    $.post(`/api/posts/upvote/${numberEl.text()}`) //TODO request is sending correctly problem is in database and serverside
     .done(function(data) {
         console.log(data)
         console.log("created")
@@ -225,13 +222,11 @@ function upvoteButtonClicked(event) {
 }
 
 function threadCardClicked(event) {
-    //TODO redirect user to thread page on click using the id attatched to the card /post/:id
     location.href = `/post/${$(this).attr('id')}`;
 }
 
 function keyPressedInResponse(event) {
     if (event.keyCode === 13) {
-        //TODO take in message, you will record the date, message, and link to a user_id that created it
         $.post('/api/response/',  {
             post_id: $('.post').attr('id'),
             response: $('input[name="response"]').val(),
