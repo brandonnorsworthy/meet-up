@@ -29,6 +29,11 @@ function init() {
     $('button[name="response"]').click(function() {
         location.href='/login';
     });
+
+    $('input[name="post-title"]').on('input', function() {
+        let title = $('input[name="post-title"]').val();
+        console.log(80 - title.length)
+    })
 }
 
 function darkModeButtonClicked(event) {
@@ -178,9 +183,11 @@ function createPostSubmit() {
 
     console.log(title, description, location, date, time);
 
-    // return;
+    if (title.length > 80) {
+        //todo come back and add a prompt to tell the user max 80 characters
+        return;
+    }
 
-    // return;
     $.post('/api/post/create',{
         title: title,
         description: description,
