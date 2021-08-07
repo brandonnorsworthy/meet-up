@@ -93,3 +93,7 @@ main {
 .user-prompt span {
     font-size: 64px;
 }
+
+#avatar {
+    padding: 9px 15px;
+}

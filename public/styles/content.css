@@ -129,15 +129,40 @@ header {
     justify-content: flex-end;
 }
 
+.card #createPost,
 .card #sort {
     font-size: 24px;
     color: var(--text-shade);
     display: flex;
 }
 
+#createPost > * {
+    padding: 5px 35px;
+}
+
+#createPost > div > img {
+    width: 60px;
+    border-radius: 50%;
+}
+
+#createPost button {
+    border: none;
+    color: var(--text-shade);
+    background-color: var(--button-hover-on-white);
+    width: fit-content;
+    border-radius: 30px;
+    padding: 18px;
+    margin: 0px 2px;
+}
+
+#createPost button:hover {
+    color: var(--background-color);
+    background-color: var(--main-color);
+}
+
 #sort > * {
     display: flex;
-    padding: 5px 35px 5px 35px;
+    padding: 5px 35px;
 }
 
 #sort > * > * {
@@ -153,7 +178,7 @@ header {
     background-color: var(--card-background-color);
     border-radius: 10px;
     padding: 18px;
-    margin: 0px 2px 0px 2px;
+    margin: 0px 2px;
 }
 
 #sort button:hover {

@@ -17,7 +17,6 @@ router.post('/', function(req, res) {
 //TODO possibly reverse this so its more formatted to match like website.com/posts/:id/upvote***
 // /api/posts/upvote/1
 router.put('/upvote/:id', function(req, res) {
-    console.log('WE HI THTE upvote route!!')
     try {
         const userUpvote = Posts.getcreate({
             ...req.body,
@@ -28,7 +27,6 @@ router.put('/upvote/:id', function(req, res) {
     } catch (err) {
         res.status(400).json(err);
     }
-
 })
 
 //TODO possibly reverse this so its more formatted to match like website.com/posts/:id/upvote***

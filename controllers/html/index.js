@@ -57,6 +57,11 @@ router.get('/post/:id', async function (req, res) {
 			]
 		});
 
+		if (!dbPostData) {
+			res.status(400).redirect('/');
+			// .json({ message:"post does not exsist" });
+		}
+
 		let post = dbPostData.get({ plain: true })
 
 		if (req.session.loggedIn) {
@@ -93,7 +98,7 @@ router.get('/login', function (req, res) {
 
 router.get('/signup', function (req, res) {
 	if (req.session.loggedIn) {
-		res.direct('/');
+		res.redirect('/');
 		return;
 	}
 
@@ -102,7 +107,7 @@ router.get('/signup', function (req, res) {
 
 router.get('/user/:id', function (req, res) {
 	//! for now just redirect to homepage
-	res.direct('/');
+	res.redirect('/');
 	return;
 
 	Users.findAll({})
