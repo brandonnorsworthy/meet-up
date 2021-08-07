@@ -27,7 +27,7 @@ function init() {
     $('button[name="create-account"]').click(createAccountButtonClicked);
 
     //create post btn 1st card
-    $('#create-event-submit').click();
+    $('#create-event-submit').click(createPostSubmit);
 
     //sort buttons 2nd card
     $('.sortBtn').click(sortButtonClicked);
@@ -59,7 +59,7 @@ function loginButtonClicked() {
 
     console.log(emailValue, passwordValue)
 
-    $.post('/api/users/login',{
+    $.post('/api/user/login',{
         email: emailValue,
         password: passwordValue,
     }, function(){
@@ -87,7 +87,7 @@ function createAccountButtonClicked() {
         return;
     }
 
-    $.post('/api/users/register',{
+    $.post('/api/user/register',{
         email: email,
         username: username,
         password: password,
@@ -103,7 +103,7 @@ function createAccountButtonClicked() {
 }
 
 function logoutButtonClicked() {
-    $.post('/api/users/logout', function(){
+    $.post('/api/user/logout', function(){
         console.log('sent')
     })
         .done(function() {
@@ -117,6 +117,29 @@ function logoutButtonClicked() {
 
 function createPostSubmit() {
     //todo fill out create post and do post request to server
+    let title = $('input[name="post-title"]').val();
+    let description = $('textarea[name="post-description"]').val();
+    let location = $('textarea[name="post-location"]').val();
+    let date = $('input[name="post-date"]').val();
+
+    console.log(title, description, location, date)
+
+    // return;
+    $.post('/api/post/create',{
+        title: title,
+        description: description,
+        location: location,
+        date: date
+    }, function(){
+        console.log('sent')
+    })
+        .done(function() {
+            location.href='/'
+            console.log("created")
+        })
+        .fail(function(data) {
+            console.log(data.responseJSON.message)
+        })
 }
 
 function sortButtonClicked(event) {
@@ -132,8 +155,9 @@ function sortButtonClicked(event) {
 function upvoteButtonClicked(event) {
     event.stopPropagation();
 
-    console.log(event.target)
-    $.post('/api/posts/upvote/1').then(vote => console.log(vote))
+    //TODO upvote post based on id
+    // console.log(event.target)
+    // $.post('/api/post/upvote/1').then(vote => console.log(vote))
         //? if upvote has upvote-activated class already then take it off
     if ($(this)[0].classList.contains('upvote-activated')) {
         $(this).removeClass('upvote-activated');
