@@ -22,7 +22,6 @@ router.post('/login', async function (req, res) {
 			return;
 		}
 
-		// console.log('login⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠', dbUserData.get({ plain: true }));
 		let user = dbUserData.get({ plain: true })
 
 		req.session.save(() => {
@@ -77,7 +76,6 @@ router.post('/register', async function (req, res) {
 			image_url: req.body.image_url
 		});
 
-		// console.log('register⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠', dbUserData.get({ plain: true }));
 		let user = dbUserData.get({ plain: true })
 
 		req.session.save(() => {

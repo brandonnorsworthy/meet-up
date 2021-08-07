@@ -17,12 +17,7 @@ router.post('/', function(req, res) {
 
 router.post('/create', async function(req, res) {
     try {
-        let date = moment().format()
-        console.log(date)
-        // moment(date).add(24, 'h');
-        // console.log(date)
-		console.log('post-attempted-created⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠');
-		console.log(req.body)
+        let date = moment().add(Math.floor(Math.random() * 168) + 24, 'h').format()
 
 		const dbPostData = await Posts.create({
             title: req.body.title,
@@ -34,7 +29,6 @@ router.post('/create', async function(req, res) {
             created_at: moment().format()
 		});
 
-		console.log('post-created⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠', dbPostData.get({ plain: true }));
 	} catch (err) {
 		console.log(err);
 		res.status(500).json(err);
@@ -42,7 +36,6 @@ router.post('/create', async function(req, res) {
 })
 
 router.post('/upvote/:id', function(req, res) {
-    console.log('recieved upvote')
     try {
         const userUpvote = Posts.update({
             post_upvotes: req.session.post_upvotes
