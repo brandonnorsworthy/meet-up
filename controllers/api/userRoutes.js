@@ -78,32 +78,20 @@ router.post('/register', async function (req, res) {
 			return;
 		}
 
-		if (!req.body.image_url) { //! REMOVE AFTER CLOUDINARY WERKS
-			req.body.image_url = '/assets/pfp/default.png' //default image to default image incase they dont send a pic
-		}
-
 		//creates a new user in database that can be logged in from
 		const dbUserData = await Users.create({
 			username: req.body.username.trim(),
 			email: req.body.email.toLowerCase().trim(),
 			password: req.body.password.trim(),
-			image_url: req.body.image_url
+			image_url: '/assets/pfp/default.png' //default image sets to default while we wait to get the url from cloudinary
 		},{
 			plain: true
 		});
 
-
-
-
 		//TODO take in a url or image some how -------------------------------------------------------################################
-
-
 
 		cloudinary.uploader.upload(`./private/temp/${dbUserData.id}.png`,
 		function(error, result) {console.log(result, error); });
-
-
-
 
 		req.session.save(() => {
 			req.session.loggedIn = true;
