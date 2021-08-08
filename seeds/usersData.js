@@ -5,7 +5,7 @@ const userData = [
     username: 'jenniferwylan1983',
     email: 'jwylan@gmail.com',
     password: 'ewfchijwnsj',
-    image_url: '/assets/fake-pfp/fakeperson1.png',
+    image_url: 'https://res.cloudinary.com/meet-up/image/upload/v1628415046/xhlsl4wxyslcebyjjmtc.bmp',
   },
   {
     username: 'BeauHarding',
