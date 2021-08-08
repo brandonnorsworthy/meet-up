@@ -492,6 +492,10 @@ header {
     background-color: var(--card-background-color) ;
 }
 
+.modal-content span {
+    color: var(--main-color);
+}
+
 .modal-content button {
     color: var(--card-background-color);
     background-color: var(--confirm-color) ;
