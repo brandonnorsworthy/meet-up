@@ -37,7 +37,7 @@ header {
 }
 
 .nav-img {
-    width: 20vw;
+    /* width: 20vw; */
     height: 100%;
     padding-left: 2vw;
 }
@@ -68,7 +68,7 @@ header {
 }
 
 .nav-buttons {
-    width: max-content;
+    /* width: max-content; */
     height: 100%;
     display: flex;
     align-items: center;
@@ -485,4 +485,54 @@ header {
 
 .response div:last-child p {
     padding-left: 85px;
+}
+
+.modal-content {
+    color: var(--text-dark);
+    background-color: var(--card-background-color) ;
+}
+
+.modal-content span {
+    color: var(--main-color);
+}
+
+.modal-content button {
+    color: var(--card-background-color);
+    background-color: var(--confirm-color) ;
+}
+
+.modal-header,
+.modal-footer {
+    border-color: var(--text-dark);
+}
+
+.modal-content textarea,
+.modal-content input {
+    color: var(--text-dark);
+    border: none;
+    background-color: var(--button-hover-on-white) ;
+}
+
+.modal-content textarea:focus,
+.modal-content input:focus {
+    color: var(--text-dark);
+    background-color: var(--button-hover-on-white)!important;
+}
+
+.modal-header button {
+    color: var(--card-background-color);
+    background-color: var(--main-color);
+}
+
+.modal-footer button {
+    width: 100%;
+}
+
+.modal-footer button:hover {
+    background-color: var(--confirm-color);
+}
+
+.date-time input {
+    padding: .375rem .75rem;
+    border-radius: .25rem;
 }

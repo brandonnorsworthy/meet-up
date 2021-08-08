@@ -14,8 +14,7 @@
                     a event</button>
             </div>
         </div>
-        <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="create-post-modal-title"
-            aria-hidden="true">
+        <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="create-post-modal-title" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered ">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -25,25 +24,25 @@
                     <div class="modal-body">
                         <form>
                             <div class="mb-3">
-                                <label for="recipient-name" class="col-form-label">Title</label>
-                                <input type="text" class="form-control" name="post-title">
+                                <label for="post-title" class="col-form-label">Title</label>
+                                <input type="text" class="form-control" name="post-title" maxlength="80">
                             </div>
                             <div class="mb-3">
-                                <label for="message-text" class="col-form-label">Message</label>
+                                <label for="post-description" class="col-form-label">Description</label>
                                 <textarea class="form-control" name="post-description"></textarea>
                             </div>
                             <div class="mb-3">
-                                <label for="message-text" class="col-form-label">Location</label>
-                                <textarea class="form-control" name="post-location"></textarea>
+                                <label for="post-location" class="col-form-label">Location</label>
+                                <input type="text" class="form-control" name="post-location">
                             </div>
                             <div class="mb-3">
-                                <div class="row">
+                                <div class="row date-time">
                                     <div class="col-6">
-                                        <label for="startdate" class="col-form-label">Date</label>
+                                        <label for="post-date" class="col-form-label">Date</label>
                                         <input type="date" name="post-date">
                                     </div>
                                     <div class="col-6">
-                                        <label for="startdate" class="col-form-label">Time (12:00 AM)</label>
+                                        <label for="post-time" class="col-form-label">Time</label>
                                         <input type="time" name="post-time">
                                     </div>
                                 </div>

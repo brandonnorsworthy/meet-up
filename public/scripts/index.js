@@ -7,6 +7,8 @@ function init() {
         darkModeHandler(); //load darkmode settings if its enabled
     }
 
+    $('.modal-footer button').first().prop('disabled','true');
+
     //darkmode switch
     $('.darkModeToggle').click(darkModeButtonClicked);
     $('button[name="login"]').click(loginButtonClicked);
@@ -29,6 +31,39 @@ function init() {
     $('button[name="response"]').click(function() {
         location.href='/login';
     });
+
+    $('input[name="post-title"]').on('input', function() {
+        //todo move this function out of the init
+        const title = $('input[name="post-title"]').val(); //todo stop letting type in after max reached
+        const maxTitleCharacter = 80;
+
+        if (title.length >= maxTitleCharacter || title.length === 0) {
+            console.log('hit')
+            $('.modal-footer button').first().prop('disabled','true');
+        } else {
+            console.log('oof')
+            $('.modal-footer button').first().removeAttr('disabled');
+        }
+
+        const labelEl = $('input[name="post-title"]').parent().children().first();
+        const characterCountLeft = maxTitleCharacter - title.length;
+
+        if (characterCountLeft < (maxTitleCharacter / 2)) {
+            const characterCountString = ` ${characterCountLeft} Characters left`;
+            if (labelEl.children().length === 0) { //if no span has already been added then add one
+                labelEl.html(labelEl.text() + `<span>${characterCountString}</span>`);
+            } else { //if there is a span then remove it and add one back because it might say something different
+                labelEl.children().first().text(characterCountString); //todo make the other span prompts just edit the text instead of removing it
+            }
+            if (characterCountLeft === 0) {
+                labelEl.children().first().text(characterCountString + ' 😲');
+            }
+        } else {
+            if (labelEl.children().length !== 0) {
+                labelEl.children().first().remove();
+            }
+        }
+    })
 }
 
 function darkModeButtonClicked(event) {
@@ -73,7 +108,7 @@ function createAccountButtonClicked() {
         password: $('input[name="password"]').val(),
         confirmPassword: $('input[name="confirmPassword"]').val()
     }
-    const requriedText = ' <span>This field is required</span>';
+    const requriedText = '<span> This field is required</span>';
 
     //! error handling for empty fields
     let foundEmptyField = false;
@@ -136,11 +171,11 @@ function promptPasswordErrors(body) {
     let errorCode = '';
 
     if (body.password !== body.confirmPassword) {
-        errorCode = ' <span>Passwords do not match</span>';
+        errorCode = '<span> Passwords do not match</span>';
         error = true; //passwords did not match so we just stop here and let them fix it
     }
     if (body.password.length < 6) {
-        errorCode = ' <span>Passwords must be atleast 6 characters</span>';
+        errorCode = '<span> Passwords must be atleast 6 characters</span>';
         error = true;
     }
     if (error) {
@@ -178,9 +213,11 @@ function createPostSubmit() {
 
     console.log(title, description, location, date, time);
 
-    // return;
+    if (title.length > 80) {
+        //todo come back and add a prompt to tell the user max 80 characters
+        return;
+    }
 
-    // return;
     $.post('/api/post/create',{
         title: title,
         description: description,
