@@ -1,11 +1,11 @@
 // html elements
 // TODO upvote button event click
 // TODO login button (ROUTE) event click
-    // TODO login button (SUBMIT/ON LOGIN PAGE) event click
-    //? function should have email and password from user input
+// TODO login button (SUBMIT/ON LOGIN PAGE) event click
+//? function should have email and password from user input
 // TODO signup button event click
-    // TODO signup button (SUBMIT/ON signup PAGE) event click
-    //? function should have profile picture, email, username and password from user input
+// TODO signup button (SUBMIT/ON signup PAGE) event click
+//? function should have profile picture, email, username and password from user input
 // TODO clicking a form button event click
 // TODO clicking to enter a response button event click
 // TODO sort button event click
@@ -14,7 +14,7 @@
 
 function init() {
     if (window.localStorage.getItem("darkmode") == "true") { //if darkmode is set to true in storage flip switch to on
-        if($('.darkModeToggle').length != 0) { //check if page has a darkmode slider
+        if ($('.darkModeToggle').length != 0) { //check if page has a darkmode slider
             $('.darkModeToggle')[0].id = 'on'
             $('.darkModeToggle')[0].children[0].textContent = 'toggle_on'
         }
@@ -24,10 +24,12 @@ function init() {
     $('.sortBtn').click(sortButtonClicked);
     $('.upvote').click(upvoteButtonClicked);
     $('.thread').click(threadCardClicked);
+    $('button[name="login"]').click(loginButtonClicked);
+
 }
 
 function darkModeButtonClicked(event) {
-    if ($(this).attr('id') === 'off'){
+    if ($(this).attr('id') === 'off') {
         //if off turn on
         $(this).attr('id', 'on');
         $(this).children().text('toggle_on');
@@ -48,14 +50,15 @@ function sortButtonClicked(event) {
     for (let index = 0; index < $('.sortBtn').length; index++) {
         $('.sortBtn')[index].id = '';
     }
-    $(this).attr('id','active');
+    $(this).attr('id', 'active');
 }
 
 function upvoteButtonClicked(event) {
-    //TODO stop propogation upwards
     event.stopPropagation();
 
-    //? if upvote has upvote-activated class already then take it off
+    console.log(event.target)
+    $.post('/api/posts/upvote/1').then(vote => console.log(vote))
+        //? if upvote has upvote-activated class already then take it off
     if ($(this)[0].classList.contains('upvote-activated')) {
         $(this).removeClass('upvote-activated');
         $(this).parent().parent().children().first().text(Number($(this).parent().parent().children().first().text()) - 1);
@@ -92,6 +95,12 @@ function darkModeHandler() {
         document.documentElement.style.setProperty('--text-dark', '#424242');
         document.documentElement.style.setProperty('--button-hover-on-white', '#E1E1E1');
     }
+}
+
+function loginButtonClicked() {
+    let email = $('input[name="email"]').val();
+    let password = $('input[name="password"]').val();
+    console.log(email, password)
 }
 
 init()

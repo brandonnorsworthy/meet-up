@@ -8,6 +8,7 @@
     --button-hover-on-white: #E1E1E1;
 }
 
+
 * {
     font-family: 'Poppins', sans-serif;
 }
@@ -452,3 +453,7 @@ header {
 .response div:last-child p {
     padding-left: 85px;
 }
+
+#map {
+    height: 100vh;
+  }

@@ -33,6 +33,7 @@ router.get('/', async function (req, res) {
 	}
 })
 
+
 //specific post route returns page to view page by id
 router.get('/post/:id', async function (req, res) {
 	try {
@@ -99,5 +100,9 @@ router.get('/user/:id', function (req, res) {
 			res.status(500).json(err);
 		})
 });
+
+router.get('/map/:placename', (req,res) => {
+res.render('map')
+})
 
 module.exports = router;
