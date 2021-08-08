@@ -1,0 +1,56 @@
+<h1> Maps coming soon</h1>
+
+<div id="map"></div>
+
+<script>
+
+    console.log('PLACE TO SEARCH!', window.location.pathname.split("/").pop());
+    
+
+
+    let map;
+    let service;
+    let infowindow;
+
+    function initMap() {
+        const sydney = new google.maps.LatLng(30.266666, -97.733330);
+        infowindow = new google.maps.InfoWindow();
+        map = new google.maps.Map(document.getElementById("map"), {
+            center: sydney,
+            zoom: 15,
+        });
+        const request = {
+            query: window.location.pathname.split("/").pop(),
+            fields: ["name", "geometry"],
+        };
+        service = new google.maps.places.PlacesService(map);
+        service.findPlaceFromQuery(request, (results, status) => {
+            if (status === google.maps.places.PlacesServiceStatus.OK && results) {
+                console.log('RESULTS!!!!', results)
+                for (let i = 0; i < results.length; i++) {
+                    createMarker(results[i]);
+                }
+                map.setCenter(results[0].geometry.location);
+
+            }
+        });
+    }
+
+    function createMarker(place) {
+        if (!place.geometry || !place.geometry.location) return;
+        const marker = new google.maps.Marker({
+            map,
+            position: place.geometry.location,
+        });
+        google.maps.event.addListener(marker, "click", () => {
+            infowindow.setContent(place.name || "");
+            infowindow.open(map);
+        });
+    }
+</script>
+
+<!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfwIIu6BK0iG86Dr1tJ80fSuJ2GUsdvGw&callback=initMap&libraries=places&v=weekly"
+    async></script>
+
