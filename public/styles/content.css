@@ -38,7 +38,7 @@ header {
 }
 
 .nav-img {
-    width: 20vw;
+    /* width: 20vw; */
     height: 100%;
     padding-left: 2vw;
 }
@@ -48,7 +48,7 @@ header {
 }
 
 .nav-search {
-    width: 55vw;
+    width: 50vw;
     height: 100%;
     display: flex;
     align-items: center;
@@ -69,8 +69,7 @@ header {
 }
 
 .nav-buttons {
-    background-color: var(--card-background-color)!important;
-    width: fit-content;
+    /* width: max-content; */
     height: 100%;
     display: flex;
     align-items: center;
@@ -88,7 +87,7 @@ header {
 .nav-buttons button,
 .nav-buttons a {
     background-color: var(--card-background-color);
-    color: var(--main-color);
+    color: var(--main-color) !important;
     margin-right: 35px;
     font-weight: 700;
     text-decoration: none;
@@ -131,15 +130,42 @@ header {
     justify-content: flex-end;
 }
 
+.card #createPost,
 .card #sort {
     font-size: 24px;
     color: var(--text-shade);
     display: flex;
 }
 
+#createPost > * {
+    padding: 5px 35px;
+}
+
+#createPost > div > img {
+    width: 60px; /* width of container */
+    height: 60px; /* height of container */
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+#createPost button {
+    border: none;
+    color: var(--text-shade);
+    background-color: var(--button-hover-on-white);
+    width: fit-content;
+    border-radius: 30px;
+    padding: 18px;
+    margin: 0px 2px;
+}
+
+#createPost button:hover {
+    color: var(--background-color);
+    background-color: var(--main-color);
+}
+
 #sort > * {
     display: flex;
-    padding: 5px 35px 5px 35px;
+    padding: 5px 35px;
 }
 
 #sort > * > * {
@@ -155,7 +181,7 @@ header {
     background-color: var(--card-background-color);
     border-radius: 10px;
     padding: 18px;
-    margin: 0px 2px 0px 2px;
+    margin: 0px 2px;
 }
 
 #sort button:hover {
@@ -195,7 +221,9 @@ header {
 /* pfp on thread */
 /*? left column */
 .thread img {
-    width: 148px;
+    width: 150px; /* width of container */
+    height: 150px; /* height of container */
+    object-fit: cover;
     border-radius: 50%;
 }
 
@@ -283,7 +311,7 @@ header {
 }
 
 /* !post styling */
-.post { /* TODO refactor */
+.post {
     flex-direction: row;
     color: var(--text-dark);
     padding: 20px;
@@ -368,10 +396,17 @@ header {
     align-self: center;
 }
 
+.response > div div img,
 .post > div:nth-child(5) img {
-    width: 60px;
+    width: 60px; /* width of container */
+    height: 60px; /* height of container */
+    object-fit: cover;
     margin: 10px 15px 10px 15px;
     border-radius: 50%;
+}
+
+.response > div div img {
+    margin: 0px;
 }
 
 /* ?response numbers and sort by */
@@ -400,6 +435,7 @@ header {
     padding-bottom: 30px;
 }
 
+#response,
 .post > div:nth-child(7) > input {
     border: none;
     color: var(--text-shade);
@@ -412,6 +448,10 @@ header {
     cursor: pointer;
 }
 
+#response {
+    padding: 15px 15px
+}
+
 /* image 65 margin 25 */
 /* !responses */
 .response {
@@ -421,21 +461,15 @@ header {
 
 .response:last-of-type {
     padding-bottom: 0px;
-    margin-bottom: 0px;
     border-bottom: none;
 }
 
 .response div:first-child {
-    margin-bottom: 5px;
+    padding-bottom: 5px;
 }
 
 .response div:first-child div:last-child p {
     color: var(--text-shade);
-}
-
-.response img {
-    border-radius: 50%;
-    width: 60px;
 }
 
 .response h2 {
@@ -454,6 +488,52 @@ header {
     padding-left: 85px;
 }
 
-#map {
-    height: 100vh;
-  }
+.modal-content {
+    color: var(--text-dark);
+    background-color: var(--card-background-color) ;
+}
+
+.modal-content span {
+    color: var(--main-color);
+}
+
+.modal-content button {
+    color: var(--card-background-color);
+    background-color: var(--confirm-color) ;
+}
+
+.modal-header,
+.modal-footer {
+    border-color: var(--text-dark);
+}
+
+.modal-content textarea,
+.modal-content input {
+    color: var(--text-dark);
+    border: none;
+    background-color: var(--button-hover-on-white) ;
+}
+
+.modal-content textarea:focus,
+.modal-content input:focus {
+    color: var(--text-dark);
+    background-color: var(--button-hover-on-white)!important;
+}
+
+.modal-header button {
+    color: var(--card-background-color);
+    background-color: var(--main-color);
+}
+
+.modal-footer button {
+    width: 100%;
+}
+
+.modal-footer button:hover {
+    background-color: var(--confirm-color);
+}
+
+.date-time input {
+    padding: .375rem .75rem;
+    border-radius: .25rem;
+}

@@ -1,8 +1,63 @@
-
 <header>
     {{> navbar}}
 </header>
 <main class="container">
+    {{!-- add a new event --}}
+    {{#if session.loggedIn}}
+    <div class="card row">
+        <div id="createPost">
+            <div class="col-1">
+                <img src="{{session.image_url}}" alt="">
+            </div>
+            <div class="col-11">
+                <button class="txt-a-l" data-bs-toggle="modal" data-bs-target="#createModal" style="width: 100%;">Create
+                    a event</button>
+            </div>
+        </div>
+        <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="create-post-modal-title" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered ">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="create-post-modal-title">Create a new event</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="post-title" class="col-form-label">Title</label>
+                                <input type="text" class="form-control" name="post-title" maxlength="80">
+                            </div>
+                            <div class="mb-3">
+                                <label for="post-description" class="col-form-label">Description</label>
+                                <textarea class="form-control" name="post-description"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="post-location" class="col-form-label">Location</label>
+                                <input type="text" class="form-control" name="post-location">
+                            </div>
+                            <div class="mb-3">
+                                <div class="row date-time">
+                                    <div class="col-6">
+                                        <label for="post-date" class="col-form-label">Date</label>
+                                        <input type="date" name="post-date">
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="post-time" class="col-form-label">Time</label>
+                                        <input type="time" name="post-time">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="create-event-submit">Create Event</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/if}}
+    {{!-- sort card --}}
     <div class="card row">
         <div id="sort">
             <div class="justify-left">
@@ -11,8 +66,9 @@
             <div class="justify-right">
                 <button class="sortBtn" id="active">Top</button>
                 <button class="sortBtn">New</button>
-                <button class="sortBtn">Upcoming</button>
-                <button class="sortBtn">Nearby</button>
+                {{!-- <button class="sortBtn">Soon</button> --}}
+                {{!-- <button class="sortBtn">Past</button> --}}
+                {{!-- <button class="sortBtn">Nearby</button> --}}
             </div>
         </div>
     </div>
@@ -22,14 +78,14 @@
     {{#each posts as |post|}}
     <div class="card row thread" id="{{post.id}}">
         <div class="flex-column col-2">
-            <!-- pfp -->
+            {{!-- pfp --}}
             <img class="col-9" src="{{post.User.image_url}}" alt="">
             <div class="col-3">
                 <p>{{post.User.username}}</p>
             </div>
         </div>
         <div class="col-7">
-            <!-- main contnet -->
+            {{!-- main contnet --}}
             <h1 class="row">
                 {{post.title}}
             </h1>
@@ -47,7 +103,7 @@
             </div>
         </div>
         <div class="col-3">
-            <!-- right side stuff -->
+            {{!-- right side stuff --}}
             <div class="row justify-content-end">
                 {{#if post.upvoted}}
                 <p class="col-10 upvote-activated">{{post.upvotes}}</p>
@@ -69,5 +125,3 @@
     </div>
     {{/each}}
 </main>
-
-
