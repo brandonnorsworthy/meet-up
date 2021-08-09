@@ -11,7 +11,7 @@ Meet Up is a full stack web application that can be used to create posts anywher
 ### Demo 💻
 
 🖥 **Desktop Webpage Demo**  
-![demo gif of webpage - desktop version](assets/images/PetSeekerGIFDesktop.gif)
+![demo gif of webpage - desktop version](private/assets/demo_desktop.gif)
 
 ### Functionality ⚙
 
