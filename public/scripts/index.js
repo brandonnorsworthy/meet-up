@@ -7,7 +7,8 @@ function init() {
         darkModeHandler(); //load darkmode settings if its enabled
     }
 
-    $('.modal-footer button').first().prop('disabled','true');
+
+    $('.modal-footer button').first().prop('disabled', 'true');
 
     //darkmode switch
     $('.darkModeToggle').click(darkModeButtonClicked);
@@ -28,20 +29,25 @@ function init() {
 
     //enter is pressed in the response input
     $('input[name="response"]').keypress(keyPressedInResponse);
-    $('button[name="response"]').click(function() {
-        location.href='/login';
+    $('button[name="response"]').click(function () {
+        location.href = '/login';
     });
 
-    $('input[name="post-title"]').on('input', function() {
+    $('#signUpForm').keypress(
+        function(event){
+          if (event.which == '13') {
+            event.preventDefault();
+          }
+      });
+
+    $('input[name="post-title"]').on('input', function () {
         //todo move this function out of the init
         const title = $('input[name="post-title"]').val(); //todo stop letting type in after max reached
         const maxTitleCharacter = 80;
 
         if (title.length >= maxTitleCharacter || title.length === 0) {
-            console.log('hit')
-            $('.modal-footer button').first().prop('disabled','true');
+            $('.modal-footer button').first().prop('disabled', 'true');
         } else {
-            console.log('oof')
             $('.modal-footer button').first().removeAttr('disabled');
         }
 
@@ -87,21 +93,22 @@ function loginButtonClicked() {
 
     console.log(emailValue, passwordValue)
 
-    $.post('/api/user/login',{
+    $.post('/api/user/login', {
         email: emailValue,
         password: passwordValue,
-    }, function(){
+    }, function () {
         console.log('sent')
     })
-        .done(function() {
-            location.href='/'
+        .done(function () {
+            location.href = '/'
         })
-        .fail(function(data) {
+        .fail(function (data) {
             console.log(data.responseJSON.message)
         })
 }
 
 function createAccountButtonClicked() {
+    console.log('trying to create account')
     const body = {
         email: $('input[name="email"]').val(),
         username: $('input[name="username"]').val(),
@@ -135,29 +142,31 @@ function createAccountButtonClicked() {
         return;
     }
 
-    $.post('/api/user/register',{
+    $.post('/api/user/register', {
         email: body.email,
         username: body.username,
         password: body.password,
-    }, function(){
-        console.log('sent')
+    }, function () {
+        console.log('sent');
     })
-        .done(function() {
-            location.href='/'
+        .done(function () {
+            console.log('received');
+            $('form').submit();
+            setTimeout(function(){ location.href="/" }, 2500);
         })
-        .fail(function(data) {
+        .fail(function (data) {
             if (data.responseJSON.problem) { //should send over a specified part it didnt like
-                const spanString = ` <span>${data.responseJSON.message}</span>`
+                const spanString = ` <span>${data.responseJSON.message}</span>`;
                 let pEl = $(`p[for="${data.responseJSON.problem}"]`);
 
                 if (pEl.first().children().length === 0) { //if no span has already been added then add one
-                    pEl.html(pEl.text() + spanString)
+                    pEl.html(pEl.text() + spanString);
                 } else { //if there is a span then remove it and add one back because it might say something different
-                    pEl.first().children().first().remove()
-                    pEl.html(pEl.text() + spanString)
+                    pEl.first().children().first().remove();
+                    pEl.html(pEl.text() + spanString);
                 }
             } else {
-                console.log(data.responseJSON.message)
+                console.log(data.responseJSON.message);
             }
         })
 }
@@ -182,7 +191,7 @@ function promptPasswordErrors(body) {
 
         for (const key in passwords) { //loop over both password and passwordConfirm
             //if the p tag does not have a span try to add one
-            if (passwords[key].first().children().length === 0){
+            if (passwords[key].first().children().length === 0) {
                 passwords[key].html(passwords[key].text() + errorCode)
             } else { //if there was a span remove it then add one
                 passwords[key].first().children().first().remove()
@@ -196,10 +205,10 @@ function promptPasswordErrors(body) {
 
 function logoutButtonClicked() {
     $.post('/api/user/logout')
-        .done(function() {
-            location.href='/';
+        .done(function () {
+            location.href = '/';
         })
-        .fail(function(data) {
+        .fail(function (data) {
             console.log(data.responseJSON.message);
         })
 }
@@ -207,30 +216,34 @@ function logoutButtonClicked() {
 function createPostSubmit() {
     let title = $('input[name="post-title"]').val();
     let description = $('textarea[name="post-description"]').val();
-    let location = $('textarea[name="post-location"]').val();
+    let location = $('input[name="post-location"]').val();
     let date = $('input[name="post-date"]').val();
     let time = $('input[name="post-time"]').val();
 
-    console.log(title, description, location, date, time);
+    // console.log('created post stuff');
+    // console.log(title, ' ### ', description, ' ### ', location, ' ### ', date, ' ### ', time);
 
     if (title.length > 80) {
         //todo come back and add a prompt to tell the user max 80 characters
         return;
     }
 
-    $.post('/api/post/create',{
+    $.post('/api/post/create', {
         title: title,
         description: description,
         location: location,
         date: `${date} ${time}`
-    }, function(){
+    }, function () {
         console.log('sent')
     })
-        .done(function() {
-            location.href='/'
+        .done(function () {
             console.log("created")
+            // var myModal = new bootstrap.Modal(document.getElementById('createPostModal'));
+            // myModal.hide();
+            document.getElementById("close-create-post-button").click();
+            location.href = '/';
         })
-        .fail(function(data) {
+        .fail(function (data) {
             console.log(data.responseJSON.message)
         })
 }
@@ -243,16 +256,16 @@ function sortButtonClicked(event) {
 
     console.log(`${$(this).text().toLowerCase()}`)
 
-    $.post('/',{ //TODO this sends over the right thing problem on serverside
+    $.post('/', { //TODO this sends over the right thing problem on serverside
         sort: `${$(this).text().toLowerCase()}` //sends over the text from the button clicked to be sorted by
     })
-    .done(function() {
-        // location.href='/'
-        console.log("created")
-    })
-    .fail(function(data) {
-        console.log(data.responseJSON.message)
-    })
+        .done(function () {
+            // location.href='/'
+            console.log("created")
+        })
+        .fail(function (data) {
+            console.log(data.responseJSON.message)
+        })
 }
 
 function upvoteButtonClicked(event) {
@@ -260,7 +273,7 @@ function upvoteButtonClicked(event) {
     let numberEl = $(this).parent().parent().children().first();
     // console.log(event.target)
     // $.post('/api/post/upvote/1').then(vote => console.log(vote))
-        //? if upvote has upvote-activated class already then take it off
+    //? if upvote has upvote-activated class already then take it off
     if ($(this)[0].classList.contains('upvote-activated')) {
         $(this).removeClass('upvote-activated');
         numberEl.text(Number($(this).parent().parent().children().first().text()) - 1);
@@ -271,13 +284,13 @@ function upvoteButtonClicked(event) {
     }
 
     $.post(`/api/posts/upvote/${numberEl.text()}`) //TODO request is sending correctly problem is in database and serverside
-    .done(function(data) {
-        console.log(data)
-        console.log("created")
-    })
-    .fail(function(data) {
-        console.log(data.responseJSON.message)
-    })
+        .done(function (data) {
+            console.log(data)
+            console.log("created")
+        })
+        .fail(function (data) {
+            console.log(data.responseJSON.message)
+        })
     // console.log($(this).parent().parent().children().first().text())
 }
 
@@ -287,18 +300,16 @@ function threadCardClicked(event) {
 
 function keyPressedInResponse(event) {
     if (event.keyCode === 13) {
-        $.post('/api/response/',  {
+        $.post('/api/response/', {
             post_id: $('.post').attr('id'),
             response: $('input[name="response"]').val(),
-        }, function(){
-            console.log('sent')
         })
-            .done(function() {
-                location.href='/'
-                console.log("created")
+            .done(function () {
+                console.log('done')
+                location.reload();
             })
-            .fail(function(data) {
-                console.log(data.responseJSON.message)
+            .fail(function (data) {
+                console.log(data.responseJSON.message);
             })
     }
 }

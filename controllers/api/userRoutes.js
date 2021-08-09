@@ -1,11 +1,35 @@
 const router = require('express').Router();
-
+const chalk = require('chalk');
+const fs = require('fs');
+const path = require('path')
+const moment = require('moment')
+const cloudinary = require('cloudinary');
+cloudinary.config({
+	cloud_name: process.env.CLOUD_NAME,
+	api_key: process.env.CLOUDINARY_API_KEY,
+	api_secret: process.env.CLOUDINARY_API_SECRET,
+	secure: true
+});
+const multer = require('multer');
+var storage = multer.diskStorage({
+	destination: function (req, file, cb) {
+		cb(null, 'private/temp/')
+	},
+	filename: function (req, file, cb) {
+		let image_url = req.session.user_id + path.extname(file.originalname);
+		req.session.image_url = 'private/temp/' + image_url;
+		console.log(chalk.black.bgGreen('SUCCESS: '), 'uploaded to server user image: ', image_url, ' ### ', req.session.image_url)
+		cb(null, image_url);
+		uploadImage(req)
+	}
+})
+const upload = multer({ storage: storage })
 const { Users } = require('../../models');
 
 router.post('/login', async function (req, res) {
 	try {
 		//find a user with the given email
-		const dbUserData = await Users.findOne({ where: { email: req.body.email }});
+		const dbUserData = await Users.findOne({ where: { email: req.body.email } });
 
 		//if there is no user with that email send back a bad request
 		if (!dbUserData) {
@@ -31,7 +55,6 @@ router.post('/login', async function (req, res) {
 			req.session.image_url = user.image_url;
 			res.status(200).json({ message: 'You are now logged in!' });
 		});
-
 	} catch (err) {
 		console.log(err);
 		res.status(500).json(err);
@@ -64,32 +87,33 @@ router.post('/register', async function (req, res) {
 			return;
 		}
 
-		//TODO take in a url or image some how
-		if (!req.body.image_url) {
-			req.body.image_url = '/assets/pfp/default.png' //default image to default image incase they dont send a pic
-		}
 		//creates a new user in database that can be logged in from
 		const dbUserData = await Users.create({
 			username: req.body.username.trim(),
 			email: req.body.email.toLowerCase().trim(),
 			password: req.body.password.trim(),
-			image_url: req.body.image_url
+			image_url: '/assets/pfp/default.png' //default image sets to default while we wait to get the url from cloudinary
+		}, {
+			plain: true
 		});
 
-		let user = dbUserData.get({ plain: true })
+		console.log(chalk.black.bgGreen("SUCCESS: "), chalk.black.magenta(dbUserData.username), "account created", chalk.black.magenta(dbUserData.id), "is the user id")
 
 		req.session.save(() => {
 			req.session.loggedIn = true;
-			req.session.username = user.username.toUpperCase().trim();
-			req.session.user_id = user.id;
-			req.session.image_url = user.image_url;
-			res.status(200).json({ message: 'account created' });
+			req.session.username = dbUserData.username.toUpperCase().trim();
+			req.session.user_id = dbUserData.id;
+			req.session.image_url = dbUserData.image_url;
+			res.status(200).json({ message: 'ok' });
 		});
-
 	} catch (err) {
 		console.log(err);
 		res.status(500).json(err);
 	}
+});
+
+router.post('/image', upload.single("avatar"), function (req, res) {
+	console.log(chalk.black.bgGreen('SUCCESS: ') + `created file ${req.session.image_url}`)
 });
 
 router.post('/logout', function (req, res) {
@@ -102,5 +126,43 @@ router.post('/logout', function (req, res) {
 		res.status(404).end();
 	}
 });
+
+function uploadImage(req) {
+	try {
+		cloudinary.uploader.upload(__dirname + `/../../` + `${req.session.image_url}`,
+			function (result, error) {
+				if (error) {
+					console.log(chalk.black.bgRed(`ERROR: Failed to upload image "${req.session.image_url}" to cloudinary, error: ${result}`))
+				} else {
+					fs.unlink(req.session.image_url, (err) => {
+						if (err) {
+							console.log(chalk.black.bgRed(err))
+						}
+					})
+					req.session.image_url = result.url;
+					req.session.save(() => {
+						req.session.image_url = result.url;
+					});
+
+					console.log(chalk.black.bgGreen(`SUCCESS: url = `), result.url)
+					Users.update({
+						image_url: result.url
+					}, {
+						where: {
+							id: req.session.user_id
+						}
+					}).then(response => {
+						console.log(chalk.black.bgGreen(`SUCCESS: response`), response)
+					}).catch(err => {
+						console.log(chalk.black.bgRed(`ERROR: err: ${err}`))
+					})
+				}
+			}
+		);
+
+	} catch (err) {
+		console.log(chalk.black.bgRed("ERROR"), 'file upload failed')
+	}
+}
 
 module.exports = router;

@@ -10,16 +10,17 @@
                 <img src="{{session.image_url}}" alt="">
             </div>
             <div class="col-11">
-                <button class="txt-a-l" data-bs-toggle="modal" data-bs-target="#createModal" style="width: 100%;">Create
-                    a event</button>
+                <button class="txt-a-l" data-bs-toggle="modal" data-bs-target="#createPostModal" style="width: 100%;">
+                    Create a event
+                </button>
             </div>
         </div>
-        <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="create-post-modal-title" aria-hidden="true">
+        <div class="modal fade" id="createPostModal" tabindex="-1" aria-labelledby="create-post-modal-title" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered ">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="create-post-modal-title">Create a new event</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" id="close-create-post-button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form>
@@ -33,7 +34,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="post-location" class="col-form-label">Location</label>
-                                <input type="text" class="form-control" name="post-location">
+                                <input type="text" class="form-control" name="post-location" maxLength="55">
                             </div>
                             <div class="mb-3">
                                 <div class="row date-time">
@@ -72,8 +73,6 @@
             </div>
         </div>
     </div>
-
-    <a href="/map/saltysow">First Meetup at Salty Sow</a>
     <!-- thread 1 -->
     {{#each posts as |post|}}
     <div class="card row thread" id="{{post.id}}">
