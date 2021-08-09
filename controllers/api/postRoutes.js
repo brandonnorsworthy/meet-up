@@ -29,6 +29,7 @@ router.post('/create', async function(req, res) {
             created_at: moment().format()
 		});
 
+        res.status(200).redirect(`/post/${dbPostData.id}`);
 	} catch (err) {
 		console.log(err);
 		res.status(500).json(err);

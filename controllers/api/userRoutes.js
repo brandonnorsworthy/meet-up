@@ -74,19 +74,19 @@ router.post('/register', async function (req, res) {
 			email: req.body.email.toLowerCase().trim(),
 			password: req.body.password.trim(),
 			image_url: req.body.image_url
-		});
-
-		let user = dbUserData.get({ plain: true })
+		},{
+			plain: true
+		}
+		);
 
 		req.session.save(() => {
 			req.session.loggedIn = true;
-			req.session.username = user.username.toUpperCase().trim();
-			req.session.user_id = user.id;
-			req.session.image_url = user.image_url;
+			req.session.username = dbUserData.username.toUpperCase().trim();
+			req.session.user_id = dbUserData.id;
+			req.session.image_url = dbUserData.image_url;
 			res.status(200).json({ message: 'account created' });
 		});
-
-	} catch (err) {
+  } catch (err) {
 		console.log(err);
 		res.status(500).json(err);
 	}

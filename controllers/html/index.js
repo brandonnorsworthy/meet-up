@@ -13,7 +13,8 @@ router.get('/', async function (req, res) {
 				{ model: Users },
 				{ model: Responses }
 			],
-			order: [sorting]
+			order: [sorting],
+			plain: true
 		});
 
 		if (req.session.loggedIn) {
@@ -22,11 +23,7 @@ router.get('/', async function (req, res) {
 			console.log("Anonymous requested the homepage at", moment().format("h:mm a on MMMM Do, YYYY"))
 		}
 
-		let posts = dbPostsData.map((post) =>
-			post.get({ plain: true })
-		);
-
-		posts.forEach(post => {
+		dbPostsData.forEach(post => {
 			post.responses_length = post.Responses.length;
 			post.date_occuring = moment(post.date_occuring).format('h:mm a on MMMM Do, YYYY');
 			post.createdAt = moment(post.createdAt).fromNow();
@@ -34,7 +31,7 @@ router.get('/', async function (req, res) {
 
 		res.status(200).render('homepage', {
 			session: { loggedIn: req.session.loggedIn, username: req.session.username },
-			posts,
+			dbPostsData,
 		});
 	} catch (err) {
 		console.log(err);
@@ -54,7 +51,8 @@ router.post('/', async function (req, res) {
 				{ model: Users },
 				{ model: Responses }
 			],
-			order: [sorting]
+			order: [sorting],
+			plain: true
 		});
 
 		if (req.session.loggedIn) {
@@ -63,11 +61,7 @@ router.post('/', async function (req, res) {
 			console.log("Anonymous requested the homepage at", moment().format("h:mm a on MMMM Do, YYYY"))
 		}
 
-		let posts = dbPostsData.map((post) =>
-			post.get({ plain: true })
-		);
-
-		posts.forEach(post => {
+		dbPostsData.forEach(post => {
 			post.responses_length = post.Responses.length;
 			post.date_occuring = moment(post.date_occuring).format('h:mm a on MMMM Do, YYYY');
 			post.createdAt = moment(post.createdAt).fromNow();
@@ -75,7 +69,7 @@ router.post('/', async function (req, res) {
 
 		res.status(200).render('homepage', { //todo bug related to page not re-rendering
 			session: { loggedIn: req.session.loggedIn, username: req.session.username },
-			posts,
+			posts: dbPostsData,
 		});
 	} catch (err) {
 		console.log(err);
@@ -98,7 +92,8 @@ router.get('/post/:id', async function (req, res) {
 						model: Users,
 					}
 				}
-			]
+			],
+			plain: true
 		});
 
 		if (!dbPostData) {
@@ -107,24 +102,21 @@ router.get('/post/:id', async function (req, res) {
 			res.status(400).redirect('/');
 			// .json({ message:"post does not exsist" });
 		}
-
-		let post = dbPostData.get({ plain: true })
-
 		if (req.session.loggedIn) {
-			console.log(req.session.username, "requested the post", post.title, "at", moment().format("h:mm a on MMMM Do, YYYY"))
+			console.log(req.session.username, "requested the post", dbPostsData.title, "at", moment().format("h:mm a on MMMM Do, YYYY"))
 			//if current user is the same as the author of the post then show them the author buttons edit and delete
-			if (post.user_id === req.session.user_id) {
-				post.isOwner = true;
+			if (dbPostsData.user_id === req.session.user_id) {
+				dbPostsData.isOwner = true;
 			}
 		} else {
-			console.log("Anonymous requested the post", post.title, "at", moment().format("h:mm a on MMMM Do, YYYY"))
+			console.log("Anonymous requested the post", dbPostsData.title, "at", moment().format("h:mm a on MMMM Do, YYYY"))
 		}
 
 
-		post.responses_length = post.Responses.length;
-		post.date_occuring = moment(post.date_occuring).format('h:mm a on MMMM Do, YYYY');
-		post.createdAt = moment(post.createdAt).fromNow();
-		post.Responses.forEach(response => {
+		dbPostsData.responses_length = dbPostsData.Responses.length;
+		dbPostsData.date_occuring = moment(dbPostsData.date_occuring).format('h:mm a on MMMM Do, YYYY');
+		dbPostsData.createdAt = moment(dbPostsData.createdAt).fromNow();
+		dbPostsData.Responses.forEach(response => {
 			if (req.session.user_id === response.user_id) {
 				response.isOwner = true;
 			}
@@ -133,7 +125,7 @@ router.get('/post/:id', async function (req, res) {
 
 		res.status(200).render('post', {
 			session: req.session,
-			post,
+			post: dbPostsData,
 		});
 	} catch (err) {
 		console.log(err);

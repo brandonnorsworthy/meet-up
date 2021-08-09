@@ -9,16 +9,16 @@ router.post('/', async function(req, res){
             user_id: req.session.user_id,
             response: req.body.response,
             created_at: moment().format()
-        });
-
-		let responses = dbResponseData.get({ plain: true })
-
+        },{
+            plain: true 
+        }
+        );
         console.log('redirecting', req.session.username)
-
-        res.status(200).redirect(`/post/1`);
+        res.status(200).redirect(`/post/${dbResponseData.post_id}`);
     } catch (err) {
         res.status(400).json(err);
     }
+
 })
 
 router.delete('/:id',async function(req,res){
