@@ -111,6 +111,6 @@ main {
 }
 
 #hidden-row {
-    /* visibility: hidden;
-    height: 0px; */
+    visibility: hidden;
+    height: 0px;
 }

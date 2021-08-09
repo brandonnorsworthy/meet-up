@@ -1,7 +1,7 @@
 <main>
     <div class="card small user-prompt" id="signup-card">
         <div class="col-12">
-            <form method="post" action="/api/user/image" enctype="multipart/form-data">
+            <form id="signUpForm" method="post" action="/api/user/image" enctype="multipart/form-data">
                 <div class="row jc-c">
                     <a class="txt-a-c" href="/">
                         <img src="/assets/logos/logo-purple-clipped.png" alt="meet up logo with purple color">
@@ -49,7 +49,7 @@
                     </p>
                 </div>
                 <div class="row" id="hidden-row">
-                    <button class="col-1" type="submit" name="create-account-submit" style="">shush</button>
+                    <button class="col-1" id="shush" type="submit" name="create-account-submit"></button>
                 </div>
             </form>
             <div class="row jc-c">

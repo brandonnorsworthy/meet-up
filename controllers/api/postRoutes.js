@@ -33,8 +33,7 @@ router.post('/create', async function(req, res) {
             plain: true
         });
 
-        console.log(dbPostData)
-
+        res.status(200).json({ message: "Post created" })
 	} catch (err) {
 		console.log(err);
 		res.status(500).json(err);

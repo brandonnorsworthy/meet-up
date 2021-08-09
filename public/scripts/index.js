@@ -7,6 +7,7 @@ function init() {
         darkModeHandler(); //load darkmode settings if its enabled
     }
 
+
     $('.modal-footer button').first().prop('disabled', 'true');
 
     //darkmode switch
@@ -32,15 +33,12 @@ function init() {
         location.href = '/login';
     });
 
-    // $('#test').click(async function() {
-    //     await uploadFile
-    //     .then((res) => {
-    //         console.log(res)
-    //     })
-    //     .catch((err) => {
-    //         console.log(err)
-    //     })
-    // })
+    $('#signUpForm').keypress(
+        function(event){
+          if (event.which == '13') {
+            event.preventDefault();
+          }
+      });
 
     $('input[name="post-title"]').on('input', function () {
         //todo move this function out of the init
@@ -154,37 +152,7 @@ function createAccountButtonClicked() {
         .done(function () {
             console.log('received');
             $('form').submit();
-            // location.href = '/';
-
-            // console.log(document.getElementById('avatar').files[0])
-            // let formData = new FormData();
-            // formData.append("avatar", document.getElementById('avatar').files[0]);
-
-            // console.log('jgriojergoij form:')
-            // console.log(formData)
-
-            // let imageData = document.getElementById('avatar').files[0]
-
-            // $.post('/api/user/image', {
-            //     file: formData
-            // })
-            // .then(data => {
-            //     console.log('data sent')
-            //     console.log(data)
-            // })
-            // .catch(err => {
-            //     console.log('error')
-            //     console.log(err)
-            // })
-
-            // fetch('/api/user/image', {
-            //     method: "post",
-            //     body: imageData
-            // })
-            // .then(data => {
-            //     console.log(data); // JSON data parsed by `data.json()` call
-            //     // 
-            //   });
+            setTimeout(function(){ location.href="/" }, 2500);
         })
         .fail(function (data) {
             if (data.responseJSON.problem) { //should send over a specified part it didnt like
@@ -235,30 +203,6 @@ function promptPasswordErrors(body) {
     return error;
 }
 
-// let uploadFile = new Promise(function(resolve, reject) {
-//     console.log('gergerger',$('#avatar')[0].files)
-//     console.log('gjioerjoig')
-//     const formData = new FormData();
-//     formData.append("fileToUpload",  $('#avatar')[0].files);
-
-//     $.post({
-//         url: "/api/user/image",
-//         type: "post",
-//         data: formData,
-//         processData: false,
-//         contentType: false,
-//         success: function (response) {
-//             // .. do something
-//             console.log('successfully uploaded')
-//             resolve("worked")
-//         },
-//         error: function (jqXHR, textStatus, errorMessage) {
-//             console.log('uploadeFile error: ',errorMessage); // Optional
-//             reject("failed")
-//         }
-//     });
-// })
-
 function logoutButtonClicked() {
     $.post('/api/user/logout')
         .done(function () {
@@ -276,8 +220,8 @@ function createPostSubmit() {
     let date = $('input[name="post-date"]').val();
     let time = $('input[name="post-time"]').val();
 
-    console.log('created post stuff');
-    console.log(title, ' ### ', description, ' ### ', location, ' ### ', date, ' ### ', time);
+    // console.log('created post stuff');
+    // console.log(title, ' ### ', description, ' ### ', location, ' ### ', date, ' ### ', time);
 
     if (title.length > 80) {
         //todo come back and add a prompt to tell the user max 80 characters
@@ -293,8 +237,11 @@ function createPostSubmit() {
         console.log('sent')
     })
         .done(function () {
-            location.href = '/'
             console.log("created")
+            // var myModal = new bootstrap.Modal(document.getElementById('createPostModal'));
+            // myModal.hide();
+            document.getElementById("close-create-post-button").click();
+            location.href = '/';
         })
         .fail(function (data) {
             console.log(data.responseJSON.message)
