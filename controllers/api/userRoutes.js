@@ -144,7 +144,6 @@ function uploadImage(req) {
 						req.session.image_url = result.url;
 					});
 
-					console.log(chalk.black.bgGreen(`SUCCESS: url = `), result.url)
 					Users.update({
 						image_url: result.url
 					}, {

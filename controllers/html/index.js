@@ -6,7 +6,7 @@ const { Users, Posts, Responses } = require('../../models');
 //home route returns the homepage
 router.get('/', async function (req, res) {
 	try {
-		let sorting = ['upvotes', 'ASC']
+		let sorting = ['upvotes', 'DESC']
 		const dbPostsData = await Posts.findAll({
 			limit: 10,
 			include: [
@@ -32,7 +32,6 @@ router.get('/', async function (req, res) {
 			post.createdAt = moment(post.createdAt).fromNow();
 		});
 
-		console.log(req.session.image_url, req.session.user_id)
 		res.status(200).render('homepage', {
 			session: req.session,
 			posts,
