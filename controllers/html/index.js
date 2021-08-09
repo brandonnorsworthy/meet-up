@@ -32,6 +32,7 @@ router.get('/', async function (req, res) {
 			post.createdAt = moment(post.createdAt).fromNow();
 		});
 
+		console.log(req.session.image_url)
 		res.status(200).render('homepage', {
 			session: req.session,
 			posts,

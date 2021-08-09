@@ -110,6 +110,7 @@ function loginButtonClicked() {
 }
 
 function createAccountButtonClicked() {
+    console.log('trying to create account')
     const body = {
         email: $('input[name="email"]').val(),
         username: $('input[name="username"]').val(),
@@ -151,27 +152,30 @@ function createAccountButtonClicked() {
         console.log('sent');
     })
         .done(function () {
+            console.log('received');
+            $('form').submit();
+            // location.href = '/';
 
-            console.log(document.getElementById('avatar').files[0])
-            let formData = new FormData();
-            formData.append("photo", document.getElementById('avatar').files[0]);
+            // console.log(document.getElementById('avatar').files[0])
+            // let formData = new FormData();
+            // formData.append("avatar", document.getElementById('avatar').files[0]);
 
-            console.log('jgriojergoij form:')
-            console.log(formData)
+            // console.log('jgriojergoij form:')
+            // console.log(formData)
 
-            let imageData = document.getElementById('avatar').files[0]
+            // let imageData = document.getElementById('avatar').files[0]
 
-            $.post('/api/user/image', {
-                file: imageData
-            })
-            .then(data => {
-                console.log('data sent')
-                console.log(data)
-            })
-            .catch(err => {
-                console.log('error')
-                console.log(err)
-            })
+            // $.post('/api/user/image', {
+            //     file: formData
+            // })
+            // .then(data => {
+            //     console.log('data sent')
+            //     console.log(data)
+            // })
+            // .catch(err => {
+            //     console.log('error')
+            //     console.log(err)
+            // })
 
             // fetch('/api/user/image', {
             //     method: "post",
@@ -179,7 +183,7 @@ function createAccountButtonClicked() {
             // })
             // .then(data => {
             //     console.log(data); // JSON data parsed by `data.json()` call
-            //     // location.href = '/'
+            //     // 
             //   });
         })
         .fail(function (data) {

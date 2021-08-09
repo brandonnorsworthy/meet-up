@@ -18,7 +18,7 @@ var storage = multer.diskStorage({
 	filename: function (req, file, cb) {
 		let image_url = req.session.user_id + path.extname(file.originalname);
 		req.session.image_url = 'private/temp/' + image_url;
-		console.log(chalk.bgGreen('SUCCESS'), 'uploaded to server user image: ', image_url, ' ### ', req.session.image_url)
+		console.log(chalk.bgGreen('SUCCESS: '), 'uploaded to server user image: ', image_url, ' ### ', req.session.image_url)
 		cb(null, image_url);
 		uploadImage(req)
 	}
@@ -55,7 +55,6 @@ router.post('/login', async function (req, res) {
 			req.session.image_url = user.image_url;
 			res.status(200).json({ message: 'You are now logged in!' });
 		});
-
 	} catch (err) {
 		console.log(err);
 		res.status(500).json(err);
@@ -98,16 +97,15 @@ router.post('/register', async function (req, res) {
 			plain: true
 		});
 
-		console.log(chalk.bgGreen("SUCCESS: "), chalk.magenta(dbUserData.username), "account created")
+		console.log(chalk.bgGreen("SUCCESS: "), chalk.magenta(dbUserData.username), "account created", chalk.magenta(dbUserData.id), "is the user id")
 
 		req.session.save(() => {
 			req.session.loggedIn = true;
 			req.session.username = dbUserData.username.toUpperCase().trim();
 			req.session.user_id = dbUserData.id;
 			req.session.image_url = dbUserData.image_url;
-			res.status(200).json({ message: 'account created' });
+			res.status(200).json({ message: 'ok' });
 		});
-
 	} catch (err) {
 		console.log(err);
 		res.status(500).json(err);
@@ -130,11 +128,12 @@ router.post('/logout', function (req, res) {
 });
 
 function uploadImage(req) {
+	console.log(chalk.bgRed('right here'),req.session.image_url)
+	console.log(chalk.bgYellow("WARNING: "), "uploading and assigning photop to user: ", req.session.user_id)
 	try {
 		cloudinary.uploader.upload(__dirname + `/../../` + `${req.session.image_url}`,
 			// function (error, result) { console.log(result, error); });
 			function (result, error) {
-				console.log(chalk.bgGreen(error), chalk.bgRed(result));
 				if (error) {
 					console.log(chalk.bgRed(`ERROR: Failed to upload image "${req.session.image_url}" to cloudinary, error: ${result}`))
 				} else {

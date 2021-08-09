@@ -3,10 +3,6 @@
 </header>
 <main class="container">
     {{!-- add a new event --}}
-    <form method="post" action="/api/user/image" enctype="multipart/form-data">
-        <input type="file" name="avatar" />
-        <button type="submit">Submit</button>
-    </form>
     {{#if session.loggedIn}}
     <div class="card row">
         <div id="createPost">
@@ -78,8 +74,6 @@
             </div>
         </div>
     </div>
-
-    <a href="/map/saltysow">First Meetup at Salty Sow</a>
     <!-- thread 1 -->
     {{#each posts as |post|}}
     <div class="card row thread" id="{{post.id}}">

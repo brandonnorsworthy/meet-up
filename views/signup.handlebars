@@ -1,55 +1,59 @@
-
 <main>
     <div class="card small user-prompt" id="signup-card">
         <div class="col-12">
+            <form method="post" action="/api/user/image" enctype="multipart/form-data">
+                <div class="row jc-c">
+                    <a class="txt-a-c" href="/">
+                        <img src="/assets/logos/logo-purple-clipped.png" alt="meet up logo with purple color">
+                    </a>
+                </div>
+                <div class="row jc-c">
+                    <h1 class="txt-a-c">CREATE AN ACCOUNT</h1>
+                </div>
+                <div class="row">
+                    <p class="txt-a-l">Profile Picture</p>
+                </div>
+                <div class="row">
+                    <input type="file" autocomplete="off" id="avatar" name="avatar" accept="image/png, image/jpeg">
+                </div>
+                <div class="row">
+                    <p class="txt-a-l" for="email">Email</p>
+                </div>
+                <div class="row">
+                    <input type="text" autocomplete="off" name="email">
+                </div>
+                <div class="row">
+                    <p class="txt-a-l" for="username">Username</p>
+                </div>
+                <div class="row">
+                    <input type="text" autocomplete="off" name="username">
+                </div>
+                <div class="row">
+                    <p class="txt-a-l" for="password">Password</p>
+                </div>
+                <div class="row">
+                    <input type="password" autocomplete="off" name="password">
+                </div>
+                <div class="row">
+                    <p class="txt-a-l" for="confirmPassword">Confirm Password</p>
+                </div>
+                <div class="row">
+                    <input type="password" autocomplete="off" name="confirmPassword">
+                </div>
+                <div class="row">
+                    <p class="txt-a-l">Already have an account?</p>
+                </div>
+                <div class="row">
+                    <p class="txt-a-l">
+                        Click here to <a href="/login">Sign In</a>
+                    </p>
+                </div>
+                <div class="row" id="hidden-row">
+                    <button class="col-1" type="submit" name="create-account-submit" style="">shush</button>
+                </div>
+            </form>
             <div class="row jc-c">
-                <a class="txt-a-c" href="/">
-                    <img src="/assets/logos/logo-purple-clipped.png" alt="meet up logo with purple color">
-                </a>
-            </div>
-            <div class="row jc-c">
-                <h1 class="txt-a-c">CREATE AN ACCOUNT</h1>
-            </div>
-            <div class="row">
-                <p class="txt-a-l">Profile Picture</p>
-            </div>
-            <div class="row">
-                <input type="file" autocomplete="off" id="avatar" name="avatar" accept="image/png, image/jpeg">
-            </div>
-            <div class="row">
-                <p class="txt-a-l" for="email">Email</p>
-            </div>
-            <div class="row">
-                <input type="text" autocomplete="off" name="email">
-            </div>
-            <div class="row">
-                <p class="txt-a-l" for="username">Username</p>
-            </div>
-            <div class="row">
-                <input type="text" autocomplete="off" name="username">
-            </div>
-            <div class="row">
-                <p class="txt-a-l" for="password">Password</p>
-            </div>
-            <div class="row">
-                <input type="password" autocomplete="off" name="password">
-            </div>
-            <div class="row">
-                <p class="txt-a-l" for="confirmPassword">Confirm Password</p>
-            </div>
-            <div class="row">
-                <input type="password" autocomplete="off" name="confirmPassword">
-            </div>
-            <div class="row">
-                <p class="txt-a-l">Already have an account?</p>
-            </div>
-            <div class="row">
-                <p class="txt-a-l">
-                    Click here to <a href="/login">Sign In</a>
-                </p>
-            </div>
-            <div class="row jc-c">
-                <button type="submit" name="create-account">CREATE ACCOUNT</button>
+                <button class="col-11" type="button" name="create-account">CREATE ACCOUNT</button>
             </div>
         </div>
     </div>

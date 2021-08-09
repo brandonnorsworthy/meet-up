@@ -34,6 +34,7 @@ main {
     text-align: left;
 }
 
+.user-prompt form .row,
 .user-prompt div .row {
     margin: 0px;
 }
@@ -43,18 +44,21 @@ main {
     color: var(--text-shade);
 }
 
+.user-prompt > form ,
 .user-prompt > div {
     margin: 0px;
     width: 100%;
     padding: 25px;
 }
 
+.user-prompt > form > div,
 .user-prompt > div > div {
     width: 100%;
     display: flex;
 }
 
-.user-prompt > div > div img {
+.user-prompt > form > div img,
+.user-prompt > div div img {
     width: 200px;
 }
 
@@ -104,4 +108,9 @@ main {
 
 #avatar {
     padding: 9px 15px;
+}
+
+#hidden-row {
+    /* visibility: hidden;
+    height: 0px; */
 }
