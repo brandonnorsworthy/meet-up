@@ -11,23 +11,19 @@ cloudinary.config({
 	secure: true
 });
 const multer = require('multer');
-
 var storage = multer.diskStorage({
 	destination: function (req, file, cb) {
 		cb(null, 'private/temp/')
 	},
 	filename: function (req, file, cb) {
-		req.session.save(() => {
-			req.session.image_url = 'private/temp/' + req.session.user_id + path.extname(file.originalname)
-		});
-		cb(null, req.session.user_id + path.extname(file.originalname))
+		let image_url = req.session.user_id + path.extname(file.originalname);
+		req.session.image_url = 'private/temp/' + image_url;
+		console.log(chalk.bgGreen('SUCCESS'), 'uploaded to server user image: ', image_url, ' ### ', req.session.image_url)
+		cb(null, image_url);
+		uploadImage(req)
 	}
 })
-
 const upload = multer({ storage: storage })
-
-// const upload = multer({ dest: 'private/temp/', })
-
 const { Users } = require('../../models');
 
 router.post('/login', async function (req, res) {
@@ -119,30 +115,7 @@ router.post('/register', async function (req, res) {
 });
 
 router.post('/image', upload.single("avatar"), function (req, res) {
-	console.log(chalk.bgGreen('SUCCESS: ') + `created file ${req.session.user_id}.png`)
-	console.log(chalk.bgGreen('SUCCESS: ') + `${req.session.user_url}`)
-	try {
-		cloudinary.uploader.upload(`./private/temp/${dbUserData.id}.png`,
-			function (error, result) {
-				if (error) {
-					console.log(chalk.bgRed(`ERROR: Created user account, Failed to upload image "${dbUserData.id}.png" to cloudinary`))
-					console.log(chalk.bgRed(`ERROR: ${error}`))
-				} else {
-					Users.update({
-						image_url: result.url
-					}, {
-						where: req.session.user_id
-					}).then(response => {
-						console.log(chalk.bgRed(`ERROR: response: ${response}`))
-						// console.log(chalk.bgRed(`ERROR: Image uploaded to cloudinary, Failed to update user id: ${dbUserData.id}'s image_url=${result.url}`))
-					})
-				}
-				console.log(result, error);
-			});
-	} catch (err) {
-		console.log(chalk.bgRed("ERROR"), 'file upload failed')
-		res.status(500).send(err);
-	}
+	console.log(chalk.bgGreen('SUCCESS: ') + `created file ${req.session.image_url}`)
 });
 
 router.post('/logout', function (req, res) {
@@ -155,5 +128,34 @@ router.post('/logout', function (req, res) {
 		res.status(404).end();
 	}
 });
+
+function uploadImage(req) {
+	try {
+		cloudinary.uploader.upload(__dirname + `/../../` + `${req.session.image_url}`,
+			// function (error, result) { console.log(result, error); });
+			function (result, error) {
+				console.log(chalk.bgGreen(error), chalk.bgRed(result));
+				if (error) {
+					console.log(chalk.bgRed(`ERROR: Failed to upload image "${req.session.image_url}" to cloudinary, error: ${result}`))
+				} else {
+					console.log(chalk.bgGreen(`SUCCESS: url = `), result.url)
+					Users.update({
+						image_url: result.url
+					}, {
+						where: {
+							id: req.session.user_id
+						}
+					}).then(response => {
+						console.log(chalk.bgGreen(`SUCCESS: response`), response)
+					}).catch(err => {
+						console.log(chalk.bgRed(`ERROR: err: ${err}`))
+					})
+				}
+			}
+		);
+	} catch (err) {
+		console.log(chalk.bgRed("ERROR"), 'file upload failed')
+	}
+}
 
 module.exports = router;
