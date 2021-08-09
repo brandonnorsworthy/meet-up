@@ -1,18 +1,32 @@
 const router = require('express').Router();
+const chalk = require('chalk');
+const fs = require('fs');
+const path = require('path')
+const moment = require('moment')
 const cloudinary = require('cloudinary');
-// const Cloudinary = new cloudinary.Cloudinary({
-// 	cloud_name: process.env.CLOUD_NAME,
-// 	api_key: process.env.CLOUDINARY_API_KEY,
-// 	api_secret: process.env.CLOUDINARY_API_SECRET,
-// 	secure: true
-// });
 cloudinary.config({
 	cloud_name: process.env.CLOUD_NAME,
 	api_key: process.env.CLOUDINARY_API_KEY,
 	api_secret: process.env.CLOUDINARY_API_SECRET,
 	secure: true
+});
+const multer = require('multer');
+
+var storage = multer.diskStorage({
+	destination: function (req, file, cb) {
+		cb(null, 'private/temp/')
+	},
+	filename: function (req, file, cb) {
+		req.session.save(() => {
+			req.session.image_url = 'private/temp/' + req.session.user_id + path.extname(file.originalname)
+		});
+		cb(null, req.session.user_id + path.extname(file.originalname))
+	}
 })
 
+const upload = multer({ storage: storage })
+
+// const upload = multer({ dest: 'private/temp/', })
 
 const { Users } = require('../../models');
 
@@ -84,14 +98,11 @@ router.post('/register', async function (req, res) {
 			email: req.body.email.toLowerCase().trim(),
 			password: req.body.password.trim(),
 			image_url: '/assets/pfp/default.png' //default image sets to default while we wait to get the url from cloudinary
-		},{
+		}, {
 			plain: true
 		});
 
-		//TODO take in a url or image some how -------------------------------------------------------################################
-
-		cloudinary.uploader.upload(`./private/temp/${dbUserData.id}.png`,
-		function(error, result) {console.log(result, error); });
+		console.log(chalk.bgGreen("SUCCESS: "), chalk.magenta(dbUserData.username), "account created")
 
 		req.session.save(() => {
 			req.session.loggedIn = true;
@@ -104,6 +115,33 @@ router.post('/register', async function (req, res) {
 	} catch (err) {
 		console.log(err);
 		res.status(500).json(err);
+	}
+});
+
+router.post('/image', upload.single("avatar"), function (req, res) {
+	console.log(chalk.bgGreen('SUCCESS: ') + `created file ${req.session.user_id}.png`)
+	console.log(chalk.bgGreen('SUCCESS: ') + `${req.session.user_url}`)
+	try {
+		cloudinary.uploader.upload(`./private/temp/${dbUserData.id}.png`,
+			function (error, result) {
+				if (error) {
+					console.log(chalk.bgRed(`ERROR: Created user account, Failed to upload image "${dbUserData.id}.png" to cloudinary`))
+					console.log(chalk.bgRed(`ERROR: ${error}`))
+				} else {
+					Users.update({
+						image_url: result.url
+					}, {
+						where: req.session.user_id
+					}).then(response => {
+						console.log(chalk.bgRed(`ERROR: response: ${response}`))
+						// console.log(chalk.bgRed(`ERROR: Image uploaded to cloudinary, Failed to update user id: ${dbUserData.id}'s image_url=${result.url}`))
+					})
+				}
+				console.log(result, error);
+			});
+	} catch (err) {
+		console.log(chalk.bgRed("ERROR"), 'file upload failed')
+		res.status(500).send(err);
 	}
 });
 

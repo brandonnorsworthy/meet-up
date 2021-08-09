@@ -1,5 +1,6 @@
 const router = require('express').Router();
-const moment = require('moment')
+const moment = require('moment');
+const chalk = require('chalk');
 const { Responses } = require('../../models');
 
 router.post('/', async function(req, res){
@@ -9,15 +10,14 @@ router.post('/', async function(req, res){
             user_id: req.session.user_id,
             response: req.body.response,
             created_at: moment().format()
+        },{
+            plain: true
         });
+        console.log(chalk.magenta(req.session.username), "created a new response on the post_id:", chalk.magenta(`${dbResponseData.post_id}`))
 
-		let responses = dbResponseData.get({ plain: true })
-
-        console.log('redirecting', req.session.username)
-
-        res.status(200).redirect(`/post/1`);
+        res.status(200).json({ message: "created response" });
     } catch (err) {
-        res.status(400).json(err);
+        res.status(500).json(err);
     }
 })
 

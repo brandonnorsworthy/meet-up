@@ -7,6 +7,8 @@ router.post('/', function(req, res) {
         const postRoutes = Posts.getcreate({
             ...req.body,
             post_id: req.session.post_id,
+        },{
+            plain: true
         });
 
         res.status(200).json(postRoutes);
@@ -26,8 +28,10 @@ router.post('/create', async function(req, res) {
             upvotes: 0,
             date_occuring: moment(req.body.date).format(),
             user_id: req.session.user_id,
-            created_at: moment().format(),
-		});
+            createdAt: moment().format(),
+		},{
+            plain: true
+        });
 
         console.log(dbPostData)
 

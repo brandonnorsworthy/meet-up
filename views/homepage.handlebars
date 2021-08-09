@@ -3,6 +3,10 @@
 </header>
 <main class="container">
     {{!-- add a new event --}}
+    <form method="post" action="/api/user/image" enctype="multipart/form-data">
+        <input type="file" name="avatar" />
+        <button type="submit">Submit</button>
+    </form>
     {{#if session.loggedIn}}
     <div class="card row">
         <div id="createPost">
@@ -10,11 +14,13 @@
                 <img src="{{session.image_url}}" alt="">
             </div>
             <div class="col-11">
-                <button class="txt-a-l" data-bs-toggle="modal" data-bs-target="#createModal" style="width: 100%;">Create
-                    a event</button>
+                <button class="txt-a-l" data-bs-toggle="modal" data-bs-target="#createModal" style="width: 100%;">
+                    Create a event
+                </button>
             </div>
         </div>
-        <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="create-post-modal-title" aria-hidden="true">
+        <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="create-post-modal-title"
+            aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered ">
                 <div class="modal-content">
                     <div class="modal-header">
