@@ -1,13 +1,15 @@
 const router = require('express').Router();
 const moment = require('moment');
+const chalk = require('chalk');
 const { Posts } = require('../../models');
+const sequelize = require('../../config/connection');
 
-router.post('/', function(req, res) {
+router.post('/', function (req, res) {
     try {
         const postRoutes = Posts.getcreate({
             ...req.body,
             post_id: req.session.post_id,
-        },{
+        }, {
             plain: true
         });
 
@@ -17,11 +19,11 @@ router.post('/', function(req, res) {
     }
 })
 
-router.post('/create', async function(req, res) {
+router.post('/create', async function (req, res) {
     try {
         let date = moment().add(Math.floor(Math.random() * 168) + 24, 'h').format()
 
-		const dbPostData = await Posts.create({
+        const dbPostData = await Posts.create({
             title: req.body.title,
             description: req.body.description,
             location: req.body.location,
@@ -29,37 +31,50 @@ router.post('/create', async function(req, res) {
             date_occuring: moment(req.body.date).format(),
             user_id: req.session.user_id,
             createdAt: moment().format(),
-		},{
+        }, {
             plain: true
         });
 
         res.status(200).json({ message: "Post created" })
-	} catch (err) {
-		console.log(err);
-		res.status(500).json(err);
-	}
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
 })
 
-router.post('/upvote/:id', function(req, res) {
+router.post('/upvote/:id', async function (req, res) {
     try {
-        const userUpvote = Posts.update({
-            post_upvotes: req.session.post_upvotes
-        },{
-            where: { id: req.params.id },
-            returning: true,
-            plain: true
-        })
-        .then(function (result) {
-            console.log(result);
-        });
+        if (req.session.loggedIn) {
+            console.log(chalk.bgGreen("SUCCESS: "), chalk.magenta(req.session.username), "requested to upvote the post id", chalk.magenta(req.params.id), "at", moment().format("h:mm a on MMMM Do, YYYY"))
+        } else {
+            console.log(chalk.bgYellow("WARNING: "), chalk.magenta("Anonymous"), "tried to upvote the post id", chalk.magenta(req.params.id), "at", moment().format("h:mm a on MMMM Do, YYYY"))
+            throw ('message:User not-logged in')
+        }
 
-        res.status(200).json(userUpvote);
+        let incrementStr = ''
+        if (req.body.increment > 0) {
+            incrementStr = 'upvotes + 1'
+        } else {
+            incrementStr = 'upvotes - 1'
+        }
+
+        const dbPostData = await Posts.update({
+            upvotes: sequelize.literal(incrementStr)
+        }, {
+            where: {
+                id: Number(req.params.id)
+            }
+        }).catch(err => {
+            console.log(chalk.black.bgRed(`ERROR: err: ${err}`))
+        })
+
+        res.status(200).json({ message: `successfully upvoted post ${req.params.id}`});
     } catch (err) {
         res.status(400).json(err);
     }
 })
 
-router.put('/edited/:id', function(req, res) {
+router.put('/edited/:id', function (req, res) {
     try {
         const userEdited = Posts.getcreate({
             ...req.body,
@@ -73,7 +88,7 @@ router.put('/edited/:id', function(req, res) {
 
 })
 
-router.delete('/:id', async function(req, res) {
+router.delete('/:id', async function (req, res) {
     try {
         const userPost = await Posts.destroy({
             where: {

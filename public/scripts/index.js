@@ -34,11 +34,11 @@ function init() {
     });
 
     $('#signUpForm').keypress(
-        function(event){
-          if (event.which == '13') {
-            event.preventDefault();
-          }
-      });
+        function (event) {
+            if (event.which == '13') {
+                event.preventDefault();
+            }
+        });
 
     $('input[name="post-title"]').on('input', function () {
         //todo move this function out of the init
@@ -96,8 +96,6 @@ function loginButtonClicked() {
     $.post('/api/user/login', {
         email: emailValue,
         password: passwordValue,
-    }, function () {
-        console.log('sent')
     })
         .done(function () {
             location.href = '/'
@@ -152,7 +150,7 @@ function createAccountButtonClicked() {
         .done(function () {
             console.log('received');
             $('form').submit();
-            setTimeout(function(){ location.href="/" }, 2500);
+            setTimeout(function () { location.href = "/" }, 2500);
         })
         .fail(function (data) {
             if (data.responseJSON.problem) { //should send over a specified part it didnt like
@@ -270,28 +268,35 @@ function sortButtonClicked(event) {
 
 function upvoteButtonClicked(event) {
     event.stopPropagation();
+
+    if ($(event.target).is("a")) {
+        return;
+    }
+
     let numberEl = $(this).parent().parent().children().first();
-    // console.log(event.target)
-    // $.post('/api/post/upvote/1').then(vote => console.log(vote))
+    let incrementAmount = 0;
+
     //? if upvote has upvote-activated class already then take it off
     if ($(this)[0].classList.contains('upvote-activated')) {
         $(this).removeClass('upvote-activated');
         numberEl.text(Number($(this).parent().parent().children().first().text()) - 1);
+        incrementAmount = -1;
     } else {
         //? else put it on
         $(this).addClass('upvote-activated');
         numberEl.text(Number($(this).parent().parent().children().first().text()) + 1);
+        incrementAmount = 1;
     }
 
-    $.post(`/api/posts/upvote/${numberEl.text()}`) //TODO request is sending correctly problem is in database and serverside
+    $.post(`/api/post/upvote/${$(this).attr("id")}`, {
+        increment: incrementAmount
+    })
         .done(function (data) {
-            console.log(data)
-            console.log("created")
+            console.log("created", data.message)
         })
         .fail(function (data) {
-            console.log(data.responseJSON.message)
+            console.log("error", data.message)
         })
-    // console.log($(this).parent().parent().children().first().text())
 }
 
 function threadCardClicked(event) {
@@ -309,7 +314,7 @@ function keyPressedInResponse(event) {
                 location.reload();
             })
             .fail(function (data) {
-                console.log(data.responseJSON.message);
+                console.log(data.message);
             })
     }
 }
