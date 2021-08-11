@@ -6,7 +6,7 @@ design: https://www.figma.com/file/AK5DgzQzoqj6fFk28bgdKc/Meet-Up?node-id=0%3A1
 
 ### About ⁉
 
-Meet Up is a full stack web application that can be used to create posts anywhere in the world or just browse current events going on. You can create a small event anywhere to try and make new friends or create just a micro event!
+Meet Up is a full stack web application that can be used to create events anywhere in the world or just browse current events going on. You can create a small event anywhere to try and make new friends or create just a micro event!
 
 ### Demo 💻
 
