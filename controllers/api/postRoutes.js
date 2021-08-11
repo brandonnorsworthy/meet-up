@@ -21,7 +21,10 @@ router.post('/', function (req, res) {
 
 router.post('/create', async function (req, res) {
     try {
-        let date = moment().add(Math.floor(Math.random() * 168) + 24, 'h').format()
+        if (!req.session.loggedIn) {
+            console.log(chalk.bgYellow("WARNING: "), chalk.magenta("Anonymous"), "tried to create a new post", "at", moment().format("h:mm a on MMMM Do, YYYY"))
+            throw ('message:User not-logged in')
+        }
 
         const dbPostData = await Posts.create({
             title: req.body.title,
@@ -34,6 +37,8 @@ router.post('/create', async function (req, res) {
         }, {
             plain: true
         });
+
+        console.log(chalk.black.bgGreen("SUCCESS: "), chalk.magenta(req.session.username), "created a new post", chalk.magenta(dbPostData.title), "at", moment().format("h:mm a on MMMM Do, YYYY"))
 
         res.status(200).json({ message: "Post created" })
     } catch (err) {
@@ -74,7 +79,7 @@ router.post('/upvote/:id', async function (req, res) {
     }
 })
 
-router.put('/edited/:id', function (req, res) {
+router.put('/edit/:id', function (req, res) {
     try {
         const userEdited = Posts.getcreate({
             ...req.body,
@@ -88,8 +93,15 @@ router.put('/edited/:id', function (req, res) {
 
 })
 
-router.delete('/:id', async function (req, res) {
+router.post('/delete/:id', async function (req, res) {
     try {
+        if (req.session.loggedIn) {
+            console.log(chalk.bgGreen("SUCCESS: "), chalk.magenta(req.session.username), "requested to delete the post id", chalk.magenta(req.params.id), "at", moment().format("h:mm a on MMMM Do, YYYY"))
+        } else {
+            console.log(chalk.bgYellow("WARNING: "), chalk.magenta("Anonymous"), "tried to delete the post id", chalk.magenta(req.params.id), "at", moment().format("h:mm a on MMMM Do, YYYY"))
+            throw ('message:User not-logged in')
+        }
+
         const userPost = await Posts.destroy({
             where: {
                 id: req.params.id,
