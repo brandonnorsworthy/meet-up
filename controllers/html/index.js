@@ -3,7 +3,6 @@ const router = require('express').Router();
 const chalk = require('chalk');
 const { Users, Posts, Responses } = require('../../models');
 
-//home route returns the homepage
 router.get('/', async function (req, res) {
 	try {
 		let sorting = ['upvotes', 'DESC']
