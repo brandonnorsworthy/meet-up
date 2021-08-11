@@ -269,7 +269,14 @@ function sortButtonClicked(event) {
 }
 
 function upvoteButtonClicked(event) {
+    console.log('clicked')
     event.stopPropagation();
+
+    console.log($(event.target).is("a"))
+    if ($(event.target).is("a")) {
+        return;
+    }
+
     let numberEl = $(this).parent().parent().children().first();
     // console.log(event.target)
     // $.post('/api/post/upvote/1').then(vote => console.log(vote))

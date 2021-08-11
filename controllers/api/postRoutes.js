@@ -2,12 +2,12 @@ const router = require('express').Router();
 const moment = require('moment');
 const { Posts } = require('../../models');
 
-router.post('/', function(req, res) {
+router.post('/', function (req, res) {
     try {
         const postRoutes = Posts.getcreate({
             ...req.body,
             post_id: req.session.post_id,
-        },{
+        }, {
             plain: true
         });
 
@@ -17,11 +17,11 @@ router.post('/', function(req, res) {
     }
 })
 
-router.post('/create', async function(req, res) {
+router.post('/create', async function (req, res) {
     try {
         let date = moment().add(Math.floor(Math.random() * 168) + 24, 'h').format()
 
-		const dbPostData = await Posts.create({
+        const dbPostData = await Posts.create({
             title: req.body.title,
             description: req.body.description,
             location: req.body.location,
@@ -29,29 +29,33 @@ router.post('/create', async function(req, res) {
             date_occuring: moment(req.body.date).format(),
             user_id: req.session.user_id,
             createdAt: moment().format(),
-		},{
+        }, {
             plain: true
         });
 
         res.status(200).json({ message: "Post created" })
-	} catch (err) {
-		console.log(err);
-		res.status(500).json(err);
-	}
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
 })
 
-router.post('/upvote/:id', function(req, res) {
+router.post('/upvote/:id', function (req, res) {
     try {
         const userUpvote = Posts.update({
-            post_upvotes: req.session.post_upvotes
-        },{
-            where: { id: req.params.id },
-            returning: true,
-            plain: true
+            post_upvotes: sequelize.literal('post_upvotes + 1')
+        }, {
+            where: { id: req.params.id }
         })
-        .then(function (result) {
-            console.log(result);
-        });
+        // const userUpvote = Posts.update({
+        //     post_upvotes: req.session.post_upvotes
+        // }, {
+        //     where: { id: req.params.id },
+        //     plain: true
+        // })
+            .then(function (result) {
+                console.log(result);
+            });
 
         res.status(200).json(userUpvote);
     } catch (err) {
@@ -59,7 +63,7 @@ router.post('/upvote/:id', function(req, res) {
     }
 })
 
-router.put('/edited/:id', function(req, res) {
+router.put('/edited/:id', function (req, res) {
     try {
         const userEdited = Posts.getcreate({
             ...req.body,
@@ -73,7 +77,7 @@ router.put('/edited/:id', function(req, res) {
 
 })
 
-router.delete('/:id', async function(req, res) {
+router.delete('/:id', async function (req, res) {
     try {
         const userPost = await Posts.destroy({
             where: {
