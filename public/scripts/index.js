@@ -96,8 +96,6 @@ function loginButtonClicked() {
     $.post('/api/user/login', {
         email: emailValue,
         password: passwordValue,
-    }, function () {
-        console.log('sent')
     })
         .done(function () {
             location.href = '/'
@@ -269,7 +267,6 @@ function sortButtonClicked(event) {
 }
 
 function upvoteButtonClicked(event) {
-    console.log('clicked')
     event.stopPropagation();
 
     console.log($(event.target).is("a"))
@@ -278,27 +275,29 @@ function upvoteButtonClicked(event) {
     }
 
     let numberEl = $(this).parent().parent().children().first();
-    // console.log(event.target)
-    // $.post('/api/post/upvote/1').then(vote => console.log(vote))
+    let incrementAmount = 0;
+
     //? if upvote has upvote-activated class already then take it off
     if ($(this)[0].classList.contains('upvote-activated')) {
         $(this).removeClass('upvote-activated');
         numberEl.text(Number($(this).parent().parent().children().first().text()) - 1);
+        incrementAmount = -1;
     } else {
         //? else put it on
         $(this).addClass('upvote-activated');
         numberEl.text(Number($(this).parent().parent().children().first().text()) + 1);
+        incrementAmount = 1;
     }
 
-    $.post(`/api/posts/upvote/${numberEl.text()}`) //TODO request is sending correctly problem is in database and serverside
+    $.post(`/api/post/upvote/${$(this).parent().parent().parent().parent().attr('id')}`, {
+        increment: incrementAmount
+    })
         .done(function (data) {
-            console.log(data)
-            console.log("created")
+            console.log("created", data.responseJSON.message)
         })
         .fail(function (data) {
-            console.log(data.responseJSON.message)
+            console.log("error", data.responseJSON.message)
         })
-    // console.log($(this).parent().parent().children().first().text())
 }
 
 function threadCardClicked(event) {

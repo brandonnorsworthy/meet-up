@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const moment = require('moment');
+const chalk = require('chalk');
 const { Posts } = require('../../models');
+const sequelize = require('../../config/connection');
 
 router.post('/', function (req, res) {
     try {
@@ -40,24 +42,33 @@ router.post('/create', async function (req, res) {
     }
 })
 
-router.post('/upvote/:id', function (req, res) {
+router.post('/upvote/:id', async function (req, res) {
     try {
-        const userUpvote = Posts.update({
-            post_upvotes: sequelize.literal('post_upvotes + 1')
-        }, {
-            where: { id: req.params.id }
-        })
-        // const userUpvote = Posts.update({
-        //     post_upvotes: req.session.post_upvotes
-        // }, {
-        //     where: { id: req.params.id },
-        //     plain: true
-        // })
-            .then(function (result) {
-                console.log(result);
-            });
+        if (req.session.loggedIn) {
+            console.log(chalk.bgGreen("SUCCESS: "), chalk.magenta(req.session.username), "requested to upvote the post id", chalk.magenta(req.params.id), "at", moment().format("h:mm a on MMMM Do, YYYY"))
+        } else {
+            console.log(chalk.bgYellow("WARNING: "), chalk.magenta("Anonymous"), "tried to upvote the post id", chalk.magenta(req.params.id), "at", moment().format("h:mm a on MMMM Do, YYYY"))
+            throw ('message:User not-logged in')
+        }
 
-        res.status(200).json(userUpvote);
+        let incrementStr = ''
+        if (req.body.increment > 0) {
+            incrementStr = 'upvotes + 1'
+        } else {
+            incrementStr = 'upvotes - 1'
+        }
+
+        const dbPostData = await Posts.update({
+            upvotes: sequelize.literal(incrementStr)
+        }, {
+            where: {
+                id: Number(req.params.id)
+            }
+        }).catch(err => {
+            console.log(chalk.black.bgRed(`ERROR: err: ${err}`))
+        })
+
+        res.status(200).json(dbPostData);
     } catch (err) {
         res.status(400).json(err);
     }
