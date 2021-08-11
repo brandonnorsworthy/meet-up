@@ -27,20 +27,23 @@ function init() {
     //each thread clickable
     $('.thread').click(threadCardClicked);
 
+    //author buttons pressed inside thread
+    // $('button[name="editPost"]').click(editPostClicked);
+    $('button[name="deletePost"]').click(deletePostClicked);
+
     //enter is pressed in the response input
     $('input[name="response"]').keypress(keyPressedInResponse);
     $('button[name="response"]').click(function () {
         location.href = '/login';
     });
 
-    $('#signUpForm').keypress(
-        function (event) {
-            if (event.which == '13') {
-                event.preventDefault();
-            }
-        });
+    $('#signUpForm').keypress(function (event) {
+        if (event.which == '13') {
+            event.preventDefault();
+        }
+    });
 
-    $('input[name="post-title"]').on('input', function () {
+    $('input[name="post-title"]').on('input', function (event) {
         //todo move this function out of the init
         const title = $('input[name="post-title"]').val(); //todo stop letting type in after max reached
         const maxTitleCharacter = 80;
@@ -301,6 +304,13 @@ function upvoteButtonClicked(event) {
 
 function threadCardClicked(event) {
     location.href = `/post/${$(this).attr('id')}`;
+}
+
+function deletePostClicked(event) {
+    $.post(`/api/post/delete/${$(this).parent().parent().parent().attr("id")}`)
+    .done(function () {
+        location.href = "/"
+    })
 }
 
 function keyPressedInResponse(event) {

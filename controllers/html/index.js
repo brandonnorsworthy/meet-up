@@ -5,7 +5,7 @@ const { Users, Posts, Responses } = require('../../models');
 
 router.get('/', async function (req, res) {
 	try {
-		let sorting = ['upvotes', 'DESC']
+		let sorting = ['created_at', 'DESC']
 		const dbPostsData = await Posts.findAll({
 			limit: 10,
 			include: [
@@ -54,7 +54,7 @@ router.post('/', async function (req, res) {
 		}
 
 		const dbPostsData = await Posts.findAll({
-			limit: 10,
+			limit: 50,
 			include: [
 				{ model: Users },
 				{ model: Responses }
