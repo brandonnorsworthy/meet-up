@@ -68,7 +68,7 @@ router.post('/upvote/:id', async function (req, res) {
             console.log(chalk.black.bgRed(`ERROR: err: ${err}`))
         })
 
-        res.status(200).json(dbPostData);
+        res.status(200).json({ message: `successfully upvoted post ${req.params.id}`});
     } catch (err) {
         res.status(400).json(err);
     }

@@ -34,11 +34,11 @@ function init() {
     });
 
     $('#signUpForm').keypress(
-        function(event){
-          if (event.which == '13') {
-            event.preventDefault();
-          }
-      });
+        function (event) {
+            if (event.which == '13') {
+                event.preventDefault();
+            }
+        });
 
     $('input[name="post-title"]').on('input', function () {
         //todo move this function out of the init
@@ -150,7 +150,7 @@ function createAccountButtonClicked() {
         .done(function () {
             console.log('received');
             $('form').submit();
-            setTimeout(function(){ location.href="/" }, 2500);
+            setTimeout(function () { location.href = "/" }, 2500);
         })
         .fail(function (data) {
             if (data.responseJSON.problem) { //should send over a specified part it didnt like
@@ -269,7 +269,6 @@ function sortButtonClicked(event) {
 function upvoteButtonClicked(event) {
     event.stopPropagation();
 
-    console.log($(event.target).is("a"))
     if ($(event.target).is("a")) {
         return;
     }
@@ -289,14 +288,14 @@ function upvoteButtonClicked(event) {
         incrementAmount = 1;
     }
 
-    $.post(`/api/post/upvote/${$(this).parent().parent().parent().parent().attr('id')}`, {
+    $.post(`/api/post/upvote/${$(this).attr("id")}`, {
         increment: incrementAmount
     })
         .done(function (data) {
-            console.log("created", data.responseJSON.message)
+            console.log("created", data.message)
         })
         .fail(function (data) {
-            console.log("error", data.responseJSON.message)
+            console.log("error", data.message)
         })
 }
 
@@ -315,7 +314,7 @@ function keyPressedInResponse(event) {
                 location.reload();
             })
             .fail(function (data) {
-                console.log(data.responseJSON.message);
+                console.log(data.message);
             })
     }
 }
