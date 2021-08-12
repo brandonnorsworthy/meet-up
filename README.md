@@ -25,8 +25,6 @@ Meet Up is a full stack web application that can be used to create events anywhe
 1. [Figma.com](https://www.figma.com/file/AK5DgzQzoqj6fFk28bgdKc/Meet-Up?node-id=0%3A1) for wireframing
 2. [Bootstrap Framework](https://getbootstrap.com/) for styling
 3. [jQuery](https://jquery.com/)
-4. [PetFinder API](https://www.petfinder.com/) used to grab adoptable pets in shelters
-5. [The Dog API](https://thedogapi.com/) used to grab information to give to user about the breed avaliable
 6. [Google Fonts Icons](https://fonts.google.com/icons) used for all page icons
 
 ### Dependencies
