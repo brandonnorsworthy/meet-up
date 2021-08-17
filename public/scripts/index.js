@@ -282,12 +282,12 @@ function upvoteButtonClicked(event) {
     //? if upvote has upvote-activated class already then take it off
     if ($(this)[0].classList.contains('upvote-activated')) {
         $(this).removeClass('upvote-activated');
-        numberEl.text(Number($(this).parent().parent().children().first().text()) - 1);
+        numberEl.text(Number(numberEl.text()) - 1);
         incrementAmount = -1;
     } else {
         //? else put it on
         $(this).addClass('upvote-activated');
-        numberEl.text(Number($(this).parent().parent().children().first().text()) + 1);
+        numberEl.text(Number(numberEl.text()) + 1);
         incrementAmount = 1;
     }
 
