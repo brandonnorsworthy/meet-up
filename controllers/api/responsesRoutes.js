@@ -13,7 +13,7 @@ router.post('/', async function(req, res){
         },{
             plain: true
         });
-        console.log(chalk.magenta(req.session.username), "created a new response on the post_id:", chalk.magenta(`${dbResponseData.post_id}`))
+        console.log(chalk.bgGreen("SUCCESS: "), chalk.magenta(req.session.username), "created a new response on the post_id:", chalk.magenta(`${dbResponseData.post_id}`))
 
         res.status(200).json({ message: "created response" });
     } catch (err) {

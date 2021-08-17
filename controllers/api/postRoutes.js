@@ -42,7 +42,7 @@ router.post('/create', async function (req, res) {
 
         res.status(200).json({ message: "Post created" })
     } catch (err) {
-        console.log(err);
+        console.log(chalk.bgRed("ERROR post('/create'"), err);
         res.status(500).json(err);
     }
 })
