@@ -584,6 +584,8 @@ header {
     main {
         margin: 0px 2vw 0px 2vw;
         width: 96vw;
+        background-color: red;
+
     }
 
     .card {
@@ -592,6 +594,25 @@ header {
 
     .card > div:last-child > :first-child {
         padding-right: 15px;
+    }
+
+    .card > :first-child {
+        display: flex;
+        align-items: center;
+    }
+
+    .card > :first-child > img.col-9 {
+        width: 75px;
+        height: 75px;
+    }
+
+    .card > :first-child p {
+        font-size: 18px !important;
+    }
+
+    .thread h1,
+    .thread p {
+        font-size: 20px !important;
     }
 }
 
