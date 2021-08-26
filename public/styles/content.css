@@ -8,7 +8,6 @@
     --button-hover-on-white: #E1E1E1;
 }
 
-
 * {
     font-family: 'Poppins', sans-serif;
 }
@@ -29,6 +28,7 @@ header {
 }
 
 /*! navbar */
+
 .nav {
     /* width: 100%; */
     height: 5%;
@@ -84,8 +84,7 @@ header {
     border: 0px;
 }
 
-.nav-buttons button,
-.nav-buttons a {
+.nav-buttons button, .nav-buttons a {
     background-color: var(--card-background-color);
     color: var(--main-color) !important;
     margin-right: 35px;
@@ -99,6 +98,7 @@ header {
 }
 
 /*! formatting of base cards */
+
 .card {
     width: 60vw;
     border-radius: 10px;
@@ -107,6 +107,7 @@ header {
 }
 
 /* used for signup and login just a bit smaller in width */
+
 .small {
     width: 37.5vw
 }
@@ -120,6 +121,7 @@ header {
 }
 
 /*! first card on main page has special formatting also formats the sort buttons */
+
 .justify-left {
     width: 50%;
     justify-content: start;
@@ -130,20 +132,21 @@ header {
     justify-content: flex-end;
 }
 
-.card #createPost,
-.card #sort {
+.card #createPost, .card #sort {
     font-size: 24px;
     color: var(--text-shade);
     display: flex;
 }
 
-#createPost > * {
+#createPost>* {
     padding: 5px 35px;
 }
 
-#createPost > div > img {
-    width: 60px; /* width of container */
-    height: 60px; /* height of container */
+#createPost>div>img {
+    width: 60px;
+    /* width of container */
+    height: 60px;
+    /* height of container */
     object-fit: cover;
     border-radius: 50%;
 }
@@ -163,12 +166,12 @@ header {
     background-color: var(--main-color);
 }
 
-#sort > * {
+#sort>* {
     display: flex;
     padding: 5px 35px;
 }
 
-#sort > * > * {
+#sort>*>* {
     /* background-color: red; */
     display: flex;
     align-items: center;
@@ -199,6 +202,7 @@ header {
 }
 
 /*! all google font icons are unselectable */
+
 .unselectable {
     user-select: none;
     -moz-user-select: none;
@@ -208,6 +212,7 @@ header {
 }
 
 /*! thread card formatting */
+
 .thread {
     flex-direction: row;
     color: var(--text-dark);
@@ -219,16 +224,21 @@ header {
 }
 
 /* pfp on thread */
+
 /*? left column */
+
 .thread img {
-    width: 150px; /* width of container */
-    height: 150px; /* height of container */
+    width: 150px;
+    /* width of container */
+    height: 150px;
+    /* height of container */
     object-fit: cover;
     border-radius: 50%;
 }
 
 /* purple nameplate under pfp first column */
-.thread > div:first-child > div {
+
+.thread>div:first-child>div {
     width: 100%;
     text-align: center;
     font-size: 20px;
@@ -237,56 +247,59 @@ header {
 }
 
 /*? middle column */
-.thread > div:nth-child(2) {
+
+.thread>div:nth-child(2) {
     padding-left: 30px;
 }
 
-.thread > div:nth-child(2) > * {
+.thread>div:nth-child(2)>* {
     display: flex;
-    height: 25%; /* 4 rows spread them evenly to fill all height */
+    height: 25%;
+    /* 4 rows spread them evenly to fill all height */
 }
 
-.thread > div:nth-child(2) > h1 {
+.thread>div:nth-child(2)>h1 {
     font-weight: 700;
     font-size: 26px;
 }
 
-.thread > div:nth-child(2) > div {
+.thread>div:nth-child(2)>div {
     font-size: 24px;
 }
 
-.thread > div:nth-child(2) > div > span{
+.thread>div:nth-child(2)>div>span {
     text-align: right;
     padding-right: 0px;
 }
 
 /* !KEEP ABOVE THE RIGHT COLUMN AND UPVOTE SO IT DOESNT OVERWRITE */
+
 .post * {
     margin: 0px;
     padding: 0px;
 }
 
 /*? right column */
-.post > div:first-child > div:last-child,
-.thread > div:last-child > div {
+
+.post>div:first-child>div:last-child, .thread>div:last-child>div {
     margin-bottom: 8px;
     font-size: 26px;
 }
 
-.post > div:first-child > div:last-child p,
-.thread > div:last-child > div p {
-    text-align:right;
+.post>div:first-child>div:last-child p, .thread>div:last-child>div p {
+    text-align: right;
     padding-top: 8px;
     padding-right: 0px;
 }
 
-.thread > div:last-child > p {
+.thread>div:last-child>p {
     margin-bottom: 0;
     font-size: 24px;
     height: 25%;
 }
 
 /*! upvote button area */
+
 .upvote {
     text-align: center;
     text-decoration: none;
@@ -298,89 +311,95 @@ header {
 }
 
 /* if the upvote has been previously clicked */
+
 .upvote:hover {
     cursor: pointer;
-    color:var(--confirm-color);
+    color: var(--confirm-color);
     background-color: var(--card-background-color);
     border: 2px solid var(--confirm-color);
 }
 
-.upvote-activated:hover,
-.upvote-activated {
-    color:var(--card-background-color);
+.upvote-activated:hover, .upvote-activated {
+    color: var(--card-background-color);
     background-color: var(--confirm-color);
     border: 2px solid var(--confirm-color);
 }
 
 /* !post styling */
+
 .post {
     flex-direction: row;
     color: var(--text-dark);
     padding: 20px;
 }
 
-.post > div {
+.post>div {
     margin-bottom: 20px;
 }
 
 /* ? header of post and upvote */
-.post > div:first-child > div:first-child {
+
+.post>div:first-child>div:first-child {
     display: flex;
     align-items: center;
 }
 
-.post > div:first-child > div:first-child h1 {
+.post>div:first-child>div:first-child h1 {
     font-size: 26px;
     font-weight: 700;
 }
 
-.post > div:first-child > div:last-child p {
+.post>div:first-child>div:last-child p {
     padding-right: 12px;
 }
 
 /* ? location tag and time tag */
-.post > div:nth-child(2) > div {
+
+.post>div:nth-child(2)>div {
     display: flex;
     font-size: 24px;
 }
 
 /* last child of any because later on it the location tag will be converted into a clickable link for google maps instead of a p tag */
-.post > div:nth-child(2) > div *:last-child {
+
+.post>div:nth-child(2)>div *:last-child {
     margin-left: 20px;
 }
 
-.post > div:nth-child(2) > div:first-child  span {
+.post>div:nth-child(2)>div:first-child span {
     margin-left: 0px;
 }
 
-.post > div:nth-child(2) > div span {
+.post>div:nth-child(2)>div span {
     margin-left: 20px;
 }
 
-.post > div:nth-child(2) > div p {
+.post>div:nth-child(2)>div p {
     color: var(--main-color);
 }
 
 /*? description area */
-.post > div:nth-child(3) > p {
+
+.post>div:nth-child(3)>p {
     font-size: 22px;
     line-height: 1.3;
 }
 
 /* ? date buttons and author */
-.post > div:nth-child(5) {
+
+.post>div:nth-child(5) {
     border-bottom: 1px solid var(--text-dark);
 }
 
 /* first half justified left */
 
-.post > div:nth-child(5) > div:first-child p {
+.post>div:nth-child(5)>div:first-child p {
     font-size: 20px;
     margin: 10px 30px 10px 0px;
     align-self: center;
 }
 
-.post > div:nth-child(5) > div:first-child button {
+.post>div:nth-child(5)>div:first-child button {
     font-size: 20px;
     border: none;
     color: var(--main-color);
@@ -390,7 +409,8 @@ header {
 }
 
 /* second half justfied right */
-.post > div:nth-child(5) > div:last-child p {
+
+.post>div:nth-child(5)>div:last-child p {
     font-size: 20px;
     /* color: var(--main-color); */
     font-weight: 600;
@@ -398,33 +418,35 @@ header {
     align-self: center;
 }
 
-.response > div div img,
-.post > div:nth-child(5) img {
-    width: 60px; /* width of container */
-    height: 60px; /* height of container */
+.response>div div img, .post>div:nth-child(5) img {
+    width: 60px;
+    /* width of container */
+    height: 60px;
+    /* height of container */
     object-fit: cover;
     margin: 10px 15px 10px 15px;
     border-radius: 50%;
 }
 
-.response > div div img {
+.response>div div img {
     margin: 0px;
 }
 
 /* ?response numbers and sort by */
-.post >div:nth-child(6) > div p {
+
+.post>div:nth-child(6)>div p {
     font-size: 20px;
 }
 
-.post > div:nth-child(6) > div:first-child  span {
+.post>div:nth-child(6)>div:first-child span {
     padding-left: 0px;
 }
 
-.post > div:nth-child(6) > div:first-child p {
+.post>div:nth-child(6)>div:first-child p {
     margin-left: 20px;
 }
 
-.post > div:nth-child(6) > div button {
+.post>div:nth-child(6)>div button {
     border: none;
     font-size: 20px;
     margin-left: 10px;
@@ -433,12 +455,12 @@ header {
 }
 
 /* ?respond box area */
-.post > div:nth-child(7) {
+
+.post>div:nth-child(7) {
     padding-bottom: 30px;
 }
 
-#response,
-.post > div:nth-child(7) > input {
+#response, .post>div:nth-child(7)>input {
     border: none;
     color: var(--text-shade);
     background-color: var(--button-hover-on-white);
@@ -446,7 +468,7 @@ header {
     padding: 7px 0px 7px 15px;
 }
 
-.post > div:nth-child(7) > input:hover {
+.post>div:nth-child(7)>input:hover {
     cursor: pointer;
 }
 
@@ -455,7 +477,9 @@ header {
 }
 
 /* image 65 margin 25 */
+
 /* !responses */
+
 .response {
     padding-bottom: 20px;
     border-bottom: 1px solid var(--text-shade);
@@ -492,7 +516,7 @@ header {
 
 .modal-content {
     color: var(--text-dark);
-    background-color: var(--card-background-color) ;
+    background-color: var(--card-background-color);
 }
 
 .modal-content span {
@@ -501,23 +525,20 @@ header {
 
 .modal-content button {
     color: var(--card-background-color);
-    background-color: var(--confirm-color) ;
+    background-color: var(--confirm-color);
 }
 
-.modal-header,
-.modal-footer {
+.modal-header, .modal-footer {
     border-color: var(--text-dark);
 }
 
-.modal-content textarea,
-.modal-content input {
+.modal-content textarea, .modal-content input {
     color: var(--text-dark);
     border: none;
-    background-color: var(--button-hover-on-white) ;
+    background-color: var(--button-hover-on-white);
 }
 
-.modal-content textarea:focus,
-.modal-content input:focus {
+.modal-content textarea:focus, .modal-content input:focus {
     color: var(--text-dark);
     background-color: var(--button-hover-on-white)!important;
 }
@@ -538,4 +559,92 @@ header {
 .date-time input {
     padding: .375rem .75rem;
     border-radius: .25rem;
+}
+
+#sort {
+    width: 100%;
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1400px) {
+    main {
+        width: 96vw;
+    }
+
+    .card {
+        width: 70vw;
+    }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+    main {
+        margin: 0px 2vw 0px 2vw;
+        width: 96vw;
+    }
+
+    .card {
+        width: 70vw;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+    main {
+        margin: 0px 2vw 0px 2vw;
+        width: 96vw;
+    }
+
+    .card {
+        width: 70vw;
+    }
+}
+
+@media only screen and (min-width: 576px) and (max-width: 768px) {
+    main {
+        margin: 0px 2vw 0px 2vw;
+        width: 96vw;
+    }
+
+    .card {
+        width: 96vw;
+    }
+
+    .card img {
+        width: 75px;
+        height: 75px;
+    }
+
+    .tablet-break {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    main {
+        margin: 0px !important;
+        width: 100vw;
+    }
+
+    .card {
+        width: 100vw;
+    }
+
+    .card > div:first-child {
+        display: none;
+    }
+
+    .card > div:nth-child(2) {
+        width: 73%;
+        padding-left: 0px;
+    }
+
+    .card > div:last-child {
+        width: 24%;
+    }
+
+    .tablet-break {
+        display: none;
+    }
+
+    #signup-card {
+        margin-top: 0px !important;
+    }
 }
