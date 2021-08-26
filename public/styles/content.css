@@ -261,6 +261,7 @@ header {
 .thread>div:nth-child(2)>h1 {
     font-weight: 700;
     font-size: 26px;
+    margin: 0px;
 }
 
 .thread>div:nth-child(2)>div {
@@ -565,13 +566,17 @@ header {
     width: 100%;
 }
 
-@media only screen and (min-width: 1200px) and (max-width: 1400px) {
+@media only screen and (min-width: 1200px) and (max-width: 1450px) {
     main {
         width: 96vw;
     }
 
     .card {
         width: 70vw;
+    }
+
+    .card > div:last-child > :first-child {
+        padding-right: 15px;
     }
 }
 
@@ -584,6 +589,10 @@ header {
     .card {
         width: 70vw;
     }
+
+    .card > div:last-child > :first-child {
+        padding-right: 15px;
+    }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 992px) {
@@ -594,6 +603,10 @@ header {
 
     .card {
         width: 70vw;
+    }
+
+    .card > div:last-child > :first-child {
+        padding-right: 15px;
     }
 }
 
@@ -615,6 +628,10 @@ header {
     .tablet-break {
         display: none;
     }
+
+    .card > div:last-child > :first-child {
+        padding-right: 15px;
+    }
 }
 
 @media only screen and (max-width: 576px) {
@@ -627,17 +644,29 @@ header {
         width: 100vw;
     }
 
+    .card > div {
+        padding: 0px
+    }
+
     .card > div:first-child {
         display: none;
     }
 
     .card > div:nth-child(2) {
-        width: 73%;
+        width: 75%;
         padding-left: 0px;
     }
 
     .card > div:last-child {
-        width: 24%;
+        width: max-content;
+    }
+
+    .card > div:last-child > :first-child {
+        justify-content: center !important;
+    }
+
+    .card > div:last-child .col-10 {
+        width: 50%;
     }
 
     .tablet-break {
