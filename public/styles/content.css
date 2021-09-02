@@ -282,7 +282,7 @@ header {
 
 /*? right column */
 
-.post>div:first-child>div:last-child, .thread>div:last-child>div {
+.thread>div:last-child>div {
     margin-bottom: 8px;
     font-size: 26px;
 }
@@ -584,8 +584,6 @@ header {
     main {
         margin: 0px 2vw 0px 2vw;
         width: 96vw;
-        background-color: red;
-
     }
 
     .card {
@@ -618,16 +616,26 @@ header {
 
 @media only screen and (min-width: 768px) and (max-width: 992px) {
     main {
-        margin: 0px 2vw 0px 2vw;
+        /* margin: 0px !important; */
         width: 96vw;
     }
 
     .card {
-        width: 70vw;
+        width: 90vw;
     }
 
     .card > div:last-child > :first-child {
         padding-right: 15px;
+    }
+
+    .card > :first-child > img.col-9 {
+        width: 75px;
+        height: 75px;
+    }
+
+    .thread h1,
+    .thread p {
+        font-size: 20px !important;
     }
 }
 
@@ -708,11 +716,17 @@ header {
     }
 
     .card > div:last-child {
-        width: max-content;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
     }
 
     .card > div:last-child > :first-child {
-        justify-content: center !important;
+        /* justify-content: center !important; */
+    }
+
+    .card > div:last-child > * {
+        width: 50%;
     }
 
     .card > div:last-child .col-10 {
